@@ -1,8 +1,8 @@
 # Moshe Avni's DotFiles
 
-<a href="https://dotfyle.com/mosheavni/dotfiles-nvim-config-nvim"><img src="https://dotfyle.com/mosheavni/dotfiles-nvim-config-nvim/badges/plugins?style=flat" /></a>
-<a href="https://dotfyle.com/mosheavni/dotfiles-nvim-config-nvim"><img src="https://dotfyle.com/mosheavni/dotfiles-nvim-config-nvim/badges/leaderkey?style=flat" /></a>
-<a href="https://dotfyle.com/mosheavni/dotfiles-nvim-config-nvim"><img src="https://dotfyle.com/mosheavni/dotfiles-nvim-config-nvim/badges/plugin-manager?style=flat" /></a>
+<a href="https://dotfyle.com/geek-kb/dotfiles-nvim-config-nvim"><img src="https://dotfyle.com/geek-kb/dotfiles-nvim-config-nvim/badges/plugins?style=flat" /></a>
+<a href="https://dotfyle.com/geek-kb/dotfiles-nvim-config-nvim"><img src="https://dotfyle.com/geek-kb/dotfiles-nvim-config-nvim/badges/leaderkey?style=flat" /></a>
+<a href="https://dotfyle.com/geek-kb/dotfiles-nvim-config-nvim"><img src="https://dotfyle.com/geek-kb/dotfiles-nvim-config-nvim/badges/plugin-manager?style=flat" /></a>
 
 ## Usage
 
@@ -28,7 +28,7 @@
 
    ```bash
    [[ -d ~/Repos ]] || mkdir ~/Repos
-   cd ~ && git clone git@github.com:mosheavni/dotfiles.git .dotfiles && cd .dotfiles
+   cd ~ && git clone git@github.com:geek-kb/dotfiles.git .dotfiles && cd .dotfiles
    ```
 
 3. Install [antidote](https://antidote.sh/)
@@ -91,13 +91,13 @@
 Clone the repository and install the plugins:
 
 ```sh
-git clone git@github.com:mosheavni/dotfiles ~/.config/mosheavni/dotfiles
+git clone git@github.com:geek-kb/dotfiles ~/.config/geek-kb/dotfiles
 ```
 
 Open Neovim with this config:
 
 ```sh
-NVIM_APPNAME=mosheavni/dotfiles/nvim/.config/nvim nvim
+NVIM_APPNAME=geek-kb/dotfiles/nvim/.config/nvim nvim
 ```
 
 ## Additional stuff
