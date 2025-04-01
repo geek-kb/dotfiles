@@ -1,9 +1,9 @@
 
 # Itai Ganot's DotFiles
 
-<a href="https://dotfyle.com/geek-kb/dotfiles-nvim-config-nvim"><img src="https://dotfyle.com/geek-kb/dotfiles-nvim-config-nvim/badges/plugins?style=flat" /></a>
-<a href="https://dotfyle.com/geek-kb/dotfiles-nvim-config-nvim"><img src="https://dotfyle.com/geek-kb/dotfiles-nvim-config-nvim/badges/leaderkey?style=flat" /></a>
-<a href="https://dotfyle.com/geek-kb/dotfiles-nvim-config-nvim"><img src="https://dotfyle.com/geek-kb/dotfiles-nvim-config-nvim/badges/plugin-manager?style=flat" /></a>
+<a href="https://dotfyle.com/geek-kb/dotfiles-nvim-config-nvim"><img src="https://dotfyle.com/geek-kb/dotfiles-nvim-config-nvim/badges/plugins?style=for-the-badge" /></a>
+<a href="https://dotfyle.com/geek-kb/dotfiles-nvim-config-nvim"><img src="https://dotfyle.com/geek-kb/dotfiles-nvim-config-nvim/badges/leaderkey?style=for-the-badge" /></a>
+<a href="https://dotfyle.com/geek-kb/dotfiles-nvim-config-nvim"><img src="https://dotfyle.com/geek-kb/dotfiles-nvim-config-nvim/badges/plugin-manager?style=for-the-badge" /></a>
 
 ## Usage
 
