@@ -5,3 +5,6 @@ neovim
 npm
 typescript
 yarn
+mermaid-cli
+corepack
+prettier

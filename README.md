@@ -1,3 +1,4 @@
+
 # Itai Ganot's DotFiles
 
 ## Usage
@@ -40,15 +41,21 @@
    source ~/.zshrc
    ```
 
-5. Install brew dependencies (generated with `brew bundle dump`)
+5. Install latest LTS Node.js using `nvm`:
+
+   ```bash
+   nvm install --lts
+   ```
+
+6. Install brew dependencies (generated with `brew bundle dump`)
 
    ```bash
    brew bundle install --file=~/.dotfiles/Brewfile
    ```
 
-6. Open [Wezterm](https://wezfurlong.org/wezterm/index.html)
+7. Open [Wezterm](https://wezfurlong.org/wezterm/index.html)
 
-7. Install [asdf-vm](https://asdf-vm.com/guide/getting-started.html) plugins
+8. Install [asdf-vm](https://asdf-vm.com/guide/getting-started.html) plugins
 
    ```bash
    cd ~/.dotfiles
@@ -58,19 +65,19 @@
    asdf install
    ```
 
-8. Add support for recently installed [fzf](https://github.com/junegunn/fzf)
+9. Add support for recently installed [fzf](https://github.com/junegunn/fzf)
 
     ```bash
     $(brew --prefix)/opt/fzf/install
     ```
 
-9. Login to gh cli
+10. Login to gh cli
 
     ```bash
     gh auth login --web -h github.com
     ```
 
-10. Install gh [github cli copilot extension](https://github.com/github/gh-copilot)
+11. Install gh [github cli copilot extension](https://github.com/github/gh-copilot)
 
     ```bash
     gh extension install github/gh-copilot --force
@@ -78,17 +85,17 @@
 
 ## Usage (just NVIM)
 
- > Install requires Neovim 0.10+. Always review the code before installing a configuration.
+> Install requires Neovim 0.10+. Always review the code before installing a configuration.
 
 Clone the repository and install the plugins:
 
-```sh
+```bash
 git clone git@github.com:geek-kb/dotfiles ~/.config/geek-kb/dotfiles
 ```
 
 Open Neovim with this config:
 
-```sh
+```bash
 NVIM_APPNAME=geek-kb/dotfiles/nvim/.config/nvim nvim
 ```
 
