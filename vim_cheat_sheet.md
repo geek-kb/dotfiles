@@ -71,12 +71,20 @@
 |--------------------|--------------------------------------|
 | `<c-o>`            | Toggle file tree                     |
 | `<leader>v`        | Focus file in tree                   |
-| `h / l`            | Collapse/Expand nodes                |
-| `dd / yy / p`      | Cut / Copy / Paste                   |
-| `J / K`            | Toggle mark + move down/up          |
-| `df / dF`          | Trash / Delete marked files         |
-| `mv`               | Move bookmarked files               |
-| `r`                | Move file to path                    |
+| `h` / `<Left>`     | Collapse directory or go to parent   |
+| `l` / `<Right>`    | Expand directory                     |
+| `v`                | Open file in vertical split          |
+| `i`                | Open file in horizontal split        |
+| `cd`               | Change root to current node          |
+| `T`                | Cycle sort method                    |
+| `dd`               | Cut selected files                   |
+| `yy`               | Copy selected files                  |
+| `p`                | Paste copied/cut files               |
+| `df`               | Trash selected files                 |
+| `dF`               | Permanently delete selected files    |
+| `J` / `K`          | Bookmark + move down/up              |
+| `mv`               | Move bookmarked files                |
+| `r`                | Move current file to a new location  |
 
 ---
 

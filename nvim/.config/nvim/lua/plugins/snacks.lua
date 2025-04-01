@@ -122,5 +122,12 @@ return {
     end, {
       desc = 'Rename file',
     })
+
+    vim.api.nvim_create_autocmd('TermOpen', {
+      callback = function()
+        vim.b.miniindentscope_disable = true
+        vim.cmd('startinsert') -- Optional: auto-enter insert mode
+      end,
+    })
   end,
 }

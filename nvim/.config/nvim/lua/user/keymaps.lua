@@ -400,12 +400,18 @@ command! -range VisualCalculator call <SID>VisualCalculator()
 vmap <c-r> :VisualCalculator<cr>
 ]]
 
+----------------
+-- Copy/Paste --
+----------------
+
 -- Replace current buffer with clipboard content
 vim.keymap.set('n', '<leader>rp', ':%d<CR>"+p', {
   desc = 'Replace file with clipboard content',
   noremap = true,
   silent = true,
 })
+
+vim.keymap.set('v', '<leader>y', '"+y', { desc = 'Yank to system clipboard' })
 
 ----------
 -- Grep --
