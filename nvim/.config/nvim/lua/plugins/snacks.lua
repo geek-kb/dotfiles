@@ -71,7 +71,11 @@ return {
           vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-\\><C-n>', true, true, true), 'n', true)
           vim.cmd.close()
         else
-          Snacks.terminal.toggle(nil, { cwd = vim.fn.expand '%:p:h' })
+          local cwd = vim.fn.expand('%:p:h')
+          if cwd == '' or not vim.loop.fs_stat(cwd) then
+            cwd = vim.fn.expand('~') -- fallback to home directory
+          end
+          Snacks.terminal.toggle(nil, { cwd = cwd })
         end
       end,
       mode = { 'n', 't' },
