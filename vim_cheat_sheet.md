@@ -170,9 +170,9 @@
 
 Use this menu to toggle:
 
-```vim
-:lua require('user.menu').open('Colorscheme')
-```
+| Shortcut           | Description                      |
+|--------------------|----------------------------------|
+| `<leader>tcm`       | Toggle colorscheme menu         |
 
 ---
 

@@ -10,6 +10,7 @@ alias grep=ggrep
 alias sort=gsort
 alias awk=gawk
 #alias cat=bat
+alias s=source
 alias cat="bat --style=plain --paging=never"
 alias pbc='pbcopy'
 

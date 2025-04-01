@@ -36,11 +36,11 @@ vim.keymap.set('n', '<leader>tcm', function()
 end, { desc = 'Colorscheme Action Picker' })
 
 -- Always open file tree when launching Neovim
-vim.api.nvim_create_autocmd('VimEnter', {
-  callback = function()
-    local tree = require('nvim-tree.api').tree
-    vim.schedule(function()
-      tree.open()
-    end)
-  end,
-})
+-- vim.api.nvim_create_autocmd('VimEnter', {
+--   callback = function()
+--     local tree = require('nvim-tree.api').tree
+--     vim.schedule(function()
+--       tree.open()
+--     end)
+--   end,
+-- })
