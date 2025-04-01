@@ -5,3 +5,4 @@ pyrightconfig.json
 .DS_Store
 *.zsh_history
 zsh/.zsh_history
+nvim/.config/nvim/colorscheme.txt
