@@ -16,6 +16,16 @@ fi
 # Ensure path arrays do not contain duplicates.
 typeset -gU path fpath
 
+# ================ #
+# NVM and Node.js  #
+# ================ #
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+
+# ================ #
+
 # Additional PATHs
 path=(
   ${ASDF_DATA_DIR:-$HOME/.asdf}/shims

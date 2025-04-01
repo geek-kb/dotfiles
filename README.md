@@ -1,6 +1,10 @@
 
 # Itai Ganot's DotFiles
 
+<a href="https://dotfyle.com/geek-kb/dotfiles-nvim-config-nvim"><img src="https://dotfyle.com/geek-kb/dotfiles-nvim-config-nvim/badges/plugins?style=flat" /></a>
+<a href="https://dotfyle.com/geek-kb/dotfiles-nvim-config-nvim"><img src="https://dotfyle.com/geek-kb/dotfiles-nvim-config-nvim/badges/leaderkey?style=flat" /></a>
+<a href="https://dotfyle.com/geek-kb/dotfiles-nvim-config-nvim"><img src="https://dotfyle.com/geek-kb/dotfiles-nvim-config-nvim/badges/plugin-manager?style=flat" /></a>
+
 ## Usage
 
 ### (also, how to bootstrap a brand new Mac laptop)
@@ -19,6 +23,20 @@
    eval "$(/opt/homebrew/bin/brew shellenv)" # to make brew available before we load `~/.zshrc` that has "$PATH"
    brew update
    brew install git stow
+   ```
+
+1.5. Install Node.js LTS via NVM and Global Packages
+
+   ```bash
+   nvm install --lts
+   nvm use --lts
+   ```
+
+   Then install your global npm packages:
+
+   ```bash
+   chmod +x ~/.dotfiles/node/install-npm-globals.sh
+   ~/.dotfiles/node/install-npm-globals.sh
    ```
 
 2. Clone this repo:
@@ -41,21 +59,15 @@
    source ~/.zshrc
    ```
 
-5. Install latest LTS Node.js using `nvm`:
-
-   ```bash
-   nvm install --lts
-   ```
-
-6. Install brew dependencies (generated with `brew bundle dump`)
+5. Install brew dependencies (generated with `brew bundle dump`)
 
    ```bash
    brew bundle install --file=~/.dotfiles/Brewfile
    ```
 
-7. Open [Wezterm](https://wezfurlong.org/wezterm/index.html)
+6. Open [Wezterm](https://wezfurlong.org/wezterm/index.html)
 
-8. Install [asdf-vm](https://asdf-vm.com/guide/getting-started.html) plugins
+7. Install [asdf-vm](https://asdf-vm.com/guide/getting-started.html) plugins
 
    ```bash
    cd ~/.dotfiles
@@ -65,19 +77,19 @@
    asdf install
    ```
 
-9. Add support for recently installed [fzf](https://github.com/junegunn/fzf)
+8. Add support for recently installed [fzf](https://github.com/junegunn/fzf)
 
     ```bash
     $(brew --prefix)/opt/fzf/install
     ```
 
-10. Login to gh cli
+9. Login to gh cli
 
     ```bash
     gh auth login --web -h github.com
     ```
 
-11. Install gh [github cli copilot extension](https://github.com/github/gh-copilot)
+10. Install gh [github cli copilot extension](https://github.com/github/gh-copilot)
 
     ```bash
     gh extension install github/gh-copilot --force
@@ -89,22 +101,19 @@
 
 Clone the repository and install the plugins:
 
-```bash
+```sh
 git clone git@github.com:geek-kb/dotfiles ~/.config/geek-kb/dotfiles
 ```
 
 Open Neovim with this config:
 
-```bash
+```sh
 NVIM_APPNAME=geek-kb/dotfiles/nvim/.config/nvim nvim
 ```
 
 ## Additional stuff
 
 - Adjust dock and keyboard settings
-
 - Download and install [docker](https://www.docker.com/products/docker-desktop)
-
 - Install [magnet](https://apps.apple.com/us/app/magnet/id441258766?mt=12)
-
 - Install Snagit

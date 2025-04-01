@@ -81,6 +81,7 @@ M.opts = {
     'python',
     'query',
     'regex',
+    'requirements',
     'scss',
     'sql',
     'ssh_config',
