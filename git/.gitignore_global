@@ -3,6 +3,5 @@ tags
 .luarc.json
 pyrightconfig.json
 .DS_Store
-/Users/itaig/.dotfiles/zsh/.zsh_history
 *.zsh_history
 zsh/.zsh_history
