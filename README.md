@@ -111,6 +111,11 @@ Open Neovim with this config:
 NVIM_APPNAME=geek-kb/dotfiles/nvim/.config/nvim nvim
 ```
 
+---
+
+An almost complete shortcuts cheat sheet, can be found here:
+[vim-cheat-sheet](https://github.com/geek-kb/dotfiles/blob/main/vim_cheat_sheet.md)
+
 ## Additional stuff
 
 - Adjust dock and keyboard settings
