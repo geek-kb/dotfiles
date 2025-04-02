@@ -3,6 +3,7 @@
 local utils = require 'user.utils'
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = utils.augroup
+local bit = require 'bit'
 
 -- Reload file on external changes
 local reload_file_group = augroup 'ReloadFile'
@@ -198,3 +199,43 @@ vim.api.nvim_create_user_command('Titleize', function(opts)
     top_bottom,
   })
 end, { nargs = '?' })
+
+---- Auto-resize nvim-tree on window resize
+--vim.api.nvim_create_autocmd({ "VimResized" }, {
+--  desc = "Resize nvim-tree if nvim window got resized",
+--  group = vim.api.nvim_create_augroup("NvimTreeResize", { clear = true }),
+--  callback = function()
+--    local percentage = 15 -- Adjust the percentage based on your preference
+--
+--    local ratio = percentage / 100
+--    local width = math.floor(vim.go.columns * ratio) -- Calculate the width based on Neovim's current window size
+--    -- Resize nvim-tree window
+--    vim.cmd("tabdo NvimTreeResize " .. width)
+--  end,
+--})
+
+-- Auto-manage nvim-tree on startup
+vim.api.nvim_create_autocmd({ "VimEnter" }, {
+  desc = "Open nvim-tree on startup when no file is specified, close it when file is specified",
+  group = vim.api.nvim_create_augroup("NvimTreeStartup", { clear = true }),
+  callback = function()
+    local args = vim.fn.argv()
+    if #args == 0 then
+      vim.cmd("NvimTreeOpen")
+    else
+      vim.cmd("NvimTreeClose")
+    end
+  end,
+})
+
+-- Auto-resize nvim-tree on window resize
+vim.api.nvim_create_autocmd({ "VimResized" }, {
+  desc = "Resize nvim-tree if nvim window got resized",
+  group = vim.api.nvim_create_augroup("NvimTreeResize", { clear = true }),
+  callback = function()
+    local percentage = 15 -- Adjust the percentage based on your preference
+    local ratio = percentage / 100
+    local width = math.floor(vim.go.columns * ratio)
+    vim.cmd("tabdo NvimTreeResize " .. width)
+  end,
+})

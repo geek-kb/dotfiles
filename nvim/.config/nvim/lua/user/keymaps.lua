@@ -499,3 +499,19 @@ end, { nargs = '?' })
 -- Search and Replace --
 ------------------------
 vim.cmd('source ' .. vim.fn.stdpath 'config' .. '/lua/user/search-replace.vim')
+
+
+-----------------------------
+--- Resize tree separator ---
+-----------------------------
+vim.keymap.set('n', '<leader>-', function()
+  local width = vim.g.nvim_tree_width or 30
+  vim.g.nvim_tree_width = math.max(width - 5, 20)
+  require('nvim-tree').resize(vim.g.nvim_tree_width)
+end, { noremap = true, silent = true, desc = 'Reduce tree size' })
+
+vim.keymap.set('n', '<leader>+', function()
+  local width = vim.g.nvim_tree_width or 30
+  vim.g.nvim_tree_width = math.min(width + 5, 50)
+  require('nvim-tree').resize(vim.g.nvim_tree_width)
+end, { noremap = true, silent = true, desc = 'Increase tree size' })

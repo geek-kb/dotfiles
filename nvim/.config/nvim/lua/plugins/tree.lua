@@ -198,9 +198,21 @@ M.config = function()
       enable = true,
       update_cwd = false,
     },
+    --    view = {
+    --      side = 'left',
+    --      width = '20%',
+    --    },
     view = {
       side = 'left',
-      width = '20%',
+      width = {
+        min = 30,
+        max = 100,
+        padding = 1,
+      },
+      adaptive_size = true,
+      float = {
+        enable = false
+      }
     },
     filters = {
       dotfiles = false,
