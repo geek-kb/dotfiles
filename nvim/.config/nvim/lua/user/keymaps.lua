@@ -19,8 +19,8 @@ map('n', 'H', '5zh', { remap = false })
 map('v', 'H', '0', { remap = false })
 
 -- indent/unindent visual mode selection with tab/shift+tab
-map('v', '<tab>', '>gv')
-map('v', '<s-tab>', '<gv')
+map('v', '<tab>', '>gv', { desc = 'Indent selection' })
+map('v', '<s-tab>', '<gv', { desc = 'Unindent selection' })
 
 -- command line mappings
 map('c', '<c-h>', '<left>')
@@ -39,6 +39,10 @@ map('i', ')', ')<c-g>u', { remap = false })
 
 map('i', ';;', '<C-O>A;', { remap = false })
 map('i', ',,', '<C-O>A,', { remap = false })
+
+-- Map ` to lowercase and ~ to uppercase
+map('v', '`', 'u', { desc = 'Convert to lowercase', remap = false })
+map('v', '~', 'U', { desc = 'Convert to uppercase', remap = false })
 
 -- delete word on insert mode
 map('i', '<C-e>', '<C-o>de', { remap = false })
@@ -170,7 +174,7 @@ map('n', '<leader>dn', ':windo diffthis<cr>', { remap = false, silent = true })
 map('n', '<leader>df', ':windo diffoff<cr>', { remap = false, silent = true })
 
 -- Map enter to no highlight
-map('n', '<CR>', '<Esc>:nohlsearch<CR><CR>', { remap = false, silent = true })
+map('n', '<CR>', '<Esc>:nohlsearch<CR>zz', { remap = false, silent = true })
 
 -- Exit mappings
 map('i', 'jk', '<esc>', { remap = false })
@@ -217,6 +221,7 @@ map('v', 'cp', '"+y')
 map('n', 'cP', '"+yy')
 map('n', 'cp', '"+y')
 map('n', 'cv', '"+p')
+map('v', 'p', '"_dP', { desc = 'Paste over selection without copying' })
 
 map('n', '<C-c>', 'ciw')
 
@@ -263,6 +268,9 @@ map('v', '<leader>yab', [["hymmqeq:v?\V<c-r>h?yank E<cr>:let @"=@e<cr>`m:noh<cr>
   { remap = false, desc = 'Yank all but...', silent = true })
 map('v', '<leader>yaa', [["hymmqeq:g?\V<c-r>h?yank E<cr>:let @"=@e<cr>`m:noh<cr>]],
   { remap = false, desc = 'Yank all...', silent = true })
+
+-- Join lines keeping cursor position
+map('n', 'J', 'mzJ`z', { desc = 'Join lines keeping cursor position', remap = false })
 
 -- Base64 dencode
 local function b64(action)
@@ -455,6 +463,7 @@ map('t', '<C-l><C-l><C-l>', [[<C-\><C-N>:ClearTerm 1<CR>]], { remap = false, sil
 ----------------------------
 -- Sort Json Array by key --
 ----------------------------
+--- This is a workaround for the fact that jq does not support sorting by key
 vim.cmd [[
 function s:JsonSortArrayByKey() abort
   call inputsave()
@@ -470,6 +479,9 @@ function s:JsonSortArrayByKey() abort
 endfunction
 command! -range JsonSortArrayByKey call <SID>JsonSortArrayByKey()
 ]]
+
+-- shortcut for format json
+map('n', '<leader>fj', ':%!jq .<CR>', { desc = 'Format JSON', silent = true })
 
 --------------
 -- Titleize --

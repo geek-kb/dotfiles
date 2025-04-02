@@ -95,16 +95,16 @@ local onepass_creds = function()
     return false
   end
   local onepass = vim
-    .system({
-      'op',
-      'item',
-      'get',
-      op_jenkins_id,
-      '--reveal',
-      '--format',
-      'json',
-    })
-    :wait()
+      .system({
+        'op',
+        'item',
+        'get',
+        op_jenkins_id,
+        '--reveal',
+        '--format',
+        'json',
+      })
+      :wait()
   if onepass.code ~= 0 then
     return false
   end
@@ -126,7 +126,7 @@ local function ok_and_validate(should_notify)
   if ok then
     validate_job(get_crumb_job())
     return true
-  elseif should_notify then
+  elseif should_notify and msg then
     vim.notify(msg, vim.log.levels.ERROR)
   end
   return false
