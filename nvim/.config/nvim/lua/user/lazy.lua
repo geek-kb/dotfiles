@@ -2,13 +2,13 @@ return {
   -- 🎨 Colorscheme Plugins (loaded eagerly for immediate availability)
 
   {
-    'morhetz/gruvbox',              -- Classic retro groove color scheme
+    'morhetz/gruvbox', -- Classic retro groove color scheme
     name = 'gruvbox',
-    lazy = false,                   -- Load on startup
-    priority = 1000,                -- Ensure it loads before others
+    lazy = false,      -- Load on startup
+    priority = 1000,   -- Ensure it loads before others
   },
   {
-    'catppuccin/nvim',              -- Warm pastel theme with extensive customization
+    'catppuccin/nvim', -- Warm pastel theme with extensive customization
     name = 'catppuccin',
     lazy = false,
     priority = 1000,
@@ -17,7 +17,7 @@ return {
     end,
   },
   {
-    'folke/tokyonight.nvim',        -- Elegant dark theme
+    'folke/tokyonight.nvim', -- Elegant dark theme
     name = 'tokyonight',
     lazy = false,
     priority = 1000,
