@@ -9,6 +9,8 @@
 
 ### (also, how to bootstrap a brand new Mac laptop)
 
+**This guide is for MacOS only as it configures shortcuts and settings that are specific to MacOS.**
+
 0. Install xcode-select
 
    ```bash
