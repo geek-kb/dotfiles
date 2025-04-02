@@ -20,7 +20,6 @@ local pref_file = vim.fn.stdpath('config') .. '/colorscheme.txt'
 local colorscheme = 'default'
 if vim.fn.filereadable(pref_file) == 1 then
   colorscheme = vim.fn.readfile(pref_file)[1]
-  vim.notify('Loading colorscheme: ' .. colorscheme, vim.log.levels.INFO)
 end
 local ok, err = pcall(vim.cmd.colorscheme, colorscheme)
 if not ok then
@@ -46,7 +45,8 @@ vim.keymap.set('n', '<leader>tcm', function()
       local pref_file = vim.fn.stdpath('config') .. '/colorscheme.txt'
       local success = vim.fn.writefile({ choice }, pref_file)
       if success == 0 then
-        vim.notify('Colorscheme ' .. choice .. ' saved to ' .. pref_file, vim.log.levels.INFO)
+        -- Successfully saved, no notification needed
+        -- vim.notify('Colorscheme ' .. choice .. ' saved to ' .. pref_file, vim.log.levels.INFO)
       else
         vim.notify('Failed to save colorscheme preference', vim.log.levels.ERROR)
       end

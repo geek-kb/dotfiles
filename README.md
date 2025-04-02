@@ -46,7 +46,8 @@
    If you have a different path for your git repositories, change the path accordingly
 
    ```bash
-   [[ -d ~/src ]] || mkdir ~/src
+   REPO_DIR=~/src
+   [[ -d $REPO_DIR ]] || mkdir $REPO_DIR
    cd ~ && git clone git@github.com:geek-kb/dotfiles.git .dotfiles && cd .dotfiles
    ```
 
