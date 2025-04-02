@@ -106,6 +106,16 @@ com! -bang FormatGroovyMap call s:FormatGroovyMap("<bang>")
 com! BasicGroovyFormat call s:BasicGroovyFormat()
 ]=]
 
+
+-- Buffer navigation
+map('n', '<leader>bp', ':BufferLinePick<CR>', { silent = true, desc = 'Pick buffer' })
+map('n', '<leader>bc', ':BufferLinePickClose<CR>', { silent = true, desc = 'Pick buffer to close' })
+map('n', '[b', ':BufferLineCyclePrev<CR>', { silent = true, desc = 'Previous buffer' })
+map('n', ']b', ':BufferLineCycleNext<CR>', { silent = true, desc = 'Next buffer' })
+map('n', '<leader>bl', ':BufferLineCloseLeft<CR>', { silent = true, desc = 'Close all buffers to the left' })
+map('n', '<leader>br', ':BufferLineCloseRight<CR>', { silent = true, desc = 'Close all buffers to the right' })
+map('n', '<leader>bo', ':BufferLineCloseOthers<CR>', { silent = true, desc = 'Close all other buffers' })
+
 -- Windows mappings
 map('n', '<Leader><Leader>', '<C-^>', { remap = false, silent = true })
 map('n', '<tab>', '<c-w>w', { remap = false, silent = true })
@@ -143,8 +153,8 @@ map('n', ']l', ':lnext<cr>zz', { remap = false, silent = true })
 map('n', '[l', ':lprev<cr>zz', { remap = false, silent = true })
 map('n', ']t', ':tabnext<cr>zz', { remap = false, silent = true })
 map('n', '[t', ':tabprev<cr>zz', { remap = false, silent = true })
-map('n', ']b', ':bnext<cr>', { remap = false, silent = true })
-map('n', '[b', ':bprev<cr>', { remap = false, silent = true })
+--map('n', ']b', ':bnext<cr>', { remap = false, silent = true })
+--map('n', '[b', ':bprev<cr>', { remap = false, silent = true })
 
 -- tabs
 map('n', '<leader>tn', ':tabnew<cr>', { remap = false, silent = true })
