@@ -24,7 +24,7 @@
      "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
    eval "$(/opt/homebrew/bin/brew shellenv)" # to make brew available before we load `~/.zshrc` that has "$PATH"
    brew update
-   brew install git stow
+   brew install git stow nvm
    ```
 
 1.5. Install Node.js LTS via NVM and Global Packages
@@ -42,6 +42,8 @@
    ```
 
 2. Clone this repo:
+
+   If you have a different path for your git repositories, change the path accordingly
 
    ```bash
    [[ -d ~/src ]] || mkdir ~/src
@@ -100,17 +102,19 @@
 ## Usage (just NVIM)
 
 > Install requires Neovim 0.10+. Always review the code before installing a configuration.
+> This allows you to see what the configuration does before you install it.
 
 Clone the repository and install the plugins:
 
 ```sh
-git clone git@github.com:geek-kb/dotfiles ~/.config/geek-kb/dotfiles
+NAME="ENTER_YOUR_NAME_HERE"
+git clone git@github.com:geek-kb/dotfiles "~/.config/$NAME/dotfiles"
 ```
 
 Open Neovim with this config:
 
 ```sh
-NVIM_APPNAME=geek-kb/dotfiles/nvim/.config/nvim nvim
+NVIM_APPNAME="$NAME/dotfiles/nvim/.config/nvim" nvim
 ```
 
 ---
