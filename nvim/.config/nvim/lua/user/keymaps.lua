@@ -217,14 +217,27 @@ map('n', '_', [["ldd2k"lp==]], { remap = false })
 map('n', 'Y', ':%y+<cr>', { remap = false, silent = true })
 
 -- Copy file path to clipboard
-map('n', '<leader>cfp', [[:let @+ = expand('%')<cr>:echo   "Copied relative file path " . expand('%')<cr>]],
-  { remap = false, silent = true })
-map('n', '<leader>cfa', [[:let @+ = expand('%:p')<cr>:echo "Copied full file path " . expand('%:p')<cr>]],
-  { remap = false, silent = true })
-map('n', '<leader>cfd', [[:let @+ = expand('%:p:h')<cr>:echo "Copied file directory path " . expand('%:p:h')<cr>]],
-  { remap = false, silent = true })
-map('n', '<leader>cfn', [[:let @+ = expand('%:t')<cr>:echo "Copied file directory path " . expand('%:t')<cr>]],
-  { remap = false, silent = true })
+map('n', '<leader>cfp', function()
+  local rel_path = vim.fn.expand('%')
+  vim.fn.setreg('+', rel_path)
+  vim.notify('Copied relative file path: ' .. rel_path)
+end, { desc = 'Copy relative file path' })
+map('n', '<leader>cfa', function()
+  local full_path = vim.fn.expand('%:p')
+  vim.fn.setreg('+', full_path)
+  vim.notify('Copied full file path: ' .. full_path)
+end, { desc = 'Copy full file path' })
+map('n', '<leader>cfd', function()
+  local dir_path = vim.fn.expand('%:p:h')
+  vim.fn.setreg('+', dir_path)
+  vim.notify('Copied file directory path: ' .. dir_path)
+end, { desc = 'Copy file directory path' })
+
+map('n', '<leader>cfn', function()
+  local file_name = vim.fn.expand('%:t')
+  vim.fn.setreg('+', file_name)
+  vim.notify('Copied file name: ' .. file_name)
+end, { desc = 'Copy file name' })
 
 -- Copy and paste to/from system clipboard
 map('v', 'cp', '"+y')

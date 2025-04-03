@@ -215,16 +215,18 @@ end, { nargs = '?' })
 --})
 
 -- Auto-manage nvim-tree on startup
-vim.api.nvim_create_autocmd({ "VimEnter" }, {
+vim.api.nvim_create_autocmd("VimEnter", {
   desc = "Open nvim-tree on startup when no file is specified, close it when file is specified",
   group = vim.api.nvim_create_augroup("NvimTreeStartup", { clear = true }),
   callback = function()
-    local args = vim.fn.argv()
-    if #args == 0 then
-      vim.cmd("NvimTreeOpen")
-    else
-      vim.cmd("NvimTreeClose")
-    end
+    vim.schedule(function()
+      local args = vim.fn.argv()
+      if #args == 0 then
+        pcall(vim.cmd, "NvimTreeOpen")
+      else
+        pcall(vim.cmd, "NvimTreeClose")
+      end
+    end)
   end,
 })
 

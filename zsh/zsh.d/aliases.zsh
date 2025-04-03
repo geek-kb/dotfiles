@@ -30,6 +30,7 @@ alias src="~/src"
 alias vim="nvim"
 alias v='nvim'
 alias vi='nvim'
+alias vsrc='nvim ~/src'
 alias sudoedit="nvim"
 alias lvim='NVIM_APPNAME=LazyVim nvim'
 alias zshrc='${=EDITOR} ${ZDOTDIR:-$HOME}/.zshrc'
