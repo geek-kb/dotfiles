@@ -91,7 +91,7 @@ chmod +x ~/.dotfiles/node/install-npm-globals.sh
    python${pyver} -m pip install --upgrade pip
    python${pyver} -m pip install --upgrade setuptools
    python${pyver} -m pip install --upgrade wheel
-   pip install -r ~/.dotfiles/python/requirements.txt
+   pip install -r ~/.dotfiles/requirements.txt
    deactivate
    ```
 
