@@ -1,3 +1,9 @@
+-- Fix for TabNine binary path on Apple Silicon
+local tabnine_path = vim.fn.stdpath("data") .. "/lazy/cmp-tabnine/binaries/4.257.0/aarch64-apple-darwin/TabNine"
+if vim.fn.filereadable(tabnine_path) == 1 then
+  vim.g.tabnine_binary_path = tabnine_path
+end
+
 return {
   -- 🎨 Colorscheme Plugins (loaded eagerly for immediate availability)
 

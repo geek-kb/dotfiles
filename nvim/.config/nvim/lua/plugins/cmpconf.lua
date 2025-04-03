@@ -9,7 +9,7 @@ local M = {
     { 'L3MON4D3/LuaSnip',    build = 'make install_jsregexp' },
     'saadparwaiz1/cmp_luasnip',
     'onsails/lspkind-nvim',
-    { 'tzachar/cmp-tabnine', build = './install.sh' },
+    { 'tzachar/cmp-tabnine', build = './install.sh',         event = "InsertEnter" },
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-calc',
     'hrsh7th/cmp-cmdline',
