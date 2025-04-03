@@ -82,6 +82,16 @@
    asdf install
    ```
 
+8. Create python virtualenvs
+
+   ```bash
+   python3.13 -m venv ~/.myenv
+   python3.13 -m pip install --upgrade pip
+   python3.13 -m pip install --upgrade setuptools
+   python3.13 -m pip install --upgrade wheel
+   pip install -r ~/.dotfiles/python/requirements.txt
+   ```
+
 8. Add support for recently installed [fzf](https://github.com/junegunn/fzf)
 
     ```bash

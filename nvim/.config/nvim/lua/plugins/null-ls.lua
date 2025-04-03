@@ -13,7 +13,7 @@ M.config = function()
   null_ls.setup {
     debug = true,
     sources = {
-      null_ls.builtins.code_actions.gitsigns,
+      --      null_ls.builtins.code_actions.gitsigns,
       null_ls.builtins.code_actions.proselint,
       require('user.lsp.code-actions').revision_branch_comment,
       require('user.lsp.code-actions').toggle_function_params,
@@ -23,7 +23,7 @@ M.config = function()
       null_ls.builtins.diagnostics.markdownlint,
       null_ls.builtins.diagnostics.proselint,
       null_ls.builtins.diagnostics.npm_groovy_lint,
-      null_ls.builtins.diagnostics.terragrunt_validate,
+      --      null_ls.builtins.diagnostics.terragrunt_validate,
       null_ls.builtins.diagnostics.vint,
       null_ls.builtins.diagnostics.selene,
     },

@@ -16,6 +16,7 @@ A comprehensive reference organized from basic to advanced operations.
 | `<leader>sa`  | Visually select entire buffer   |
 | `-`           | Move line down                  |
 | `_`           | Move line up                    |
+| `<leader><leader>` | Toggle last buffer         |
 
 ---
 
@@ -23,6 +24,7 @@ A comprehensive reference organized from basic to advanced operations.
 
 | Shortcut        | Description                        |
 | --------------- | ---------------------------------- |
+| `<leader>gt`    | Mark block for indentation         |
 | `<tab>/<s-tab>` | Indent/unindent selection          |
 | `<C-e>`         | Delete word (insert mode)          |
 | `<C-b>`         | Delete word backward (insert mode) |
@@ -46,6 +48,7 @@ A comprehensive reference organized from basic to advanced operations.
 | `mt`          | Surround with string interpolation |
 | `<leader>gt`  | Indent block                       |
 | `<leader>=`   | Create line of = signs below       |
+| `<leader>r`   | Search & Replace                   |
 
 ---
 

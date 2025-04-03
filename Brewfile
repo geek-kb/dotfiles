@@ -13,10 +13,10 @@ tap "superbrothers/zsh-kubectl-prompt"
 tap "weaveworks/tap"
 # New file format for still image compression
 brew "jpeg-xl"
-# GitOps Continuous Delivery for Kubernetes
-brew "argocd"
 # Cryptography and SSL/TLS Toolkit
 brew "openssl@3"
+# GitOps Continuous Delivery for Kubernetes
+brew "argocd"
 # Record and share terminal sessions
 brew "asciinema"
 # Extendable version manager with support for Ruby, Node.js, Erlang & more
@@ -39,28 +39,34 @@ brew "bpytop"
 brew "cbfmt"
 # CloudFlare's PKI toolkit
 brew "cfssl"
+# C/C++ and Java libraries for Unicode and globalization
+brew "icu4c@77"
+# Versatile and fast Unicode/ASCII/ANSI graphics renderer
+brew "chafa"
 # Prevent cloud misconfigurations during build-time for IaC tools
 brew "checkov"
 # CloudFormation Provider Development Toolkit
 brew "cloudformation-cli"
 # Cross-platform make
 brew "cmake"
+# Get a file from an HTTP, HTTPS or FTP server
+brew "curl"
+# General-purpose scripting language
+brew "php"
+# Dependency Manager for PHP
+brew "composer"
 # Utility that creates projects from templates
 brew "cookiecutter"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
 # Apjanke's fork of the classic cowsay project
 brew "cowsay"
-# Get a file from an HTTP, HTTPS or FTP server
-brew "curl"
 # Simple command-line tool for creating clusters on Amazon EKS
 brew "eksctl"
 # Modern, maintained replacement for ls
 brew "eza"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
-# C/C++ and Java libraries for Unicode and globalization
-brew "icu4c@77"
 # OCR (Optical Character Recognition) engine
 brew "tesseract"
 # Banner-like program prints strings as ASCII art
@@ -153,6 +159,8 @@ brew "nvm"
 brew "parallel"
 # Perl compatible regular expressions library
 brew "pcre"
+# Execute binaries from Python packages in isolated environments
+brew "pipx"
 # Framework for managing multi-language pre-commit hooks
 brew "pre-commit"
 # Code formatter for JavaScript, CSS, JSON, GraphQL, Markdown, YAML
@@ -197,12 +205,18 @@ brew "tfupdate"
 brew "the_silver_searcher"
 # Official tldr client written in Rust
 brew "tlrc"
+# Terminal multiplexer
+brew "tmux"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
 # Vulnerability scanner for container images, file systems, and Git repos
 brew "trivy"
 # Vi 'workalike' with many additional features
 brew "vim"
+# Vim script Language Lint
+brew "vint"
+# Simple terminal image viewer written in Rust
+brew "viu"
 # Executes a program periodically, showing output fullscreen
 brew "watch"
 # Internet file retriever
@@ -235,10 +249,16 @@ brew "johanhaleby/kubetail/kubetail"
 brew "minamijoyo/hcledit/hcledit"
 # Display information about the kubectl current context and namespace in zsh prompt.
 brew "superbrothers/zsh-kubectl-prompt/zsh-kubectl-prompt"
+# Password manager that keeps all passwords secure behind one password
+cask "1password"
+# Command-line interface for 1Password
+cask "1password-cli"
 # View, print, and comment on PDF documents
 cask "adobe-acrobat-reader"
 # Control USB Cameras from an app
 cask "cameracontroller"
+# Clipboard extension app
+cask "clipy"
 # Disk usage utility
 cask "disk-inventory-x"
 # Web browser
@@ -253,14 +273,26 @@ cask "karabiner-elements"
 cask "keycastr"
 # Password manager
 cask "lastpass"
+# Clipboard manager
+cask "maccy"
+# Desktop virtualization software
+cask "parallels"
 # Collaboration platform for API development
 cask "postman"
 # Screenshot measurement and annotation tool
 cask "shottr"
+# Text editor for code, markup and prose
+cask "sublime-text"
+# Multi-platform VNC client and server
+cask "tigervnc-viewer"
+# Development environment
+cask "vagrant"
 # Open-source code editor
 cask "visual-studio-code"
 # Multimedia player
 cask "vlc"
+# Rust-based terminal
+cask "warp"
 # GPU-accelerated cross-platform terminal emulator and multiplexer
 cask "wezterm"
 # Network protocol analyzer

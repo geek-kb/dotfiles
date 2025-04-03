@@ -26,3 +26,4 @@ toml
 urllib3
 vim-vint
 zipp
+setuptools==58.2.0
