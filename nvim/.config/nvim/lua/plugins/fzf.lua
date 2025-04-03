@@ -132,12 +132,12 @@ return {
       '<leader>/',
       require('fzf-lua').live_grep,
     },
-    {
-      '<leader>h',
-      ':FzfLua files cwd=' .. vim.fn.expand('~') .. '<CR>',
-      silent = true,
-      desc = 'Open files from home directory'
-    },
+    --    {
+    --      '<leader>h',
+    --      ':FzfLua files cwd=' .. vim.fn.expand('~') .. '<CR>',
+    --      silent = true,
+    --      desc = 'Open files from home directory'
+    --    },
   },
   cmd = { 'FzfLua', 'ListFilesFromBranch' },
   config = function()
