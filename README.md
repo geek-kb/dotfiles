@@ -1,4 +1,3 @@
-
 # Itai Ganot's DotFiles
 
 <a href="https://dotfyle.com/geek-kb/dotfiles-nvim-config-nvim"><img src="https://dotfyle.com/geek-kb/dotfiles-nvim-config-nvim/badges/plugins?style=for-the-badge" /></a>
@@ -29,17 +28,17 @@
 
 1.5. Install Node.js LTS via NVM and Global Packages
 
-   ```bash
-   nvm install --lts
-   nvm use --lts
-   ```
+```bash
+nvm install --lts
+nvm use --lts
+```
 
-   Then install your global npm packages:
+Then install your global npm packages:
 
-   ```bash
-   chmod +x ~/.dotfiles/node/install-npm-globals.sh
-   ~/.dotfiles/node/install-npm-globals.sh
-   ```
+```bash
+chmod +x ~/.dotfiles/node/install-npm-globals.sh
+~/.dotfiles/node/install-npm-globals.sh
+```
 
 2. Clone this repo:
 
@@ -82,29 +81,33 @@
    asdf install
    ```
 
-8. Create python virtualenvs
+8. Create python VirtualEnv
 
    ```bash
-   python3.13 -m venv ~/.myenv
-   python3.13 -m pip install --upgrade pip
-   python3.13 -m pip install --upgrade setuptools
-   python3.13 -m pip install --upgrade wheel
+   venvname=".myenv"
+   pyver=$(grep python ~/.dotfiles/asdf/.tool-versions | awk '{print $2}' | cut -d. -f1,2)
+   python${pyver} -m venv ~/$venvname
+   source ~/$venvname/bin/activate
+   python${pyver} -m pip install --upgrade pip
+   python${pyver} -m pip install --upgrade setuptools
+   python${pyver} -m pip install --upgrade wheel
    pip install -r ~/.dotfiles/python/requirements.txt
+   deactivate
    ```
 
-8. Add support for recently installed [fzf](https://github.com/junegunn/fzf)
+9. Add support for recently installed [fzf](https://github.com/junegunn/fzf)
 
-    ```bash
-    $(brew --prefix)/opt/fzf/install
-    ```
+   ```bash
+   $(brew --prefix)/opt/fzf/install
+   ```
 
-9. Login to gh cli
+10. Login to gh cli
 
     ```bash
     gh auth login --web -h github.com
     ```
 
-10. Install gh [github cli copilot extension](https://github.com/github/gh-copilot)
+11. Install gh [github cli copilot extension](https://github.com/github/gh-copilot)
 
     ```bash
     gh extension install github/gh-copilot --force
