@@ -6,17 +6,17 @@ A comprehensive reference organized from basic to advanced operations.
 
 ## 🎯 Essential Navigation
 
-| Shortcut      | Description                     |
-| ------------- | ------------------------------- |
-| `j/k`         | Better up/down movement         |
-| `<Up>/<Down>` | Better up/down movement         |
-| `0`           | Go to first non-blank character |
-| `L/H`         | Move view right/left            |
-| `]] / [[`     | Next / Prev reference           |
-| `<leader>sa`  | Visually select entire buffer   |
-| `-`           | Move line down                  |
-| `_`           | Move line up                    |
-| `<leader><leader>` | Toggle last buffer         |
+| Shortcut           | Description                     |
+| ------------------ | ------------------------------- |
+| `j/k`              | Better up/down movement         |
+| `<Up>/<Down>`      | Better up/down movement         |
+| `0`                | Go to first non-blank character |
+| `L/H`              | Move view right/left            |
+| `]] / [[`          | Next / Prev reference           |
+| `<leader>sa`       | Visually select entire buffer   |
+| `-`                | Move line down                  |
+| `_`                | Move line up                    |
+| `<leader><leader>` | Toggle last buffer              |
 
 ---
 
@@ -39,16 +39,20 @@ A comprehensive reference organized from basic to advanced operations.
 
 ## 🔄 Text Manipulation
 
-| Shortcut      | Description                        |
-| ------------- | ---------------------------------- |
-| `<leader>sw`  | Interactive swap                   |
-| `g< / g>`     | Swap previous/next                 |
-| `gs`          | Smart word switch                  |
-| `ga` (visual) | EasyAlign selection                |
-| `mt`          | Surround with string interpolation |
-| `<leader>gt`  | Indent block                       |
-| `<leader>=`   | Create line of = signs below       |
-| `<leader>r`   | Search & Replace                   |
+| Shortcut      | Description                            |
+| ------------- | -------------------------------------- |
+| `<leader>sw`  | Interactive swap                       |
+| `g< / g>`     | Swap previous/next                     |
+| `gs`          | Smart word switch                      |
+| `ga` (visual) | EasyAlign selection                    |
+| `mt`          | Surround with string interpolation     |
+| `<leader>gt`  | Indent block                           |
+| `<leader>=`   | Create line of = signs below           |
+| `<leader>r`   | Search & Replace                       |
+| `yss"`        | Surround whole line with double quotes |
+| `ysiw"`       | Surround word with double quotes       |
+| `ds"`         | Delete surrounding double quotes       |
+| `cs"'`        | Change surrounding double quotes "->'  |
 
 ---
 
