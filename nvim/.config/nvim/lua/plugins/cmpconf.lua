@@ -6,7 +6,7 @@ local M = {
   event = { 'InsertEnter', 'CmdlineEnter' },
   dependencies = {
     'rafamadriz/friendly-snippets',
-    { 'L3MON4D3/LuaSnip', build = 'make install_jsregexp' },
+    { 'L3MON4D3/LuaSnip',    build = 'make install_jsregexp' },
     'saadparwaiz1/cmp_luasnip',
     'onsails/lspkind-nvim',
     { 'tzachar/cmp-tabnine', build = './install.sh' },
@@ -149,7 +149,7 @@ M.config = function()
     },
     sources = cmp.config.sources {
       { name = 'nvim_lsp_signature_help', priority = 101 },
-      { name = 'nvim_lsp', priority = 100 },
+      { name = 'nvim_lsp',                priority = 100 },
       { name = 'luasnip' },
       {
         name = 'lazydev',
@@ -157,7 +157,7 @@ M.config = function()
       },
       { name = 'cmp_tabnine' },
       { name = 'path' },
-      { name = 'buffer', keyword_length = 4 },
+      { name = 'buffer',     keyword_length = 4 },
       { name = 'calc' },
     },
     snippet = {
@@ -184,7 +184,7 @@ M.config = function()
   end
 
   tabnine:setup {
-    max_lines = 500,
+    max_lines = 1000,
     max_num_results = 5,
     sort = true,
   }

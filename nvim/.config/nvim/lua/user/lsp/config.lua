@@ -24,7 +24,8 @@ M.setup = function()
   require('user.lsp.actions').setup()
   require('vim.lsp.log').set_format_func(vim.inspect)
   M.capabilities =
-    vim.tbl_deep_extend('force', vim.lsp.protocol.make_client_capabilities(), require('cmp_nvim_lsp').default_capabilities(), M.capabilities or {}, {})
+      vim.tbl_deep_extend('force', vim.lsp.protocol.make_client_capabilities(),
+        require('cmp_nvim_lsp').default_capabilities(), M.capabilities or {}, {})
 
   -- Diagnostics
   vim.diagnostic.config {
@@ -45,7 +46,7 @@ M.setup = function()
     callback = function(ev)
       local client = vim.lsp.get_client_by_id(ev.data.client_id)
       local bufnr = ev.buf
-      require 'user.lsp.keymaps'(bufnr)
+      require 'user.lsp.keymaps' (bufnr)
       if client and client.server_capabilities.documentSymbolProvider then
         require('nvim-navic').attach(client, bufnr)
       end
