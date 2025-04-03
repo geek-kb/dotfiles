@@ -21,7 +21,7 @@
 
 [alias]
   log  = log --pretty=log
-  lb   = log --graph --simplify-by-decoration --pretty=shorter --all --notes --date-order --relative-date
+  lb   = log --graph --simplify-by-decoration --pretty=short --all --notes --date-order --relative-date
   adog = log --all --decorate --oneline --graph
 
 [init]
