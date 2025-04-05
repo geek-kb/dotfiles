@@ -5,15 +5,15 @@ local package_root = vim.fs.joinpath(temp_dir, 'nvim', 'site', 'lazy')
 local lazypath = vim.fs.joinpath(temp_dir, 'nvim', 'site') .. '/lazy/lazy.nvim'
 if not vim.uv.fs_stat(lazypath) then
   vim
-    .system({
-      'git',
-      'clone',
-      '--filter=blob:none',
-      '--single-branch',
-      'https://github.com/folke/lazy.nvim.git',
-      lazypath,
-    }, { text = true })
-    :wait()
+      .system({
+        'git',
+        'clone',
+        '--filter=blob:none',
+        '--single-branch',
+        'https://github.com/folke/lazy.nvim.git',
+        lazypath,
+      }, { text = true })
+      :wait()
 end
 vim.opt.runtimepath:prepend(lazypath)
 
@@ -77,6 +77,19 @@ require('lazy').setup({
           'vimdoc',
           'xml',
           'yaml',
+          'dockerfile',
+          'git_config',
+          'groovy',
+          'hcl',
+          'helm',
+          'html',
+          'jinja',
+          'jinja_inline',
+          'jq',
+          'requirements',
+          'ssh_config',
+          'toml',
+          'typescript',
         },
         highlight = {
           enable = true,
@@ -88,11 +101,11 @@ require('lazy').setup({
   {
     'ibhagwan/fzf-lua',
     keys = {
-      { '<c-p>', ':FzfLua files<cr>', silent = true },
-      { '<c-b>', ':FzfLua buffers<cr>', silent = true },
-      { '<leader>ee', ':FzfLua builtin<cr>', silent = true },
+      { '<c-p>',      ':FzfLua files<cr>',     silent = true },
+      { '<c-b>',      ':FzfLua buffers<cr>',   silent = true },
+      { '<leader>ee', ':FzfLua builtin<cr>',   silent = true },
       { '<leader>hh', ':FzfLua help_tags<cr>', silent = true },
-      { '<leader>i', ':FzfLua oldfiles<cr>', silent = true },
+      { '<leader>i',  ':FzfLua oldfiles<cr>',  silent = true },
       {
         '<leader>/',
         function()

@@ -215,7 +215,18 @@ local M = {
     },
   },
 
-  -- DONE ✅
+  -- Grype vulnerability scanner commands
+  vim.api.nvim_create_user_command("GrypeSBOM", require("user.grype").grype_sbom, {
+    nargs = 1,
+    complete = "file",
+    desc = "Scan SBOM with Grype",
+  }),
+  -- Syft vulnerability scanner commands
+  vim.api.nvim_create_user_command("SyftSBOM", require("user.syft").generate_sbom, {
+    nargs = "?",
+    complete = "file",
+    desc = "Generate SBOM with Syft",
+  }),
 }
 
 vim.keymap.set('n', '<leader>z', '<cmd>Lazy<CR>', { silent = true })

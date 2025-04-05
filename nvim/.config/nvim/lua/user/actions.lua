@@ -220,18 +220,6 @@ end)
   ['Toggle words wrapping (<leader>ww)'] = function()
     vim.o.wrap = not vim.o.wrap
   end,
-  ['Copy full file path to clipboard (<leader>cfa)'] = function()
-    vim.fn.feedkeys(T '<leader>' .. 'cfa')
-  end,
-  ['Copy relative file path to clipboard (<leader>cfp)'] = function()
-    vim.fn.feedkeys(T '<leader>' .. 'cfp')
-  end,
-  ['Copy directory path to clipboard (<leader>cfd)'] = function()
-    vim.fn.feedkeys(T '<leader>' .. 'cfd')
-  end,
-  ['Copy file name to clipboard (<leader>cfn)'] = function()
-    vim.fn.feedkeys(T '<leader>' .. 'cfn')
-  end,
   ['Split long bash line (<leader>\\'] = function()
     vim.fn.feedkeys(T '<leader>' .. [[\]])
   end,

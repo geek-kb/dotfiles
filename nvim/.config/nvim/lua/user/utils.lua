@@ -8,7 +8,7 @@ function M.augroup(name)
   return vim.api.nvim_create_augroup(name, { clear = true })
 end
 
--- Helper functions
+-- Vimscript helper functions
 vim.cmd [[
 function! GetVisualSelection() abort
   let [lnum1, col1] = getpos("'<")[1:2]
@@ -33,7 +33,6 @@ function! ReplaceMotion(motion, text)
   defer setreg('a', saved_register)
 
   let @a = a:text
-
   exe 'normal! ' .. a:motion .. '"ap'
 endfunction
 ]]
@@ -43,26 +42,48 @@ endfunction
 function M.get_visual_selection_stay_in_visual()
   local mode = vim.api.nvim_get_mode().mode
   local opts = {}
-  -- \22 is an escaped version of <c-v>
   if mode == 'v' or mode == 'V' or mode == '\22' then
     opts.type = mode
   end
-  return vim.fn.getregion(vim.fn.getpos 'v', vim.fn.getpos '.', opts)
+
+  local vstart = vim.fn.getpos("'<")
+  local vend = vim.fn.getpos("'>")
+
+  if vstart[2] == 0 or vend[2] == 0 then
+    vim.notify("No valid visual selection", vim.log.levels.WARN)
+    return {}
+  end
+
+  return vim.fn.getregion(vstart, vend, opts)
 end
 
----Returns the current visual selection and exits visual mode
+--- Returns the current visual selection and exits visual mode
 ---@return string text The selected text
 function M.get_visual_selection()
+  local mode = vim.fn.mode()
+  if mode ~= "v" and mode ~= "V" and mode ~= "\22" then
+    vim.notify("No visual selection active", vim.log.levels.WARN)
+    return ""
+  end
+
+  local vstart = vim.fn.getpos("'<")
+  local vend = vim.fn.getpos("'>")
+
+  if vstart[2] == 0 or vend[2] == 0 then
+    vim.notify("Invalid visual selection", vim.log.levels.WARN)
+    return ""
+  end
+
+  local lines = vim.fn.getregion(vstart, vend)
   local esc = vim.api.nvim_replace_termcodes('<esc>', true, false, true)
   vim.api.nvim_feedkeys(esc, 'x', false)
-  local vstart = vim.fn.getpos "'<"
-  local vend = vim.fn.getpos "'>"
-  return table.concat(vim.fn.getregion(vstart, vend), '\n')
+
+  return table.concat(lines or {}, '\n')
 end
 
 function M.get_os_command_output(cmd, cwd)
   if type(cmd) ~= 'table' then
-    M.pretty_print('cmd has to be a table', vim.log.levels.ERROR, '🖥️')
+    M.pretty_print('cmd has to be a table', 'Shell Error', '🛠️', vim.log.levels.ERROR)
     return '', -1, ''
   end
 
@@ -70,7 +91,6 @@ function M.get_os_command_output(cmd, cwd)
   local command = table.remove(cmd, 1)
   local stderr = {}
 
-  ---@diagnostic disable-next-line: missing-fields
   local stdout, ret = Job:new({
     command = command,
     args = cmd,
@@ -92,7 +112,7 @@ end
 function M.pretty_print(message, title, icon, level, timeout)
   vim.notify(message, level or vim.log.levels.INFO, {
     title = title or 'Neovim',
-    icon = icon or '',
+    icon = icon or '⚙️',
     timeout = timeout or 3000,
   })
 end
@@ -112,7 +132,9 @@ function M.country_os_to_emoji(country_iso)
     elseif code_point <= 0x7FF then
       table.insert(flag_icon, string.char(0xC0 + math.floor(code_point / 0x40), 0x80 + code_point % 0x40))
     elseif code_point <= 0xFFFF then
-      table.insert(flag_icon, string.char(0xE0 + math.floor(code_point / 0x1000), 0x80 + math.floor((code_point % 0x1000) / 0x40), 0x80 + code_point % 0x40))
+      table.insert(flag_icon,
+        string.char(0xE0 + math.floor(code_point / 0x1000), 0x80 + math.floor((code_point % 0x1000) / 0x40),
+          0x80 + code_point % 0x40))
     elseif code_point <= 0x10FFFF then
       table.insert(
         flag_icon,

@@ -217,26 +217,50 @@ map('n', '_', [["ldd2k"lp==]], { remap = false })
 map('n', 'Y', ':%y+<cr>', { remap = false, silent = true })
 
 -- Copy file path to clipboard
+local function is_real_file()
+  local path = vim.fn.expand('%:p')
+  return vim.fn.filereadable(path) == 1
+end
+
+local function notify_and_copy(label, value)
+  vim.fn.setreg('+', value)
+  vim.notify('Copied ' .. label .. ': ' .. value)
+end
+
+-- Copy relative file path to clipboard
 map('n', '<leader>cfp', function()
-  local rel_path = vim.fn.expand('%')
-  vim.fn.setreg('+', rel_path)
-  vim.notify('Copied relative file path: ' .. rel_path)
+  if not is_real_file() then
+    vim.notify('No real file to copy path from', vim.log.levels.WARN)
+    return
+  end
+  notify_and_copy('relative file path', vim.fn.expand('%'))
 end, { desc = 'Copy relative file path' })
+
+-- Copy full file path to clipboard
 map('n', '<leader>cfa', function()
-  local full_path = vim.fn.expand('%:p')
-  vim.fn.setreg('+', full_path)
-  vim.notify('Copied full file path: ' .. full_path)
+  if not is_real_file() then
+    vim.notify('No real file to copy path from', vim.log.levels.WARN)
+    return
+  end
+  notify_and_copy('full file path', vim.fn.expand('%:p'))
 end, { desc = 'Copy full file path' })
+
+-- Copy file directory path to clipboard
 map('n', '<leader>cfd', function()
-  local dir_path = vim.fn.expand('%:p:h')
-  vim.fn.setreg('+', dir_path)
-  vim.notify('Copied file directory path: ' .. dir_path)
+  if not is_real_file() then
+    vim.notify('No real file to copy dir from', vim.log.levels.WARN)
+    return
+  end
+  notify_and_copy('file directory path', vim.fn.expand('%:p:h'))
 end, { desc = 'Copy file directory path' })
 
+-- Copy file name to clipboard
 map('n', '<leader>cfn', function()
-  local file_name = vim.fn.expand('%:t')
-  vim.fn.setreg('+', file_name)
-  vim.notify('Copied file name: ' .. file_name)
+  if not is_real_file() then
+    vim.notify('No real file to copy name from', vim.log.levels.WARN)
+    return
+  end
+  notify_and_copy('file name', vim.fn.expand('%:t'))
 end, { desc = 'Copy file name' })
 
 -- Copy and paste to/from system clipboard
