@@ -241,11 +241,14 @@ M.config = function()
       enable = true,
       update_cwd = false,
     },
+    -- In order to configure the tree to auto resize itself based on the longest file in the tree
+    -- change the adaptive_size to true
+    -- and set the max width to 0
     view = {
       side = 'left',
       width = {
-        min = 30,
-        max = 100,
+        --        min = 30,
+        max = 0,
         padding = 1,
       },
       adaptive_size = true,

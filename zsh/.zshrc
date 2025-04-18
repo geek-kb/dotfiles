@@ -40,6 +40,7 @@ path=(
   $HOME/.cargo/bin
   /usr/local/sbin
   /usr/local/opt/postgresql@15/bin
+  $HOME/.asdf/installs/python/3.11.8/bin
   $path
 )
 export PATH
@@ -59,7 +60,6 @@ export LC_ALL=en_US.UTF-8
 # ============= #
 # asdf
 export ASDF_PYTHON_DEFAULT_PACKAGES_FILE=~/.dotfiles/requirements.txt
-
 source $HOME/.antidote/antidote.zsh
 antidote load
 

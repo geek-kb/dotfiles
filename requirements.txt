@@ -27,3 +27,4 @@ urllib3
 vim-vint
 zipp
 setuptools
+debugpy
