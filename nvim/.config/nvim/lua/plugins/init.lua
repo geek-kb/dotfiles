@@ -231,4 +231,6 @@ local M = {
 
 vim.keymap.set('n', '<leader>z', '<cmd>Lazy<CR>', { silent = true })
 
+vim.keymap.set('n', '<leader>x', 'x', { noremap = true, desc = 'Delete character under cursor' })
+
 return M
