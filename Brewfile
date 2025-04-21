@@ -249,16 +249,12 @@ brew "johanhaleby/kubetail/kubetail"
 brew "minamijoyo/hcledit/hcledit"
 # Display information about the kubectl current context and namespace in zsh prompt.
 brew "superbrothers/zsh-kubectl-prompt/zsh-kubectl-prompt"
-# Password manager that keeps all passwords secure behind one password
-cask "1password"
 # Command-line interface for 1Password
 cask "1password-cli"
 # View, print, and comment on PDF documents
 cask "adobe-acrobat-reader"
 # Control USB Cameras from an app
 cask "cameracontroller"
-# Clipboard extension app
-cask "clipy"
 # Disk usage utility
 cask "disk-inventory-x"
 # Web browser
@@ -273,20 +269,10 @@ cask "karabiner-elements"
 cask "keycastr"
 # Password manager
 cask "lastpass"
-# Clipboard manager
-cask "maccy"
-# Desktop virtualization software
-cask "parallels"
 # Collaboration platform for API development
 cask "postman"
 # Screenshot measurement and annotation tool
 cask "shottr"
-# Text editor for code, markup and prose
-cask "sublime-text"
-# Multi-platform VNC client and server
-cask "tigervnc-viewer"
-# Development environment
-cask "vagrant"
 # Open-source code editor
 cask "visual-studio-code"
 # Multimedia player
