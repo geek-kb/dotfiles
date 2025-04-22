@@ -106,7 +106,6 @@ com! -bang FormatGroovyMap call s:FormatGroovyMap("<bang>")
 com! BasicGroovyFormat call s:BasicGroovyFormat()
 ]=]
 
-
 -- Buffer navigation
 map('n', '<leader>bp', ':BufferLinePick<CR>', { silent = true, desc = 'Pick buffer' })
 map('n', '<leader>bc', ':BufferLinePickClose<CR>', { silent = true, desc = 'Pick buffer to close' })
@@ -141,9 +140,7 @@ map('v', 'ae', '<esc>gg0vG$', { remap = false })
 -- Run and edit macros
 for _, key in pairs { 'Q', 'X' } do
   map('n', key, '@' .. key:lower(), { remap = false })
-  map('n', '<leader>' .. key,
-    ":<c-u><c-r><c-r>='let @" .. key:lower() .. " = '. string(getreg('" .. key:lower() .. "'))<cr><c-f><left>",
-    { remap = false })
+  map('n', '<leader>' .. key, ":<c-u><c-r><c-r>='let @" .. key:lower() .. " = '. string(getreg('" .. key:lower() .. "'))<cr><c-f><left>", { remap = false })
 end
 
 -- Quickfix and tabs
@@ -218,7 +215,7 @@ map('n', 'Y', ':%y+<cr>', { remap = false, silent = true })
 
 -- Copy file path to clipboard
 local function is_real_file()
-  local path = vim.fn.expand('%:p')
+  local path = vim.fn.expand '%:p'
   return vim.fn.filereadable(path) == 1
 end
 
@@ -233,7 +230,7 @@ map('n', '<leader>cfp', function()
     vim.notify('No real file to copy path from', vim.log.levels.WARN)
     return
   end
-  notify_and_copy('relative file path', vim.fn.expand('%'))
+  notify_and_copy('relative file path', vim.fn.expand '%')
 end, { desc = 'Copy relative file path' })
 
 -- Copy full file path to clipboard
@@ -242,7 +239,7 @@ map('n', '<leader>cfa', function()
     vim.notify('No real file to copy path from', vim.log.levels.WARN)
     return
   end
-  notify_and_copy('full file path', vim.fn.expand('%:p'))
+  notify_and_copy('full file path', vim.fn.expand '%:p')
 end, { desc = 'Copy full file path' })
 
 -- Copy file directory path to clipboard
@@ -251,7 +248,7 @@ map('n', '<leader>cfd', function()
     vim.notify('No real file to copy dir from', vim.log.levels.WARN)
     return
   end
-  notify_and_copy('file directory path', vim.fn.expand('%:p:h'))
+  notify_and_copy('file directory path', vim.fn.expand '%:p:h')
 end, { desc = 'Copy file directory path' })
 
 -- Copy file name to clipboard
@@ -260,7 +257,7 @@ map('n', '<leader>cfn', function()
     vim.notify('No real file to copy name from', vim.log.levels.WARN)
     return
   end
-  notify_and_copy('file name', vim.fn.expand('%:t'))
+  notify_and_copy('file name', vim.fn.expand '%:t')
 end, { desc = 'Copy file name' })
 
 -- Copy and paste to/from system clipboard
@@ -286,8 +283,7 @@ map('n', '<leader>fo', 'zR', { remap = false })
 map('n', '<leader>fl', 'zazczA', { remap = false })
 
 -- Change \n to new lines
-map('n', '<leader><cr>', [[:silent! %s?\\n?\r?g<bar>silent! %s?\\t?\t?g<bar>silent! %s?\\r?\r?g<cr>:noh<cr>]],
-  { silent = true })
+map('n', '<leader><cr>', [[:silent! %s?\\n?\r?g<bar>silent! %s?\\t?\t?g<bar>silent! %s?\\r?\r?g<cr>:noh<cr>]], { silent = true })
 
 -- toggle wrap
 map('n', '<leader>ww', ':set wrap!<cr>', { remap = false, silent = true })
@@ -307,14 +303,10 @@ map('n', '<leader>cd', ':cd %:p:h<CR>:pwd<CR>', { remap = false, silent = true }
 map('n', [[<leader>\]], [[:.s/ -/ \\\r  -/g<cr>:noh<cr>]], { silent = true })
 
 -- global yanks and deletes
-map('v', '<leader>dab', [["hyqeq:v?\V<c-r>h?d E<cr>:let @"=@e<cr>:noh<cr>]],
-  { remap = false, desc = 'Delete all but...', silent = true })
-map('v', '<leader>daa', [["hyqeq:g?\V<c-r>h?d E<cr>:let @"=@e<cr>:noh<cr>]],
-  { remap = false, desc = 'Delete all ...', silent = true })
-map('v', '<leader>yab', [["hymmqeq:v?\V<c-r>h?yank E<cr>:let @"=@e<cr>`m:noh<cr>]],
-  { remap = false, desc = 'Yank all but...', silent = true })
-map('v', '<leader>yaa', [["hymmqeq:g?\V<c-r>h?yank E<cr>:let @"=@e<cr>`m:noh<cr>]],
-  { remap = false, desc = 'Yank all...', silent = true })
+map('v', '<leader>dab', [["hyqeq:v?\V<c-r>h?d E<cr>:let @"=@e<cr>:noh<cr>]], { remap = false, desc = 'Delete all but...', silent = true })
+map('v', '<leader>daa', [["hyqeq:g?\V<c-r>h?d E<cr>:let @"=@e<cr>:noh<cr>]], { remap = false, desc = 'Delete all ...', silent = true })
+map('v', '<leader>yab', [["hymmqeq:v?\V<c-r>h?yank E<cr>:let @"=@e<cr>`m:noh<cr>]], { remap = false, desc = 'Yank all but...', silent = true })
+map('v', '<leader>yaa', [["hymmqeq:g?\V<c-r>h?yank E<cr>:let @"=@e<cr>`m:noh<cr>]], { remap = false, desc = 'Yank all...', silent = true })
 
 -- Join lines keeping cursor position
 map('n', 'J', 'mzJ`z', { desc = 'Join lines keeping cursor position', remap = false })
@@ -558,7 +550,6 @@ end, { nargs = '?' })
 -- Search and Replace --
 ------------------------
 vim.cmd('source ' .. vim.fn.stdpath 'config' .. '/lua/user/search-replace.vim')
-
 
 -----------------------------
 --- Resize tree separator ---

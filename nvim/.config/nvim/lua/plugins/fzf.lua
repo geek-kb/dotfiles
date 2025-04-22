@@ -1,6 +1,7 @@
 return {
   'ibhagwan/fzf-lua',
-  dependencies = { 'ribru17/bamboo.nvim' },
+  lazy = true,
+  dependencies = {},
   event = 'VeryLazy',
   keys = {
     { '<c-p>', ':FzfLua files<cr>', silent = true },
@@ -71,7 +72,11 @@ return {
                     if ret == 0 then
                       utils.info('Renamed branch ' .. branch .. ' to ' .. new_name)
                     else
-                      local msg = string.format('Error when renaming branch: %s. Git returned:\n%s', branch, table.concat(stderr or {}, '\n'))
+                      local msg = string.format(
+                        'Error when renaming branch: %s. Git returned:\n%s',
+                        branch,
+                        type(stderr) == 'table' and table.concat(stderr, '\n') or tostring(stderr)
+                      )
                       utils.err(msg)
                     end
                   end)
@@ -101,13 +106,20 @@ return {
                       if ret_remote == 0 then
                         utils.info('Deleted branch ' .. branch .. ' from remote')
                       else
-                        local msg =
-                          string.format('Error when deleting branch from remote: %s. Git returned:\n%s', branch, table.concat(stderr_remote or {}, '\n'))
+                        local msg = string.format(
+                          'Error when deleting branch from remote: %s. Git returned:\n%s',
+                          branch,
+                          type(stderr_remote) == 'table' and table.concat(stderr_remote, '\n') or tostring(stderr_remote)
+                        )
                         utils.err(msg)
                       end
                     end)
                   else
-                    local msg = string.format('Error when deleting branch: %s. Git returned:\n%s', branch, table.concat(stderr or {}, '\n'))
+                    local msg = string.format(
+                      'Error when deleting branch: %s. Git returned:\n%s',
+                      branch,
+                      type(stderr) == 'table' and table.concat(stderr, '\n') or tostring(stderr)
+                    )
                     utils.err(msg)
                   end
                 end)
@@ -134,9 +146,17 @@ return {
   cmd = { 'FzfLua', 'ListFilesFromBranch' },
   config = function()
     require('fzf-lua').setup {
-      'default-title',
-      files = {
-        git_icons = true,
+      winopts = {
+        border = 'single',
+        height = 0.85,
+        width = 0.90,
+        hl = {
+          normal = 'Normal',
+          border = 'FloatBorder',
+          cursor = 'Cursor',
+          cursorline = 'CursorLine',
+          search = 'Search',
+        },
       },
       oldfiles = {
         cwd_only = true,
@@ -153,7 +173,7 @@ return {
       keymap = { fzf = { ['ctrl-q'] = 'select-all+accept' } },
       previewers = {
         builtin = {
-          syntax = function(filepath, bufnr, ft)
+          syntax = function(filepath, _, ft)
             if filepath:match 'requirements%.txt$' then
               return 'text'
             end
