@@ -20,7 +20,7 @@ alias pbc='pbcopy'
 alias ll='ls -lah'
 alias ls='eza '
 alias dc='cd '
-alias dotfiles='cd ~/.dotfiles'
+alias dot='cd ~/.dotfiles'
 alias pj='fdf ~/Repos'
 alias src="~/src"
 
