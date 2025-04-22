@@ -1,3 +1,6 @@
+-- Disable Perl and Ruby providers if you don't need them
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
 ---@class PluginSpec[]
 --- Plugin specifications for Lazy.nvim plugin manager
 --- This file contains the core plugin configurations for Neovim
@@ -126,10 +129,10 @@ local M = {
   {
     'kevinhwang91/nvim-hlslens',
     keys = {
-      { 'n',  [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>zz]] },
-      { 'N',  [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>zz]] },
-      { '*',  [[*<Cmd>lua require('hlslens').start()<CR>N]] },
-      { '#',  [[#<Cmd>lua require('hlslens').start()<CR>n]] },
+      { 'n', [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>zz]] },
+      { 'N', [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>zz]] },
+      { '*', [[*<Cmd>lua require('hlslens').start()<CR>N]] },
+      { '#', [[#<Cmd>lua require('hlslens').start()<CR>n]] },
       { 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]] },
       { 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]] },
     },
@@ -140,8 +143,8 @@ local M = {
     'machakann/vim-swap',
     keys = {
       { '<leader>sw', '<Plug>(swap-interactive)', mode = { 'n', 'v' } },
-      { 'g<',         '<Plug>(swap-prev)' },
-      { 'g>',         '<Plug>(swap-next)' },
+      { 'g<', '<Plug>(swap-prev)' },
+      { 'g>', '<Plug>(swap-next)' },
     },
     init = function()
       vim.g.swap_no_default_key_mappings = true
@@ -151,7 +154,13 @@ local M = {
     'zbirenbaum/copilot.lua',
     event = { 'InsertEnter' },
     config = function()
-      vim.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"
+      -- Create necessary directories
+      local state_dir = vim.fn.stdpath 'state'
+      local copilot_dir = state_dir .. '/copilot'
+      if vim.fn.isdirectory(copilot_dir) == 0 then
+        vim.fn.mkdir(copilot_dir, 'p')
+      end
+
       require('copilot').setup {
         copilot_node_command = 'node',
         filetypes = { python = true, ['*'] = true },
@@ -212,7 +221,7 @@ local M = {
       error_header = '  Error ',
     },
     keys = {
-      { '<leader>ccc', '<cmd>CopilotChat<CR>',    mode = { 'n', 'v' } },
+      { '<leader>ccc', '<cmd>CopilotChat<CR>', mode = { 'n', 'v' } },
       { '<leader>ccs', '<cmd>CopilotChatStop<CR>' },
     },
   },

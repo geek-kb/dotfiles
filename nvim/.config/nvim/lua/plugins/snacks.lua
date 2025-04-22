@@ -9,7 +9,7 @@ return {
     indent = { enabled = false },
     input = { enabled = true },
     notifier = {
-      enabled = false,
+      enabled = true,
       timeout = 3000,
     },
     scope = { enabled = false },
@@ -71,9 +71,9 @@ return {
           vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-\\><C-n>', true, true, true), 'n', true)
           vim.cmd.close()
         else
-          local cwd = vim.fn.expand('%:p:h')
+          local cwd = vim.fn.expand '%:p:h'
           if cwd == '' or not vim.loop.fs_stat(cwd) then
-            cwd = vim.fn.expand('~') -- fallback to home directory
+            cwd = vim.fn.expand '~' -- fallback to home directory
           end
           Snacks.terminal.toggle(nil, { cwd = cwd })
         end
@@ -126,7 +126,7 @@ return {
     vim.api.nvim_create_autocmd('TermOpen', {
       callback = function()
         vim.b.miniindentscope_disable = true
-        vim.cmd('startinsert') -- Optional: auto-enter insert mode
+        vim.cmd 'startinsert' -- Optional: auto-enter insert mode
       end,
     })
   end,

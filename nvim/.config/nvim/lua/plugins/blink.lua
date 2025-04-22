@@ -29,7 +29,7 @@ return {
         config = function()
           vim.schedule(function()
             require('copilot').setup {
-              copilot_node_command = '/usr/local/bin/node',
+              copilot_node_command = 'node',
               filetypes = { ['*'] = true },
               panel = {
                 enabled = true,
@@ -43,6 +43,7 @@ return {
                 },
               },
               suggestion = {
+                enabled = true,
                 auto_trigger = true,
                 keymap = {
                   accept = '<M-Enter>',
@@ -56,7 +57,6 @@ return {
     event = 'InsertEnter',
 
     ---@module 'blink.cmp'
-    ---@type blink.cmp.Config
     opts = {
 
       appearance = {

@@ -144,43 +144,43 @@ local function on_attach(bufnr)
   local function copy_absolute_path()
     local node = api.tree.get_node_under_cursor()
     if not node or not node.absolute_path then
-      vim.notify("No file selected", vim.log.levels.WARN)
+      vim.notify('No file selected', vim.log.levels.WARN)
       return
     end
     vim.fn.setreg('+', node.absolute_path)
-    vim.notify("Copied full path: " .. node.absolute_path)
+    vim.notify('Copied full path: ' .. node.absolute_path)
   end
   local function copy_relative_path()
     local node = api.tree.get_node_under_cursor()
     if not node or not node.absolute_path then
-      vim.notify("No file selected", vim.log.levels.WARN)
+      vim.notify('No file selected', vim.log.levels.WARN)
       return
     end
-    local path = vim.fn.fnamemodify(node.absolute_path, ":.")
+    local path = vim.fn.fnamemodify(node.absolute_path, ':.')
     vim.fn.setreg('+', path)
-    vim.notify("Copied relative path: " .. path)
+    vim.notify('Copied relative path: ' .. path)
   end
   -- Copy file name only
   local function copy_filename()
     local node = api.tree.get_node_under_cursor()
     if not node or not node.name then
-      vim.notify("No file selected", vim.log.levels.WARN)
+      vim.notify('No file selected', vim.log.levels.WARN)
       return
     end
     vim.fn.setreg('+', node.name)
-    vim.notify("Copied file name: " .. node.name)
+    vim.notify('Copied file name: ' .. node.name)
   end
 
   -- Copy directory path of selected node
   local function copy_dir_path()
     local node = api.tree.get_node_under_cursor()
     if not node or not node.absolute_path then
-      vim.notify("No file selected", vim.log.levels.WARN)
+      vim.notify('No file selected', vim.log.levels.WARN)
       return
     end
-    local dir = vim.fn.fnamemodify(node.absolute_path, ":h")
+    local dir = vim.fn.fnamemodify(node.absolute_path, ':h')
     vim.fn.setreg('+', dir)
-    vim.notify("Copied directory path: " .. dir)
+    vim.notify('Copied directory path: ' .. dir)
   end
   vim.keymap.set('n', '<leader>cfa', copy_absolute_path, opts 'Copy Absolute Path')
   vim.keymap.set('n', '<leader>cfp', copy_relative_path, opts 'Copy Relative Path')
@@ -196,7 +196,7 @@ local M = {
 
 M.keys = {
   { '<leader>v', ':lua require("nvim-tree.api").tree.find_file { open = true, focus = true }<cr>', silent = true, desc = 'Open Tree under current file' },
-  { '<c-o>',     ':lua require("nvim-tree.api").tree.toggle()<cr>',                                silent = true, desc = 'Open Tree' },
+  { '<c-o>', ':lua require("nvim-tree.api").tree.toggle()<cr>', silent = true, desc = 'Open Tree' },
 }
 
 M.config = function()
@@ -253,8 +253,8 @@ M.config = function()
       },
       adaptive_size = true,
       float = {
-        enable = false
-      }
+        enable = false,
+      },
     },
     filters = {
       dotfiles = false,
@@ -272,8 +272,11 @@ M.config = function()
         local events = require('nvim-tree.api').events
         events.subscribe(events.Event.NodeRenamed, function(data)
           if prev.new_name ~= data.new_name or prev.old_name ~= data.old_name then
-            data = data
-            Snacks.rename.on_rename_file(data.old_name, data.new_name)
+            prev = data
+            if _G.Snacks and _G.Snacks.rename and _G.Snacks.rename.on_rename_file then
+              _G.Snacks.rename.on_rename_file(data.old_name, data.new_name)
+            end
+            require('nvim-tree.api').tree.reload()
           end
         end)
       end,
