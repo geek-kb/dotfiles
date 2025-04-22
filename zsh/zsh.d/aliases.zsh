@@ -34,6 +34,7 @@ alias vsrc='nvim ~/src'
 alias sudoedit="nvim"
 alias lvim='NVIM_APPNAME=LazyVim nvim'
 alias zshrc='${=EDITOR} ${ZDOTDIR:-$HOME}/.zshrc'
+alias diff='/usr/bin/diff --color $1 $2'
 
 #------------------------------------------------------------------------------
 # Development Tools

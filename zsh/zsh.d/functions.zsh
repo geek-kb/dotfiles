@@ -308,6 +308,14 @@ function get_pods_of_svc() {
   kubectl get pod $* -l $label_selectors
 }
 
+function asdf_install() {
+  cd ~/.dotfiles
+  while read -r plugin_line; do
+       asdf plugin add $(awk '{print $1}' <<<"$plugin_line")
+     done <asdf/.tool-versions
+     asdf install
+}
+
 function kgel() {
   if [[ -z $1 ]]; then
     echo "Usage: $0 <pod_name>"

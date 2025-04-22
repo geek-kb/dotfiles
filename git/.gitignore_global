@@ -6,3 +6,6 @@ pyrightconfig.json
 *.zsh_history
 zsh/.zsh_history
 nvim/.config/nvim/colorscheme.txt
+nvim/.config/github-copilot/
+nvim/.config/gh/
+nvim/.config/op

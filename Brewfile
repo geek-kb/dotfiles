@@ -1,3 +1,5 @@
+# For Apple Macbook m4 only:
+# brew install openjdk@21
 tap "argoproj/tap"
 tap "aws/tap"
 tap "azure/kubelogin"

@@ -24,4 +24,5 @@ lua 5.1.5
 rust stable
 vim 9.1.0958
 ripgrep 14.1.1
+uvicorn 0.34.2
 stylua 2.1.0

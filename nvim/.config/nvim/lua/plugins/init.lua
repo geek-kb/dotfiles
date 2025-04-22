@@ -151,9 +151,10 @@ local M = {
     'zbirenbaum/copilot.lua',
     event = { 'InsertEnter' },
     config = function()
+      vim.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"
       require('copilot').setup {
         copilot_node_command = 'node',
-        filetypes = { ['*'] = true },
+        filetypes = { python = true, ['*'] = true },
         panel = {
           enabled = true,
           auto_refresh = false,
@@ -167,6 +168,7 @@ local M = {
         },
         suggestion = {
           auto_trigger = true,
+          enabled = true,
           keymap = {
             accept = '<M-Enter>',
           },
@@ -215,22 +217,9 @@ local M = {
     },
   },
 
-  -- Grype vulnerability scanner commands
-  vim.api.nvim_create_user_command("GrypeSBOM", require("user.grype").grype_sbom, {
-    nargs = 1,
-    complete = "file",
-    desc = "Scan SBOM with Grype",
-  }),
-  -- Syft vulnerability scanner commands
-  vim.api.nvim_create_user_command("SyftSBOM", require("user.syft").generate_sbom, {
-    nargs = "?",
-    complete = "file",
-    desc = "Generate SBOM with Syft",
-  }),
+  -- DONE ✅
 }
 
 vim.keymap.set('n', '<leader>z', '<cmd>Lazy<CR>', { silent = true })
-
-vim.keymap.set('n', '<leader>x', 'x', { noremap = true, desc = 'Delete character under cursor' })
 
 return M

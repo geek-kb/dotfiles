@@ -28,3 +28,5 @@ vim-vint
 zipp
 setuptools
 debugpy
+black
+uvicorn

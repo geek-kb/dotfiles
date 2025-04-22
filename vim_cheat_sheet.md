@@ -200,15 +200,15 @@ A comprehensive reference organized from basic to advanced operations.
 
 ## 🧠 AI & Code Intelligence
 
-| Shortcut      | Description               |
-| ------------- | ------------------------- |
-| `<M-Enter>`   | Accept Copilot suggestion |
-| `<leader>ccc` | Open CopilotChat          |
-| `<leader>ccs` | Stop CopilotChat          |
-| `<leader>ccp` | CopilotChat prompt picker |
-| `<leader>lp`  | Format buffer (LSP/tool)  |
-| `<leader>46`  | Base64 decode             |
-| `<leader>64`  | Base64 encode             |
+| Shortcut                           | Description               |
+| ---------------------------------- | ------------------------- |
+| `<Alt-Enter>` (Alt = Opt in Macos) | Accept Copilot suggestion |
+| `<leader>ccc`                      | Open CopilotChat          |
+| `<leader>ccs`                      | Stop CopilotChat          |
+| `<leader>ccp`                      | CopilotChat prompt picker |
+| `<leader>lp`                       | Format buffer (LSP/tool)  |
+| `<leader>46`                       | Base64 decode             |
+| `<leader>64`                       | Base64 encode             |
 
 ---
 
