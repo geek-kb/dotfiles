@@ -58,10 +58,11 @@ function mwatch() {
 }
 
 function clone() {
-  cd ~/Repos
+  cd ~/src
   git clone $1
   cd "$(basename "$_" .git)"
   nvim
+  cd -
 }
 
 function gitcd() {

@@ -21,7 +21,6 @@ alias ll='ls -lah'
 alias ls='eza '
 alias dc='cd '
 alias dot='cd ~/.dotfiles'
-alias pj='fdf ~/Repos'
 alias src="~/src"
 
 #------------------------------------------------------------------------------
@@ -61,7 +60,7 @@ alias kgevents='kubectl get event --sort-by=.metadata.creationTimestamp | grep -
 #------------------------------------------------------------------------------
 # File Type Associations
 #------------------------------------------------------------------------------
-alias -s {lua,yml,yaml}=nvim
+alias -s {lua,yml,yaml,json,txt}=nvim
 
 #------------------------------------------------------------------------------
 # Global Aliases (Pipe Operations)

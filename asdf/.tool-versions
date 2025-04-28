@@ -25,3 +25,4 @@ rust stable
 vim 9.1.0958
 ripgrep 14.1.1
 stylua 2.1.0
+direnv 2.36.0

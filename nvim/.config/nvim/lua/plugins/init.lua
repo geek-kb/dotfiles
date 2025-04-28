@@ -225,8 +225,6 @@ local M = {
       { '<leader>ccs', '<cmd>CopilotChatStop<CR>' },
     },
   },
-
-  -- DONE ✅
 }
 
 vim.keymap.set('n', '<leader>z', '<cmd>Lazy<CR>', { silent = true })
