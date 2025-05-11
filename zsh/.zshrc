@@ -1,5 +1,25 @@
 # shellcheck disable=2148,2034,2155,1091,2086,1094
 zmodload zsh/zprof
+
+# ================ #
+# NVM and Node.js  #
+# ================ #
+
+export NVM_DIR="$HOME/.nvm"
+#[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+#[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+autoload -U add-zsh-hook
+
+load-nvm() {
+  unset -f nvm node npm npx # Remove the placeholders
+  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+}
+
+nvm() { load-nvm; nvm "$@"; }
+node() { load-nvm; node "$@"; }
+npm() { load-nvm; npm "$@"; }
+npx() { load-nvm; npx "$@"; }
 # ================ #
 # Basic ZSH Config #
 # ================ #
@@ -15,14 +35,6 @@ fi
 
 # Ensure path arrays do not contain duplicates.
 typeset -gU path fpath
-
-# ================ #
-# NVM and Node.js  #
-# ================ #
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
 
 # ================ #
 
@@ -84,7 +96,6 @@ for ZSH_FILE in "${ZDOTDIR:-$HOME}"/zsh.d/*.zsh(N); do
 done
 [[ -f $HOME/corp-aliases.sh ]] && source $HOME/corp-aliases.sh
 
-
 # ================ #
 # Kubectl Contexts #
 # ================ #
@@ -93,4 +104,5 @@ export KUBECONFIG=$HOME/.kube/config
 export KUBECTL_EXTERNAL_DIFF="kdiff"
 export KUBERNETES_EXEC_INFO='{"apiVersion": "client.authentication.k8s.io/v1beta1"}'
 
+export DISABLE_AUTO_UPDATE="true"
 eval "$(starship init zsh)"

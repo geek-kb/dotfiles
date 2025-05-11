@@ -59,9 +59,20 @@ autocmd('FileType', {
   desc = 'Set q to quit for specific filetypes',
   group = buffer_settings,
   pattern = {
-    'PlenaryTestPopup', 'checkhealth', 'help', 'lspinfo', 'man', 'neotest-output',
-    'neotest-output-panel', 'neotest-summary', 'netrw', 'notify', 'qf',
-    'spectre_panel', 'startuptime', 'tsplayground',
+    'PlenaryTestPopup',
+    'checkhealth',
+    'help',
+    'lspinfo',
+    'man',
+    'neotest-output',
+    'neotest-output-panel',
+    'neotest-summary',
+    'netrw',
+    'notify',
+    'qf',
+    'spectre_panel',
+    'startuptime',
+    'tsplayground',
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
@@ -81,7 +92,8 @@ autocmd('TextYankPost', {
   desc = 'Highlight on yank',
   group = buffer_settings,
   callback = function()
-    pcall(vim.highlight.on_yank, { higroup = 'IncSearch', timeout = 200 })
+    pcall(vim.hl.on_yank, { higroup = 'IncSearch', timeout = 200 })
+    --    pcall(vim.highlight.on_yank, { higroup = 'IncSearch', timeout = 200 })
   end,
 })
 
@@ -109,7 +121,7 @@ autocmd('BufReadPost', {
     if mark[1] > 0 and mark[1] <= lcount then
       vim.schedule(function()
         pcall(vim.api.nvim_win_set_cursor, 0, mark)
-        vim.cmd('normal! zv')
+        vim.cmd 'normal! zv'
       end)
     end
   end,
@@ -215,29 +227,29 @@ end, { nargs = '?' })
 --})
 
 -- Auto-manage nvim-tree on startup
-vim.api.nvim_create_autocmd("VimEnter", {
-  desc = "Open nvim-tree on startup when no file is specified, close it when file is specified",
-  group = vim.api.nvim_create_augroup("NvimTreeStartup", { clear = true }),
+vim.api.nvim_create_autocmd('VimEnter', {
+  desc = 'Open nvim-tree on startup when no file is specified, close it when file is specified',
+  group = vim.api.nvim_create_augroup('NvimTreeStartup', { clear = true }),
   callback = function()
     vim.schedule(function()
       local args = vim.fn.argv()
       if #args == 0 then
-        pcall(vim.cmd, "NvimTreeOpen")
+        pcall(vim.cmd, 'NvimTreeOpen')
       else
-        pcall(vim.cmd, "NvimTreeClose")
+        pcall(vim.cmd, 'NvimTreeClose')
       end
     end)
   end,
 })
 
 -- Auto-resize nvim-tree on window resize
-vim.api.nvim_create_autocmd({ "VimResized" }, {
-  desc = "Resize nvim-tree if nvim window got resized",
-  group = vim.api.nvim_create_augroup("NvimTreeResize", { clear = true }),
+vim.api.nvim_create_autocmd({ 'VimResized' }, {
+  desc = 'Resize nvim-tree if nvim window got resized',
+  group = vim.api.nvim_create_augroup('NvimTreeResize', { clear = true }),
   callback = function()
     local percentage = 15 -- Adjust the percentage based on your preference
     local ratio = percentage / 100
     local width = math.floor(vim.go.columns * ratio)
-    vim.cmd("tabdo NvimTreeResize " .. width)
+    vim.cmd('tabdo NvimTreeResize ' .. width)
   end,
 })

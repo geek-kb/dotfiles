@@ -150,7 +150,7 @@ return {
         border = 'single',
         height = 0.85,
         width = 0.90,
-        hl = {
+        hls = {
           normal = 'Normal',
           border = 'FloatBorder',
           cursor = 'Cursor',

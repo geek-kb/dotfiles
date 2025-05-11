@@ -106,7 +106,8 @@ return {
       jsonc = { 'prettierd' },
       less = { 'prettierd' },
       lua = { 'stylua' },
-      markdown = { 'cbfmt', 'injected', 'markdownlint', 'prettierd' },
+      markdown = { 'markdownlint', 'prettierd' },
+      --      markdown = { 'cbfmt', 'injected', 'markdownlint', 'prettierd' },
       python = function(bufnr)
         if require('conform').get_formatter_info('ruff_format', bufnr).available then
           return { 'ruff_format' }
@@ -129,11 +130,11 @@ return {
     },
     format_on_save = function()
       return {
-            lsp_format = 'fallback',
-            timeout_ms = 5000,
-          },
-          ---@diagnostic disable-next-line: redundant-return-value
-          notify_format
+        lsp_format = 'fallback',
+        timeout_ms = 5000,
+      },
+        ---@diagnostic disable-next-line: redundant-return-value
+        notify_format
     end,
     formatters = {},
   },
