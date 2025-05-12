@@ -566,3 +566,9 @@ vim.keymap.set('n', '<leader>w=', function()
   vim.g.nvim_tree_width = math.min(width + 5, 50)
   require('nvim-tree.view').resize(vim.g.nvim_tree_width)
 end, { noremap = true, silent = true, desc = 'Increase tree size' })
+
+-----------------------------
+--- Markdown Preview ---
+-----------------------------
+
+map('n', '<leader>mp', ':MarkdownPreview<cr>', { remap = false, silent = true })
