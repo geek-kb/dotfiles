@@ -322,13 +322,14 @@ A comprehensive reference organized from basic to advanced operations.
 
 ## 📦 Miscellaneous
 
-| Shortcut     | Description                    |
-| ------------ | ------------------------------ |
-| `<leader>.`  | Toggle Scratch buffer          |
-| `<leader>S`  | Select Scratch buffer          |
-| `<leader>N`  | Neovim News popup              |
-| `<leader>cc` | YAML Companion: Change schema  |
-| `<leader>mp` | Markdown Preview: Open preview |
+| Shortcut     | Description                           |
+| ------------ | ------------------------------------- |
+| `<leader>.`  | Toggle Scratch buffer                 |
+| `<leader>S`  | Select Scratch buffer                 |
+| `<leader>N`  | Neovim News popup                     |
+| `<leader>cc` | YAML Companion: Change schema         |
+| `<leader>mp` | Markdown Preview: Open preview        |
+| `<leader>dp` | Mermaid Diagram Preview: Open preview |
 
 ---
 
