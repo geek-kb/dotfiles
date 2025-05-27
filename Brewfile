@@ -1,5 +1,3 @@
-# For Apple Macbook m4 only:
-# brew install openjdk@21
 tap "argoproj/tap"
 tap "aws/tap"
 tap "azure/kubelogin"
@@ -9,9 +7,11 @@ tap "hacker1024/hacker1024"
 tap "hashicorp/tap"
 tap "homebrew/command-not-found"
 tap "johanhaleby/kubetail"
+tap "jstkdng/programs"
 tap "minamijoyo/hcledit"
 tap "neovim/neovim"
 tap "superbrothers/zsh-kubectl-prompt"
+tap "vmware-tanzu/tanzu"
 tap "weaveworks/tap"
 # New file format for still image compression
 brew "jpeg-xl"
@@ -43,10 +43,14 @@ brew "cbfmt"
 brew "cfssl"
 # C/C++ and Java libraries for Unicode and globalization
 brew "icu4c@77"
+# Library to render SVG files using Cairo
+brew "librsvg"
 # Versatile and fast Unicode/ASCII/ANSI graphics renderer
 brew "chafa"
 # Prevent cloud misconfigurations during build-time for IaC tools
 brew "checkov"
+# Command-Line Tester
+brew "clitest"
 # CloudFormation Provider Development Toolkit
 brew "cloudformation-cli"
 # Cross-platform make
@@ -63,6 +67,10 @@ brew "cookiecutter"
 brew "coreutils"
 # Apjanke's fork of the classic cowsay project
 brew "cowsay"
+# Modern diagram scripting language that turns text to diagrams
+brew "d2"
+# Pack, ship and run any application as a lightweight container
+brew "docker"
 # Simple command-line tool for creating clusters on Amazon EKS
 brew "eksctl"
 # Modern, maintained replacement for ls
@@ -103,12 +111,20 @@ brew "gnu-time"
 brew "gnupg"
 # GNU Pretty Good Privacy (PGP) package
 brew "gnupg@1.4"
+# Command-driven, interactive function plotting
+brew "gnuplot"
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
+# Development kit for the Java programming language
+brew "openjdk"
+# Open-source build automation tool based on the Groovy and Kotlin DSL
+brew "gradle"
 # Graph visualization software from AT&T and Bell Labs
 brew "graphviz"
 # GNU grep, egrep and fgrep
 brew "grep"
+# Java-based scripting language
+brew "groovy"
 # Like cURL, but for gRPC
 brew "grpcurl"
 # Vulnerability scanner for container images and filesystems
@@ -123,8 +139,6 @@ brew "infracost"
 brew "jq"
 # Little helper to run CNCF's k3s in Docker
 brew "k3d"
-# Kubernetes command-line interface
-brew "kubernetes-cli"
 # Kubernetes prompt info for bash and zsh
 brew "kube-ps1"
 # KubeConfig Manager
@@ -133,12 +147,12 @@ brew "kubecm"
 brew "kubectx"
 # LastPass command-line interface tool
 brew "lastpass-cli"
+# Simple terminal UI for git commands
+brew "lazygit"
 # Provides library functionality for FIDO U2F & FIDO 2.0, including USB
 brew "libfido2"
 # Tool for linting and static analysis of Lua code
 brew "luacheck"
-# Run a Kubernetes cluster locally
-brew "minikube"
 # Simple tool to make locally trusted development certificates
 brew "mkcert"
 # Platform built on V8 to build network applications
@@ -153,16 +167,24 @@ brew "msgpack"
 brew "mysql-client"
 # Node version management
 brew "n"
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim"
 # Port scanning utility for large networks
 brew "nmap"
 # Manage multiple Node.js versions
 brew "nvm"
+# Development kit for the Java programming language
+brew "openjdk@21"
+# Swiss-army knife of markup format conversion
+brew "pandoc"
 # Shell command parallelization utility
 brew "parallel"
 # Perl compatible regular expressions library
 brew "pcre"
 # Execute binaries from Python packages in isolated environments
 brew "pipx"
+# Draw UML diagrams
+brew "plantuml"
 # Framework for managing multi-language pre-commit hooks
 brew "pre-commit"
 # Code formatter for JavaScript, CSS, JSON, GraphQL, Markdown, YAML
@@ -177,6 +199,10 @@ brew "python@3.11"
 brew "rbenv"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
+# Safe, concurrent, practical language
+brew "rust"
+# Experimental Rust compiler front-end for IDEs
+brew "rust-analyzer"
 # Static analysis and lint tool, for (ba)sh scripts
 brew "shellcheck"
 # Autoformat shell script source code
@@ -243,24 +269,22 @@ brew "bwhaley/ssmsh/ssmsh"
 brew "derailed/k9s/k9s"
 # Outputs current CPU core and package temperatures on macOS
 brew "hacker1024/hacker1024/coretemp"
-# Terraform
-brew "hashicorp/tap/terraform"
 # Tail logs from multiple Kubernetes pods at the same time
 brew "johanhaleby/kubetail/kubetail"
+# Drop in replacement for ueberzug written in C++
+brew "jstkdng/programs/ueberzugpp"
 # A command line editor for HCL
 brew "minamijoyo/hcledit/hcledit"
 # Display information about the kubectl current context and namespace in zsh prompt.
 brew "superbrothers/zsh-kubectl-prompt/zsh-kubectl-prompt"
+# The core Tanzu command-line tool
+brew "vmware-tanzu/tanzu/tanzu-cli"
 # Command-line interface for 1Password
 cask "1password-cli"
-# View, print, and comment on PDF documents
-cask "adobe-acrobat-reader"
 # Control USB Cameras from an app
 cask "cameracontroller"
 # Disk usage utility
 cask "disk-inventory-x"
-# Web browser
-cask "firefox"
 cask "font-fira-code"
 cask "font-fira-code-nerd-font"
 cask "font-hack-nerd-font"
@@ -269,6 +293,8 @@ cask "font-jetbrains-mono-nerd-font"
 cask "karabiner-elements"
 # Open-source keystroke visualiser
 cask "keycastr"
+# GPU-based terminal emulator
+cask "kitty"
 # Password manager
 cask "lastpass"
 # Collaboration platform for API development
@@ -287,12 +313,12 @@ cask "wezterm"
 cask "wireshark"
 vscode "4ops.terraform"
 vscode "aaron-bond.better-comments"
-vscode "amazonwebservices.amazon-q-vscode"
 vscode "amazonwebservices.aws-toolkit-vscode"
 vscode "bbenoist.shell"
 vscode "bierner.markdown-mermaid"
 vscode "chrmarti.regex"
 vscode "davidanson.vscode-markdownlint"
+vscode "docker.docker"
 vscode "docsmsft.docs-yaml"
 vscode "donjayamanne.githistory"
 vscode "eamodio.gitlens"
@@ -324,6 +350,8 @@ vscode "ms-python.vscode-pylance"
 vscode "ms-toolsai.jupyter"
 vscode "ms-toolsai.jupyter-keymap"
 vscode "ms-toolsai.jupyter-renderers"
+vscode "ms-toolsai.vscode-jupyter-cell-tags"
+vscode "ms-toolsai.vscode-jupyter-slideshow"
 vscode "ms-vscode-remote.remote-containers"
 vscode "ms-vscode-remote.remote-ssh"
 vscode "ms-vscode-remote.remote-ssh-edit"
