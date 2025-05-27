@@ -13,6 +13,7 @@ PACKAGES=(
   "yarn"
   "typescript"
   "eslint-config-react-app"
+  "@kittyjs/kitty-js"
 )
 
 for pkg in "${PACKAGES[@]}"; do

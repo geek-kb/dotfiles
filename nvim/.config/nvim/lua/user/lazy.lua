@@ -1,17 +1,19 @@
 -- Fix for TabNine binary path on Apple Silicon
-local tabnine_path = vim.fn.stdpath("data") .. "/lazy/cmp-tabnine/binaries/4.257.0/aarch64-apple-darwin/TabNine"
+local tabnine_path = vim.fn.stdpath 'data' .. '/lazy/cmp-tabnine/binaries/4.257.0/aarch64-apple-darwin/TabNine'
 if vim.fn.filereadable(tabnine_path) == 1 then
   vim.g.tabnine_binary_path = tabnine_path
 end
 
 return {
+  -- ➡️ diagram.nvim
+  require 'plugins.diagram',
   -- 🎨 Colorscheme Plugins (loaded eagerly for immediate availability)
 
   {
     'morhetz/gruvbox', -- Classic retro groove color scheme
     name = 'gruvbox',
-    lazy = false,      -- Load on startup
-    priority = 1000,   -- Ensure it loads before others
+    lazy = false, -- Load on startup
+    priority = 1000, -- Ensure it loads before others
   },
   {
     'catppuccin/nvim', -- Warm pastel theme with extensive customization
@@ -29,14 +31,14 @@ return {
     priority = 1000,
   },
   {
-    "dstein64/vim-startuptime-colorschemes", -- Preview installed themes in UI
-    cmd = { "ColorschemePreview" },          -- Lazy load only when this command is used
+    'dstein64/vim-startuptime-colorschemes', -- Preview installed themes in UI
+    cmd = { 'ColorschemePreview' }, -- Lazy load only when this command is used
   },
 
   -- ⚙️ Lazy.nvim Configuration
 
   {
-    "LazyVim/LazyVim", -- Base plugin used to configure Lazy (can be your root if using LazyVim)
+    'LazyVim/LazyVim', -- Base plugin used to configure Lazy (can be your root if using LazyVim)
 
     config = {
       defaults = {

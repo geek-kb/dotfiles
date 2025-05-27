@@ -496,7 +496,7 @@ function ClearTerm(reset)
 end
 
 vim.api.nvim_create_user_command('ClearTerm', 'lua ClearTerm(<args>)', { nargs = 1 })
-map('t', '<C-l><C-l>', [[<C-\><C-N>:ClearTerm 0<CR>]], { remap = false, silent = true })
+--map('t', '<C-l><C-l>', [[<C-\><C-N>:ClearTerm 0<CR>]], { remap = false, silent = true })
 map('t', '<C-l><C-l><C-l>', [[<C-\><C-N>:ClearTerm 1<CR>]], { remap = false, silent = true })
 
 ----------------------------
@@ -572,3 +572,11 @@ end, { noremap = true, silent = true, desc = 'Increase tree size' })
 -----------------------------
 
 map('n', '<leader>mp', ':MarkdownPreview<cr>', { remap = false, silent = true })
+
+-----------------------------
+--- Mermaid Preview ---
+-----------------------------
+
+--vim.keymap.set('n', '<leader>dr', function()
+--  require('diagram').render_buffer()
+--end, { desc = 'Diagram ⇢ (re)render current buffer' })
