@@ -164,19 +164,24 @@ map('n', '<leader>=', 'yypVr=', { remap = false })
 
 -- Map dp and dg with leader for diffput and diffget
 _G.__diffput = function()
+  if not vim.wo.diff then
+    vim.notify('Buffer is not in diff mode', vim.log.levels.WARN)
+    return
+  end
   vim.cmd [[diffput]]
 end
 map('n', '<leader>dp', function()
   vim.go.operatorfunc = 'v:lua.__diffput'
   return 'g@l'
 end, { expr = true })
+
 _G.__diffget = function()
+  if not vim.wo.diff then
+    vim.notify('Buffer is not in diff mode', vim.log.levels.WARN)
+    return
+  end
   vim.cmd [[diffget]]
 end
-map('n', '<leader>dg', function()
-  vim.go.operatorfunc = 'v:lua.__diffget'
-  return 'g@l'
-end, { expr = true })
 map('n', '<leader>dn', ':windo diffthis<cr>', { remap = false, silent = true })
 map('n', '<leader>df', ':windo diffoff<cr>', { remap = false, silent = true })
 

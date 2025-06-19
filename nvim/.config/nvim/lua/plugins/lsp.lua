@@ -6,10 +6,16 @@ local M = {
 M.init = function()
   _G.start_ls = function()
     local ft = vim.api.nvim_get_option_value('filetype', { buf = 0 })
-    local file_name = _G.tmp_write { should_delete = false, new = false, ft = ft }
+    local bufnr = vim.api.nvim_get_current_buf()
+    local fname = vim.api.nvim_buf_get_name(bufnr)
+
+    if fname == '' then
+      fname = vim.fn.getcwd() .. '/tmp.' .. ft
+    end
+
     -- load lsp
     require 'lspconfig'
-    return file_name
+    return fname
   end
   vim.keymap.set('n', '<leader>ls', _G.start_ls)
   require('user.menu').add_actions('LSP', {
@@ -18,7 +24,6 @@ M.init = function()
     end,
   })
 end
-
 M.config = require('user.lsp.config').setup
 
 M.dependencies = {
