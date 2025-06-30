@@ -329,7 +329,7 @@ A comprehensive reference organized from basic to advanced operations.
 | `<leader>N`  | Neovim News popup                     |
 | `<leader>cc` | YAML Companion: Change schema         |
 | `<leader>mp` | Markdown Preview: Open preview        |
-| `<leader>dp` | Mermaid Diagram Preview: Open preview |
+| `<leader>dr` | Mermaid Diagram Preview: Open preview |
 
 ---
 

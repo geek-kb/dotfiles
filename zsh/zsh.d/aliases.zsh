@@ -95,6 +95,9 @@ alias -g BAD='| grep -v "1/1\|2/2\|3/3\|4/4\|5/5\|6/6\|Completed\|Evicted"'
 alias -g IP='-ojsonpath="{.spec.nodeName}"'
 alias -g SRT='+short | sort'
 
+# VMWare Tanzu Cli
+#alias -g tcli='~/.bin/tanzu-cli-darwin_arm64'
+
 # Shell Processing
 alias -g dollar1='$(awk "{print \$1}"<<<"${line}")'
 alias -g dollar2='$(awk "{print \$2}"<<<"${line}")'

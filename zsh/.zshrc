@@ -53,6 +53,7 @@ path=(
   /usr/local/sbin
   /usr/local/opt/postgresql@15/bin
   $HOME/.asdf/installs/python/3.11.8/bin
+  $HOME/.asdf/installs/python/3.10.14/bin
   $path
 )
 export PATH
