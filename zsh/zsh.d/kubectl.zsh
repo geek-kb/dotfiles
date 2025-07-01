@@ -25,6 +25,7 @@ alias kdelf='kubectl delete -f'
 
 # Pod management.
 alias kgp='kubectl get pods'
+alias kgn='kubectl get namespace'
 alias kgpl='kgp -l'
 alias kgpn='kgp -n'
 alias kgpsl='kubectl get pods --show-labels'
