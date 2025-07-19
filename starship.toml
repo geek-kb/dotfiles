@@ -1,4 +1,5 @@
 format = "$directory$all"
+command_timeout = 1000
 
 [kubernetes]
 disabled = false
