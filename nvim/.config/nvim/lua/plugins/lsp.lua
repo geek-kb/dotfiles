@@ -65,7 +65,7 @@ M.dependencies = {
 }
 
 local language_specific_plugins = {
-  { 'cuducos/yaml.nvim', ft = 'yaml' },
+  -- Removed cuducos/yaml.nvim as it may conflict with our yamlls setup
   {
     'phelipetls/jsonpath.nvim',
     ft = 'json',
