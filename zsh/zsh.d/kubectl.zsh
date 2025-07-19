@@ -6,6 +6,8 @@ alias kca='_kca(){ kubectl "$@" --all-namespaces;  unset -f _kca; }; _kca'
 
 # Apply a YML file
 alias kaf='kubectl apply -f'
+# Replace a YML file
+alias krf='kubectl replace -f'
 
 # Drop into an interactive terminal on a container
 alias keti='kubectl exec -t -i'
@@ -188,3 +190,7 @@ alias kd='kubectl describe '
 alias ke='kubectl edit '
 alias kdelrs='kubectl delete rs '
 alias k8s='nvim +"lua require(\"kubectl\").open()"'
+
+# Kubectx and kubens integration
+alias kctx='kubectx'
+alias kns='kubens'
