@@ -44,7 +44,6 @@ path=(
   /opt/homebrew/bin
   /opt/homebrew/sbin
   /opt/homebrew/opt/make/libexec/gnubin
-  ${KREW_ROOT:-$HOME/.krew}/bin
   /usr/local/opt/curl/bin
   /usr/local/opt/ruby/bin
   $HOME/.bin
@@ -57,8 +56,12 @@ path=(
   $path
 )
 export PATH
+export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CONFIG_HOME=${HOME}/.config
 unset ZSH_AUTOSUGGEST_USE_ASYNC
+
+# Homebrew variables.
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Ruby
 eval "$(rbenv init - zsh)"
