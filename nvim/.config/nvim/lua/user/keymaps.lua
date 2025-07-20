@@ -140,7 +140,9 @@ map('v', 'ae', '<esc>gg0vG$', { remap = false })
 -- Run and edit macros
 for _, key in pairs { 'Q', 'X' } do
   map('n', key, '@' .. key:lower(), { remap = false })
-  map('n', '<leader>' .. key, ":<c-u><c-r><c-r>='let @" .. key:lower() .. " = '. string(getreg('" .. key:lower() .. "'))<cr><c-f><left>", { remap = false })
+  map('n', '<leader>' .. key,
+    ":<c-u><c-r><c-r>='let @" .. key:lower() .. " = '. string(getreg('" .. key:lower() .. "'))<cr><c-f><left>",
+    { remap = false })
 end
 
 -- Quickfix and tabs
@@ -164,24 +166,31 @@ map('n', '<leader>=', 'yypVr=', { remap = false })
 
 -- Map dp and dg with leader for diffput and diffget
 _G.__diffput = function()
-  if not vim.wo.diff then
-    vim.notify('Buffer is not in diff mode', vim.log.levels.WARN)
-    return
+  if vim.wo.diff then
+    vim.cmd [[diffput]]
+  else
+    vim.notify("Buffer is not in diff mode", vim.log.levels.WARN)
   end
-  vim.cmd [[diffput]]
 end
+
 map('n', '<leader>dp', function()
   vim.go.operatorfunc = 'v:lua.__diffput'
   return 'g@l'
 end, { expr = true })
 
 _G.__diffget = function()
-  if not vim.wo.diff then
-    vim.notify('Buffer is not in diff mode', vim.log.levels.WARN)
-    return
+  if vim.wo.diff then
+    vim.cmd [[diffget]]
+  else
+    vim.notify("Buffer is not in diff mode", vim.log.levels.WARN)
   end
-  vim.cmd [[diffget]]
 end
+
+map('n', '<leader>dg', function()
+  vim.go.operatorfunc = 'v:lua.__diffget'
+  return 'g@l'
+end, { expr = true })
+
 map('n', '<leader>dn', ':windo diffthis<cr>', { remap = false, silent = true })
 map('n', '<leader>df', ':windo diffoff<cr>', { remap = false, silent = true })
 
@@ -288,7 +297,8 @@ map('n', '<leader>fo', 'zR', { remap = false })
 map('n', '<leader>fl', 'zazczA', { remap = false })
 
 -- Change \n to new lines
-map('n', '<leader><cr>', [[:silent! %s?\\n?\r?g<bar>silent! %s?\\t?\t?g<bar>silent! %s?\\r?\r?g<cr>:noh<cr>]], { silent = true })
+map('n', '<leader><cr>', [[:silent! %s?\\n?\r?g<bar>silent! %s?\\t?\t?g<bar>silent! %s?\\r?\r?g<cr>:noh<cr>]],
+  { silent = true })
 
 -- toggle wrap
 map('n', '<leader>ww', ':set wrap!<cr>', { remap = false, silent = true })
@@ -308,10 +318,14 @@ map('n', '<leader>cd', ':cd %:p:h<CR>:pwd<CR>', { remap = false, silent = true }
 map('n', [[<leader>\]], [[:.s/ -/ \\\r  -/g<cr>:noh<cr>]], { silent = true })
 
 -- global yanks and deletes
-map('v', '<leader>dab', [["hyqeq:v?\V<c-r>h?d E<cr>:let @"=@e<cr>:noh<cr>]], { remap = false, desc = 'Delete all but...', silent = true })
-map('v', '<leader>daa', [["hyqeq:g?\V<c-r>h?d E<cr>:let @"=@e<cr>:noh<cr>]], { remap = false, desc = 'Delete all ...', silent = true })
-map('v', '<leader>yab', [["hymmqeq:v?\V<c-r>h?yank E<cr>:let @"=@e<cr>`m:noh<cr>]], { remap = false, desc = 'Yank all but...', silent = true })
-map('v', '<leader>yaa', [["hymmqeq:g?\V<c-r>h?yank E<cr>:let @"=@e<cr>`m:noh<cr>]], { remap = false, desc = 'Yank all...', silent = true })
+map('v', '<leader>dab', [["hyqeq:v?\V<c-r>h?d E<cr>:let @"=@e<cr>:noh<cr>]],
+  { remap = false, desc = 'Delete all but...', silent = true })
+map('v', '<leader>daa', [["hyqeq:g?\V<c-r>h?d E<cr>:let @"=@e<cr>:noh<cr>]],
+  { remap = false, desc = 'Delete all ...', silent = true })
+map('v', '<leader>yab', [["hymmqeq:v?\V<c-r>h?yank E<cr>:let @"=@e<cr>`m:noh<cr>]],
+  { remap = false, desc = 'Yank all but...', silent = true })
+map('v', '<leader>yaa', [["hymmqeq:g?\V<c-r>h?yank E<cr>:let @"=@e<cr>`m:noh<cr>]],
+  { remap = false, desc = 'Yank all...', silent = true })
 
 -- Join lines keeping cursor position
 map('n', 'J', 'mzJ`z', { desc = 'Join lines keeping cursor position', remap = false })
