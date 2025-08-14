@@ -100,3 +100,5 @@
   showbranch  = true
   status      = true
   ui          = true
+[credential]
+	helper = manager-core

@@ -12,6 +12,17 @@ style = 'yellow'
 
 [python]
 disabled = false
+python_binary = "python3"
+detect_extensions = ["py", "ipynb"]
+detect_files = [
+  "pyproject.toml",
+  "Pipfile",
+  "requirements.txt",
+  "poetry.lock",
+  "setup.py",
+  ".python-version",
+]
+detect_folders = [".venv", "venv"]
 
 [battery]
 disabled = false

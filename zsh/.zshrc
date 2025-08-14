@@ -110,3 +110,10 @@ export KUBERNETES_EXEC_INFO='{"apiVersion": "client.authentication.k8s.io/v1beta
 
 export DISABLE_AUTO_UPDATE="true"
 eval "$(starship init zsh)"
+
+
+# ================ #
+# Wiz-Cli Configs #
+# ================ #
+export WIZ_CLIENT_ID=$(cat $HOME/.secrets/.wiz_cli | grep "client_id" | awk -F= '{print $2}' |xargs)
+export WIZ_CLIENT_SECRET=$(cat $HOME/.secrets/.wiz_cli | grep "client_secret" | awk -F= '{print $2}' |xargs)

@@ -437,4 +437,9 @@ function man() {
     man "$@"
 }
 
+# Temp functions
+function run_pre_commit() {
+  while ! pre-commit run --files $(find aws/modules azure/modules demo_formatting_issues -type f) --hook-stage manual; do echo "Re-running pre-commit..."; done
+}
+
 export LOADED_FUNCTIONS=true

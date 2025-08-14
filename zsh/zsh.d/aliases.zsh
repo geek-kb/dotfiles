@@ -38,8 +38,6 @@ alias diff='/usr/bin/diff --color $1 $2'
 #------------------------------------------------------------------------------
 # Development Tools
 #------------------------------------------------------------------------------
-alias tf='terraform'
-alias tg='terragrunt'
 alias update-nvim-nightly='asdf uninstall neovim nightly && asdf install neovim nightly'
 
 #------------------------------------------------------------------------------
@@ -78,6 +76,9 @@ alias -g L="| less"
 alias -g P="| pbcopy"
 alias -g V='| nvim'
 alias -g S='| sort'
+
+# Snyk cli
+alias -g snyka="snyk auth $(cat ~/.snyk_pat)"
 
 # Output Redirection
 alias -g NE="2> /dev/null"

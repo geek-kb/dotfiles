@@ -8,6 +8,7 @@ tap "hashicorp/tap"
 tap "homebrew/command-not-found"
 tap "johanhaleby/kubetail"
 tap "jstkdng/programs"
+tap "microsoft/git"
 tap "minamijoyo/hcledit"
 tap "neovim/neovim"
 tap "superbrothers/zsh-kubectl-prompt"
@@ -21,6 +22,8 @@ brew "openssl@3"
 brew "argocd"
 # Record and share terminal sessions
 brew "asciinema"
+# Distributed revision control system
+brew "git"
 # Extendable version manager with support for Ruby, Node.js, Erlang & more
 brew "asdf"
 # Tool for generating GNU Standards-compliant Makefiles
@@ -67,6 +70,8 @@ brew "cookiecutter"
 brew "coreutils"
 # Apjanke's fork of the classic cowsay project
 brew "cowsay"
+# Build control planes without needing to write code
+brew "crossplane"
 # Modern diagram scripting language that turns text to diagrams
 brew "d2"
 # Pack, ship and run any application as a lightweight container
@@ -97,8 +102,6 @@ brew "geckodriver"
 brew "gh"
 # Interpreter for PostScript and PDF
 brew "ghostscript"
-# Distributed revision control system
-brew "git"
 # Syntax-highlighting pager for git and diff output
 brew "git-delta"
 # GNU implementation of the famous stream editor
@@ -137,8 +140,6 @@ brew "imagemagick"
 brew "infracost"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
-# Little helper to run CNCF's k3s in Docker
-brew "k3d"
 # Kubernetes prompt info for bash and zsh
 brew "kube-ps1"
 # KubeConfig Manager
@@ -207,6 +208,8 @@ brew "rust-analyzer"
 brew "shellcheck"
 # Autoformat shell script source code
 brew "shfmt"
+# Scans and monitors projects for security vulnerabilities
+brew "snyk-cli"
 # Editor of encrypted files
 brew "sops"
 # Cross-shell prompt for astronauts
@@ -217,12 +220,16 @@ brew "stow"
 brew "syft"
 # Modernized, complete, self-contained TeX/LaTeX engine
 brew "tectonic"
+# User interface to the TELNET protocol
+brew "telnet"
 # Tool to generate documentation from Terraform modules
 brew "terraform-docs"
 # Thin wrapper for Terraform e.g. for locking state
 brew "terragrunt"
 # Detect compliance and security violations across Infrastructure as Code
 brew "terrascan"
+# Terraform version manager inspired by rbenv
+brew "tfenv"
 # Linter for Terraform files
 brew "tflint"
 # Static analysis security scanner for your terraform code
@@ -251,6 +258,8 @@ brew "watch"
 brew "wget"
 # Extensible command-line tool to format YAML files
 brew "yamlfmt"
+# Linter for YAML files
+brew "yamllint"
 # JavaScript package manager
 brew "yarn"
 # Blazing fast terminal file manager written in Rust, based on async I/O
@@ -289,6 +298,8 @@ cask "font-fira-code"
 cask "font-fira-code-nerd-font"
 cask "font-hack-nerd-font"
 cask "font-jetbrains-mono-nerd-font"
+# Cross-platform Git credential storage for multiple hosting providers
+cask "git-credential-manager"
 # Keyboard customiser
 cask "karabiner-elements"
 # Open-source keystroke visualiser
@@ -310,12 +321,15 @@ cask "warp"
 # GPU-accelerated cross-platform terminal emulator and multiplexer
 cask "wezterm"
 # Network protocol analyzer
-cask "wireshark"
+cask "wireshark-app"
+# CLI for interacting with the Wiz platform
+cask "wizcli"
 vscode "4ops.terraform"
 vscode "aaron-bond.better-comments"
 vscode "amazonwebservices.aws-toolkit-vscode"
 vscode "bbenoist.shell"
 vscode "bierner.markdown-mermaid"
+vscode "bpruitt-goddard.mermaid-markdown-syntax-highlighting"
 vscode "chrmarti.regex"
 vscode "davidanson.vscode-markdownlint"
 vscode "docker.docker"
@@ -342,11 +356,13 @@ vscode "me-dutour-mathieu.vscode-github-actions"
 vscode "mhutchie.git-graph"
 vscode "mikestead.dotenv"
 vscode "mindaro-dev.file-downloader"
+vscode "ms-azuretools.vscode-containers"
 vscode "ms-azuretools.vscode-docker"
 vscode "ms-kubernetes-tools.vscode-kubernetes-tools"
 vscode "ms-python.debugpy"
 vscode "ms-python.python"
 vscode "ms-python.vscode-pylance"
+vscode "ms-python.vscode-python-envs"
 vscode "ms-toolsai.jupyter"
 vscode "ms-toolsai.jupyter-keymap"
 vscode "ms-toolsai.jupyter-renderers"
@@ -365,8 +381,12 @@ vscode "ritwickdey.liveserver"
 vscode "rolandgreim.sample-ext"
 vscode "samuelcolvin.jinjahtml"
 vscode "shd101wyy.markdown-preview-enhanced"
+vscode "snyk-security.snyk-vulnerability-scanner"
 vscode "streetsidesoftware.code-spell-checker"
 vscode "tim-koehler.helm-intellisense"
+vscode "tomoki1207.pdf"
 vscode "tyriar.sort-lines"
+vscode "usernamehw.errorlens"
 vscode "vscode-icons-team.vscode-icons"
+vscode "vstirbu.vscode-mermaid-preview"
 vscode "yzhang.markdown-all-in-one"
