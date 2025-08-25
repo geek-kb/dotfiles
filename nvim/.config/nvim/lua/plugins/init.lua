@@ -259,7 +259,6 @@ local M = {
             silent = true,
             desc = 'Go to Right Window (CopilotChat override)',
           })
-          })
         end,
       })
     end,
