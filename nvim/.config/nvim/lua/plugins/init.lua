@@ -1,6 +1,7 @@
 -- Disable Perl and Ruby providers if you don't need them
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
+
 ---@class PluginSpec[]
 --- Plugin specifications for Lazy.nvim plugin manager
 --- This file contains the core plugin configurations for Neovim
@@ -154,13 +155,7 @@ local M = {
     'zbirenbaum/copilot.lua',
     event = { 'InsertEnter' },
     config = function()
-      -- Create necessary directories
-      local state_dir = vim.fn.stdpath 'state'
-      local copilot_dir = state_dir .. '/copilot'
-      if vim.fn.isdirectory(copilot_dir) == 0 then
-        vim.fn.mkdir(copilot_dir, 'p')
-      end
-
+      vim.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
       require('copilot').setup {
         copilot_node_command = 'node',
         filetypes = { python = true, ['*'] = true },
@@ -220,6 +215,54 @@ local M = {
       answer_header = '  Copilot ',
       error_header = '  Error ',
     },
+    config = function(_, opts)
+      -- Create necessary directories
+      local state_dir = vim.fn.stdpath 'state'
+      local copilot_dir = state_dir .. '/copilot'
+      if vim.fn.isdirectory(copilot_dir) == 0 then
+        vim.fn.mkdir(copilot_dir, 'p')
+      end
+
+      local chat = require 'CopilotChat'
+      chat.setup(opts)
+
+      -- Override smart-splits navigation in CopilotChat buffer
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = 'copilot-chat',
+        callback = function(event)
+          local bufnr = event.buf
+          vim.keymap.set('n', '<C-h>', function()
+            require('smart-splits').move_cursor_left()
+          end, {
+            buffer = bufnr,
+            silent = true,
+            desc = 'Go to Left Window (CopilotChat override)',
+          })
+          vim.keymap.set('n', '<C-j>', function()
+            require('smart-splits').move_cursor_down()
+          end, {
+            buffer = bufnr,
+            silent = true,
+            desc = 'Go to Lower Window (CopilotChat override)',
+          })
+          vim.keymap.set('n', '<C-k>', function()
+            require('smart-splits').move_cursor_up()
+          end, {
+            buffer = bufnr,
+            silent = true,
+            desc = 'Go to Upper Window (CopilotChat override)',
+          })
+          vim.keymap.set('n', '<C-l>', function()
+            require('smart-splits').move_cursor_right()
+          end, {
+            buffer = bufnr,
+            silent = true,
+            desc = 'Go to Right Window (CopilotChat override)',
+          })
+          })
+        end,
+      })
+    end,
     keys = {
       { '<leader>ccc', '<cmd>CopilotChat<CR>', mode = { 'n', 'v' } },
       { '<leader>ccs', '<cmd>CopilotChatStop<CR>' },

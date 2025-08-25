@@ -155,11 +155,36 @@ local M = {
       vim.keymap.set('n', '<A-j>', require('smart-splits').resize_down)
       vim.keymap.set('n', '<A-k>', require('smart-splits').resize_up)
       vim.keymap.set('n', '<A-l>', require('smart-splits').resize_right)
-      -- moving between splits
-      vim.keymap.set('n', '<C-h>', require('smart-splits').move_cursor_left)
-      vim.keymap.set('n', '<C-j>', require('smart-splits').move_cursor_down)
-      vim.keymap.set('n', '<C-k>', require('smart-splits').move_cursor_up)
-      vim.keymap.set('n', '<C-l>', require('smart-splits').move_cursor_right)
+      
+      -- Function to check if we're in a copilot chat buffer
+      local function is_copilot_chat()
+        local bufname = vim.api.nvim_buf_get_name(0)
+        return bufname:match('copilot%-chat') ~= nil
+      end
+      
+      -- Conditional smart-splits navigation that respects CopilotChat
+      local function smart_move(direction)
+        return function()
+          if is_copilot_chat() then
+            -- Use standard window navigation in CopilotChat
+            vim.cmd('wincmd ' .. direction)
+          else
+            -- Use smart-splits in other buffers
+            require('smart-splits')['move_cursor_' .. ({
+              h = 'left',
+              j = 'down', 
+              k = 'up',
+              l = 'right'
+            })[direction]]()
+          end
+        end
+      end
+      
+      -- moving between splits with smart detection
+      vim.keymap.set('n', '<C-h>', smart_move('h'))
+      vim.keymap.set('n', '<C-j>', smart_move('j'))
+      vim.keymap.set('n', '<C-k>', smart_move('k'))
+      vim.keymap.set('n', '<C-l>', smart_move('l'))
     end,
   },
 }

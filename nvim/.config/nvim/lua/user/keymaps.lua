@@ -140,9 +140,7 @@ map('v', 'ae', '<esc>gg0vG$', { remap = false })
 -- Run and edit macros
 for _, key in pairs { 'Q', 'X' } do
   map('n', key, '@' .. key:lower(), { remap = false })
-  map('n', '<leader>' .. key,
-    ":<c-u><c-r><c-r>='let @" .. key:lower() .. " = '. string(getreg('" .. key:lower() .. "'))<cr><c-f><left>",
-    { remap = false })
+  map('n', '<leader>' .. key, ":<c-u><c-r><c-r>='let @" .. key:lower() .. " = '. string(getreg('" .. key:lower() .. "'))<cr><c-f><left>", { remap = false })
 end
 
 -- Quickfix and tabs
@@ -169,7 +167,7 @@ _G.__diffput = function()
   if vim.wo.diff then
     vim.cmd [[diffput]]
   else
-    vim.notify("Buffer is not in diff mode", vim.log.levels.WARN)
+    vim.notify('Buffer is not in diff mode', vim.log.levels.WARN)
   end
 end
 
@@ -182,7 +180,7 @@ _G.__diffget = function()
   if vim.wo.diff then
     vim.cmd [[diffget]]
   else
-    vim.notify("Buffer is not in diff mode", vim.log.levels.WARN)
+    vim.notify('Buffer is not in diff mode', vim.log.levels.WARN)
   end
 end
 
@@ -297,8 +295,7 @@ map('n', '<leader>fo', 'zR', { remap = false })
 map('n', '<leader>fl', 'zazczA', { remap = false })
 
 -- Change \n to new lines
-map('n', '<leader><cr>', [[:silent! %s?\\n?\r?g<bar>silent! %s?\\t?\t?g<bar>silent! %s?\\r?\r?g<cr>:noh<cr>]],
-  { silent = true })
+map('n', '<leader><cr>', [[:silent! %s?\\n?\r?g<bar>silent! %s?\\t?\t?g<bar>silent! %s?\\r?\r?g<cr>:noh<cr>]], { silent = true })
 
 -- toggle wrap
 map('n', '<leader>ww', ':set wrap!<cr>', { remap = false, silent = true })
@@ -318,14 +315,10 @@ map('n', '<leader>cd', ':cd %:p:h<CR>:pwd<CR>', { remap = false, silent = true }
 map('n', [[<leader>\]], [[:.s/ -/ \\\r  -/g<cr>:noh<cr>]], { silent = true })
 
 -- global yanks and deletes
-map('v', '<leader>dab', [["hyqeq:v?\V<c-r>h?d E<cr>:let @"=@e<cr>:noh<cr>]],
-  { remap = false, desc = 'Delete all but...', silent = true })
-map('v', '<leader>daa', [["hyqeq:g?\V<c-r>h?d E<cr>:let @"=@e<cr>:noh<cr>]],
-  { remap = false, desc = 'Delete all ...', silent = true })
-map('v', '<leader>yab', [["hymmqeq:v?\V<c-r>h?yank E<cr>:let @"=@e<cr>`m:noh<cr>]],
-  { remap = false, desc = 'Yank all but...', silent = true })
-map('v', '<leader>yaa', [["hymmqeq:g?\V<c-r>h?yank E<cr>:let @"=@e<cr>`m:noh<cr>]],
-  { remap = false, desc = 'Yank all...', silent = true })
+map('v', '<leader>dab', [["hyqeq:v?\V<c-r>h?d E<cr>:let @"=@e<cr>:noh<cr>]], { remap = false, desc = 'Delete all but...', silent = true })
+map('v', '<leader>daa', [["hyqeq:g?\V<c-r>h?d E<cr>:let @"=@e<cr>:noh<cr>]], { remap = false, desc = 'Delete all ...', silent = true })
+map('v', '<leader>yab', [["hymmqeq:v?\V<c-r>h?yank E<cr>:let @"=@e<cr>`m:noh<cr>]], { remap = false, desc = 'Yank all but...', silent = true })
+map('v', '<leader>yaa', [["hymmqeq:g?\V<c-r>h?yank E<cr>:let @"=@e<cr>`m:noh<cr>]], { remap = false, desc = 'Yank all...', silent = true })
 
 -- Join lines keeping cursor position
 map('n', 'J', 'mzJ`z', { desc = 'Join lines keeping cursor position', remap = false })
@@ -514,9 +507,9 @@ function ClearTerm(reset)
   vim.opt_local.scrollback = scrollback
 end
 
-vim.api.nvim_create_user_command('ClearTerm', 'lua ClearTerm(<args>)', { nargs = 1 })
+--vim.api.nvim_create_user_command('ClearTerm', 'lua ClearTerm(<args>)', { nargs = 1 })
 --map('t', '<C-l><C-l>', [[<C-\><C-N>:ClearTerm 0<CR>]], { remap = false, silent = true })
-map('t', '<C-l><C-l><C-l>', [[<C-\><C-N>:ClearTerm 1<CR>]], { remap = false, silent = true })
+--map('t', '<C-l><C-l><C-l>', [[<C-\><C-N>:ClearTerm 1<CR>]], { remap = false, silent = true })
 
 ----------------------------
 -- Sort Json Array by key --

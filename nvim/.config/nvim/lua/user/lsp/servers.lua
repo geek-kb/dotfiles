@@ -77,9 +77,6 @@ M.setup = function()
     filetypes = { 'helm', 'gotmpl' },
     settings = {},
   }
-
-  -- YAML LSP configuration
-  local yaml_cfg = require('user.lsp.yaml').setup { capabilities = capabilities }
 end
 
 return M

@@ -99,11 +99,11 @@ local fugitive_config = function()
   -- Pull / Push --
   -----------------
   vim.api.nvim_create_user_command('Gp', git_funcs.push, {})
-  vim.keymap.set('n', '<leader>gp', '<cmd>Gp<cr>')
-  vim.api.nvim_create_user_command('Gl', git_funcs.pull, {})
-  vim.keymap.set('n', '<leader>gl', '<cmd>Gl<cr>')
+  vim.keymap.set('n', '<leader>gp', ':Git push<CR>', { silent = true, noremap = true })
+  -- Remove the custom Gl command and only keep the direct Fugitive mapping
+  vim.keymap.set('n', '<leader>gl', '<cmd>Git pull<CR>', { silent = true, noremap = true })
   vim.api.nvim_create_user_command('Gf', git_funcs.fetch_all, {})
-  vim.keymap.set('n', '<leader>gf', '<cmd>Gf<cr>')
+  vim.keymap.set('n', '<leader>gf', ':Git fetch<CR>', { silent = true, noremap = true })
 
   ---------------------
   -- Toggle fugitive --
