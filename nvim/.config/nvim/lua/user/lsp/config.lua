@@ -27,6 +27,10 @@ M.setup = function()
       vim.tbl_deep_extend('force', vim.lsp.protocol.make_client_capabilities(),
         require('cmp_nvim_lsp').default_capabilities(), M.capabilities or {}, {})
 
+  -- Setup URI error handler to suppress LSP URI errors
+  local uri_handler = require('user.lsp.uri_error_handler')
+  uri_handler.setup_error_handler()
+
   -- Diagnostics
   vim.diagnostic.config {
     jump = { float = true },
