@@ -371,18 +371,18 @@ map('n', 'cc', 'cc', { remap = false, desc = 'Change current line (native vim)' 
 
 -- Explicit Copilot agent keymaps to ensure they take precedence
 -- These override any potential conflicts with native vim commands
-map('n', '<leader>cca', '<cmd>CopilotChatAgents<CR>', { desc = 'CopilotChat - Select Agent' })
+map('n', '<leader>cca', '<cmd>CopilotChatPrompts<CR>', { desc = 'CopilotChat - Select Prompts' })
 map('n', '<leader>ccc', '<cmd>CopilotChat<CR>', { desc = 'CopilotChat' })
 map('n', '<leader>ccs', '<cmd>CopilotChatStop<CR>', { desc = 'Stop CopilotChat' })
-map({ 'n', 'v' }, '<leader>cce', '<cmd>CopilotChatExplain<CR>', { desc = 'CopilotChat - Explain selection' })
-map({ 'n', 'v' }, '<leader>ccr', '<cmd>CopilotChatReview<CR>', { desc = 'CopilotChat - Review selection' })
-map({ 'n', 'v' }, '<leader>ccf', '<cmd>CopilotChatFix<CR>', { desc = 'CopilotChat - Fix selection' })
-map({ 'n', 'v' }, '<leader>cco', '<cmd>CopilotChatOptimize<CR>', { desc = 'CopilotChat - Optimize selection' })
-map({ 'n', 'v' }, '<leader>ccd', '<cmd>CopilotChatDocs<CR>', { desc = 'CopilotChat - Add docs' })
-map({ 'n', 'v' }, '<leader>cct', '<cmd>CopilotChatTests<CR>', { desc = 'CopilotChat - Generate tests' })
-map('n', '<leader>ccx', '<cmd>CopilotChatFixDiagnostic<CR>', { desc = 'CopilotChat - Fix diagnostic' })
-map('n', '<leader>ccm', '<cmd>CopilotChatCommit<CR>', { desc = 'CopilotChat - Commit message' })
-map('n', '<leader>ccM', '<cmd>CopilotChatCommitStaged<CR>', { desc = 'CopilotChat - Commit message (staged)' })
+map({ 'n', 'v' }, '<leader>cce', '<cmd>CopilotChat /COPILOT_EXPLAIN<CR>', { desc = 'CopilotChat - Explain selection' })
+map({ 'n', 'v' }, '<leader>ccr', '<cmd>CopilotChat /COPILOT_REVIEW<CR>', { desc = 'CopilotChat - Review selection' })
+map({ 'n', 'v' }, '<leader>ccf', '<cmd>CopilotChat /COPILOT_GENERATE<CR>', { desc = 'CopilotChat - Fix selection' })
+map({ 'n', 'v' }, '<leader>cco', '<cmd>CopilotChat Please optimize this code<CR>', { desc = 'CopilotChat - Optimize selection' })
+map({ 'n', 'v' }, '<leader>ccd', '<cmd>CopilotChat Please add documentation for this code<CR>', { desc = 'CopilotChat - Add docs' })
+map({ 'n', 'v' }, '<leader>cct', '<cmd>CopilotChat Please generate tests for this code<CR>', { desc = 'CopilotChat - Generate tests' })
+map('n', '<leader>ccx', '<cmd>CopilotChat Please fix the diagnostics in this file<CR>', { desc = 'CopilotChat - Fix diagnostic' })
+map('n', '<leader>ccm', '<cmd>CopilotChat Please write a commit message for this change<CR>', { desc = 'CopilotChat - Commit message' })
+map('n', '<leader>ccM', '<cmd>CopilotChat Please write a commit message for the staged changes<CR>', { desc = 'CopilotChat - Commit message (staged)' })
 
 -- Abbreviations
 map('!a', 'dont', [[don't]], { remap = false })

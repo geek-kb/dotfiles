@@ -213,10 +213,10 @@ A comprehensive reference organized from basic to advanced operations.
 
 | Shortcut      | Description                                    |
 | ------------- | ---------------------------------------------- |
-| `<leader>cca` | **Agent Selection** - Choose specific agent   |
+| `<leader>cca` | **Prompt Selection** - Choose specific prompt |
 | `<leader>cce` | **Explain** - Detailed code explanation       |
 | `<leader>ccr` | **Review** - Code review & optimization tips  |
-| `<leader>ccf` | **Fix** - Identify & fix bugs                 |
+| `<leader>ccf` | **Generate/Fix** - Generate or fix code       |
 | `<leader>cco` | **Optimize** - Performance improvements       |
 | `<leader>ccd` | **Docs** - Generate documentation             |
 | `<leader>cct` | **Tests** - Generate comprehensive tests      |
@@ -239,12 +239,12 @@ A comprehensive reference organized from basic to advanced operations.
 
 **Agent Mode Usage Tips:**
 
-- Use `<leader>cca` to select specific agents for specialized tasks
-- Each agent has custom prompts optimized for their function
-- `<leader>cce` provides comprehensive explanations with examples
-- `<leader>ccr` offers architectural and performance insights
-- `<leader>ccx` focuses specifically on fixing LSP diagnostics
-- Git integration agents generate conventional commit messages
+- Use `<leader>cca` to select specific prompts for specialized tasks
+- Each shortcut uses optimized prompts or built-in CopilotChat commands
+- `<leader>cce` uses `/COPILOT_EXPLAIN` for comprehensive explanations
+- `<leader>ccr` uses `/COPILOT_REVIEW` for architectural insights
+- `<leader>ccf` uses `/COPILOT_GENERATE` for code generation and fixes
+- Other shortcuts use natural language prompts for specific tasks
 - **Note**: Explicit keymaps added to user config to prevent conflicts with native vim `cc` command
 
 ---
