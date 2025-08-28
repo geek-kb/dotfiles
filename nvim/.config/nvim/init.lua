@@ -35,6 +35,9 @@ end
 require 'user.autocommands' -- Autocommands for filetypes/events
 require 'user.number-separators' -- Adds separators for numeric readability
 
+-- Fix for CopilotChat <C-l> clearing buffer
+require('user.copilot-chat-fix').setup()
+
 -- Shortcut: Quickly quit Neovim without saving
 vim.keymap.set('n', '<leader>q', ':qa!<CR>', { noremap = true, silent = true, desc = 'Quit all without saving' })
 

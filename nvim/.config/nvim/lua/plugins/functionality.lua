@@ -157,19 +157,40 @@ local M = {
       vim.keymap.set('n', '<A-l>', require('smart-splits').resize_right)
       
       -- Function to check if we're in a copilot chat buffer
-      local function is_copilot_chat()
+      local function is_copilot_chat(debug_direction)
         local bufname = vim.api.nvim_buf_get_name(0)
-        return bufname:match('copilot%-chat') ~= nil
+        local filetype = vim.bo.filetype
+        local buftype = vim.bo.buftype
+        local winnr = vim.api.nvim_get_current_win()
+        local winconfig = vim.api.nvim_win_get_config(winnr)
+        
+        -- Debug info (temporarily)
+        local is_copilot = bufname:match('copilot%-chat') ~= nil 
+            or bufname:match('copilot') ~= nil
+            or filetype == 'copilot-chat'
+            or filetype == 'copilot'
+            or (buftype == 'nofile' and (bufname:match('copilot') or vim.fn.bufname():match('copilot')))
+            or winconfig.relative ~= '' -- floating window
+        
+        -- Debug: print info when <C-l> is pressed
+        if debug_direction and debug_direction == 'l' then
+          print(string.format("DEBUG: bufname='%s', filetype='%s', buftype='%s', is_copilot=%s", 
+            bufname, filetype, buftype, tostring(is_copilot)))
+        end
+        
+        return is_copilot
       end
       
       -- Conditional smart-splits navigation that respects CopilotChat
       local function smart_move(direction)
         return function()
-          if is_copilot_chat() then
+          if is_copilot_chat(direction) then
             -- Use standard window navigation in CopilotChat
+            print("DEBUG: Using wincmd " .. direction .. " for CopilotChat")
             vim.cmd('wincmd ' .. direction)
           else
             -- Use smart-splits in other buffers
+            print("DEBUG: Using smart-splits for direction " .. direction)
             require('smart-splits')['move_cursor_' .. ({
               h = 'left',
               j = 'down', 
@@ -184,7 +205,7 @@ local M = {
       vim.keymap.set('n', '<C-h>', smart_move('h'))
       vim.keymap.set('n', '<C-j>', smart_move('j'))
       vim.keymap.set('n', '<C-k>', smart_move('k'))
-      vim.keymap.set('n', '<C-l>', smart_move('l'))
+      -- vim.keymap.set('n', '<C-l>', smart_move('l'))  -- Disabled - handled by copilot-chat-fix
     end,
   },
 }

@@ -124,11 +124,13 @@ map('n', '<c-w>v', ':vnew<cr>', { remap = false, silent = true, desc = 'New buff
 map('n', '<c-w>s', ':new<cr>', { remap = false, silent = true, desc = 'New buffer horizontally split' })
 map('n', '<c-w>e', ':enew<cr>', { remap = false, silent = true, desc = 'New empty buffer' })
 
--- Move to window using the <ctrl> hjkl keys
+-- Move to window using the <ctrl> hjkl keys with smart CopilotChat detection
+-- Note: These will be overridden by smart-splits in functionality.lua, but kept for fallback
 map('n', '<C-h>', '<C-w>h', { remap = true, desc = 'Go to Left Window' })
 map('n', '<C-j>', '<C-w>j', { remap = true, desc = 'Go to Lower Window' })
 map('n', '<C-k>', '<C-w>k', { remap = true, desc = 'Go to Upper Window' })
-map('n', '<C-l>', '<C-w>l', { remap = true, desc = 'Go to Right Window' })
+-- Disable the problematic <C-l> mapping - will be handled by smart-splits
+-- map('n', '<C-l>', '<C-w>l', { remap = true, desc = 'Go to Right Window' })
 
 -- Resize window using <ctrl> arrow keys
 require('user.winresizer').setup()
