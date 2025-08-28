@@ -32,7 +32,7 @@ A comprehensive reference organized from basic to advanced operations.
 | `,,`            | Add comma at end of line           |
 | `` ` ``         | Convert to lowercase (visual)      |
 | `~`             | Convert to uppercase (visual)      |
-| `<C-c>`         | Change word under cursor           |
+| `ciw`           | Change inner word (native vim)     |
 | `gV`            | Select last inserted text          |
 
 ---
@@ -200,15 +200,52 @@ A comprehensive reference organized from basic to advanced operations.
 
 ## 🧠 AI & Code Intelligence
 
+### Basic Copilot Operations
+
 | Shortcut                           | Description               |
 | ---------------------------------- | ------------------------- |
 | `<Alt-Enter>` (Alt = Opt in Macos) | Accept Copilot suggestion |
 | `<leader>ccc`                      | Open CopilotChat          |
 | `<leader>ccs`                      | Stop CopilotChat          |
 | `<leader>ccp`                      | CopilotChat prompt picker |
-| `<leader>lp`                       | Format buffer (LSP/tool)  |
-| `<leader>46`                       | Base64 decode             |
-| `<leader>64`                       | Base64 encode             |
+
+### Copilot Agent Mode - Advanced Code Analysis
+
+| Shortcut      | Description                                    |
+| ------------- | ---------------------------------------------- |
+| `<leader>cca` | **Agent Selection** - Choose specific agent   |
+| `<leader>cce` | **Explain** - Detailed code explanation       |
+| `<leader>ccr` | **Review** - Code review & optimization tips  |
+| `<leader>ccf` | **Fix** - Identify & fix bugs                 |
+| `<leader>cco` | **Optimize** - Performance improvements       |
+| `<leader>ccd` | **Docs** - Generate documentation             |
+| `<leader>cct` | **Tests** - Generate comprehensive tests      |
+| `<leader>ccx` | **Fix Diagnostics** - Resolve LSP errors      |
+
+### Git Integration via Copilot
+
+| Shortcut      | Description                           |
+| ------------- | ------------------------------------- |
+| `<leader>ccm` | **Commit** - Generate commit message |
+| `<leader>ccM` | **Commit Staged** - Message for staged files |
+
+### Other Code Tools  
+
+| Shortcut     | Description              |
+| ------------ | ------------------------ |
+| `<leader>lp` | Format buffer (LSP/tool) |
+| `<leader>46` | Base64 decode            |
+| `<leader>64` | Base64 encode            |
+
+**Agent Mode Usage Tips:**
+
+- Use `<leader>cca` to select specific agents for specialized tasks
+- Each agent has custom prompts optimized for their function
+- `<leader>cce` provides comprehensive explanations with examples
+- `<leader>ccr` offers architectural and performance insights
+- `<leader>ccx` focuses specifically on fixing LSP diagnostics
+- Git integration agents generate conventional commit messages
+- **Note**: Explicit keymaps added to user config to prevent conflicts with native vim `cc` command
 
 ---
 
@@ -327,7 +364,7 @@ A comprehensive reference organized from basic to advanced operations.
 | `<leader>.`  | Toggle Scratch buffer                 |
 | `<leader>S`  | Select Scratch buffer                 |
 | `<leader>N`  | Neovim News popup                     |
-| `<leader>cc` | YAML Companion: Change schema         |
+| `<leader>yc` | YAML Companion: Change schema         |
 | `<leader>mp` | Markdown Preview: Open preview        |
 | `<leader>dr` | Mermaid Diagram Preview: Open preview |
 

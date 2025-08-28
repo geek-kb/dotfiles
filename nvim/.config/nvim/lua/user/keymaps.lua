@@ -281,7 +281,9 @@ map('n', 'cp', '"+y')
 map('n', 'cv', '"+p')
 map('v', 'p', '"_dP', { desc = 'Paste over selection without copying' })
 
-map('n', '<C-c>', 'ciw')
+-- Removed <C-c> mapping as it conflicts with <leader>cc* Copilot agent keymaps
+-- Previously: map('n', '<C-c>', 'ciw')
+-- Alternative: Use 'ciw' directly or map to a different key like '<leader>cw'
 
 -- Select last inserted text
 map('n', 'gV', '`[v`]', { remap = false, desc = 'Visually select last insert' })
@@ -360,7 +362,27 @@ map('v', '<leader>46', _G.__base64_decode)
 map('n', '<leader>bc', ':close<cr>', { silent = true, desc = 'Close this buffer' })
 
 -- Duplicate a line and comment out the first line
-map('n', 'yc', 'yygccp', { remap = true })
+-- Note: Changed from 'yygccp' to avoid 'cc' sequence that conflicts with Copilot agent keymaps
+map('n', 'yc', 'yygcc<Esc>p', { remap = true })
+
+-- Keymap timeout settings to ensure leader key sequences work properly
+-- Override native 'cc' to prevent conflicts with <leader>cc* Copilot agent sequences
+map('n', 'cc', 'cc', { remap = false, desc = 'Change current line (native vim)' })
+
+-- Explicit Copilot agent keymaps to ensure they take precedence
+-- These override any potential conflicts with native vim commands
+map('n', '<leader>cca', '<cmd>CopilotChatAgents<CR>', { desc = 'CopilotChat - Select Agent' })
+map('n', '<leader>ccc', '<cmd>CopilotChat<CR>', { desc = 'CopilotChat' })
+map('n', '<leader>ccs', '<cmd>CopilotChatStop<CR>', { desc = 'Stop CopilotChat' })
+map({ 'n', 'v' }, '<leader>cce', '<cmd>CopilotChatExplain<CR>', { desc = 'CopilotChat - Explain selection' })
+map({ 'n', 'v' }, '<leader>ccr', '<cmd>CopilotChatReview<CR>', { desc = 'CopilotChat - Review selection' })
+map({ 'n', 'v' }, '<leader>ccf', '<cmd>CopilotChatFix<CR>', { desc = 'CopilotChat - Fix selection' })
+map({ 'n', 'v' }, '<leader>cco', '<cmd>CopilotChatOptimize<CR>', { desc = 'CopilotChat - Optimize selection' })
+map({ 'n', 'v' }, '<leader>ccd', '<cmd>CopilotChatDocs<CR>', { desc = 'CopilotChat - Add docs' })
+map({ 'n', 'v' }, '<leader>cct', '<cmd>CopilotChatTests<CR>', { desc = 'CopilotChat - Generate tests' })
+map('n', '<leader>ccx', '<cmd>CopilotChatFixDiagnostic<CR>', { desc = 'CopilotChat - Fix diagnostic' })
+map('n', '<leader>ccm', '<cmd>CopilotChatCommit<CR>', { desc = 'CopilotChat - Commit message' })
+map('n', '<leader>ccM', '<cmd>CopilotChatCommitStaged<CR>', { desc = 'CopilotChat - Commit message (staged)' })
 
 -- Abbreviations
 map('!a', 'dont', [[don't]], { remap = false })

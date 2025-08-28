@@ -178,3 +178,7 @@ vim.filetype.add {
     end,
   },
 }
+
+-- Keymap timeout settings to ensure leader key sequences work properly
+vim.o.timeoutlen = 1000  -- Time to wait for a mapped sequence to complete (milliseconds)
+vim.o.ttimeoutlen = 10   -- Time to wait for a key code sequence to complete (milliseconds)
