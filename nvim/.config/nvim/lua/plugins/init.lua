@@ -4,7 +4,146 @@ vim.g.loaded_ruby_provider = 0
 
 ---@class PluginSpec[]
 --- Plugin specifications for Lazy.nvim plugin manager
---- This file contains the core plugin configurations for Neovim
+--- This fil    opts = {
+      model = 'claude-3    opts =    opts = {
+      -- Use default model (don't sp    opts = {
+      model = 'claude-3.5-sonnet',
+      question_header = '  User ',
+      answer_header = '  Copilot ',
+      error_header = '  Error ',
+      
+      -- Auto-context configuration
+      resources = { 'selection', 'buffers:visible' }, -- Automatically include selection + visible buffers
+      selection = 'visual', -- Use visual selection as default
+      auto_insert_mode = true, -- Enter insert mode when opening chat
+      highlight_selection = true, -- Highlight what's being shared
+      
+      -- Better UX settings
+      window = {
+        layout = 'vertical',
+        width = 0.4, -- 40% of screen width
+        title = '🤖 Copilot Chat',
+      },
+      
+      -- Enhanced mappings for easier code application
+      mappings = {
+        accept_diff = {
+          normal = '<C-y>',
+          insert = '<C-y>',
+        },
+        show_diff = {
+          normal = 'gd',
+          full_diff = true, -- Show full diff for better context
+        },
+        jump_to_diff = {
+          normal = 'gj',
+        },
+        yank_diff = {
+          normal = 'gy',
+          register = '+', -- Use system clipboard
+        },
+        quickfix_diffs = {
+          normal = 'gqd',
+        },
+        -- Add a custom apply all diffs mapping
+        apply_in_replace_mode = {
+          normal = '<C-a>',
+        },
+      },
+    },to let CopilotChat choose)
+      question_header = '  User ',
+      answer_header = '  Copilot ',
+      error_header = '  Error ',
+      -- Agent mode configuration
+      auto_follow_cursor = false,
+      show_help = true,
+      -- Prompts for different agent modes
+      prompts = {
+        Explain = {
+          prompt = "/COPILOT_EXPLAIN Write an explanation for the active selection as paragraphs of text.",
+        },
+        Review = {
+          prompt = "/COPILOT_REVIEW Review the selected code.",
+          callback = function(response, source)
+            -- Optionally handle the response
+          end,
+        },
+        Fix = {
+          prompt = "/COPILOT_GENERATE There is a problem in this code. Rewrite the code to show it with the bug fixed.",
+        },
+        Optimize = {
+          prompt = "/COPILOT_GENERATE Optimize the selected code to improve performance and readability.",
+        },
+        Docs = {
+          prompt = "/COPILOT_GENERATE Please add documentation comment for the selection.",
+        },
+        Tests = {
+          prompt = "/COPILOT_GENERATE Please generate tests for my code.",
+        },
+        FixDiagnostic = {
+          prompt = "/COPILOT_GENERATE Please assist with the following diagnostic issue in file:",
+          selection = function(source)
+            return require("CopilotChat.select").diagnostics(source)
+          end,
+        },
+        Commit = {
+          prompt = "/COPILOT_GENERATE Write commit message for the change with commitizen convention. Make sure the title has maximum 50 characters and message is wrapped at 72 characters. Wrap the whole message in code block with language gitcommit.",
+          selection = function(source)
+            return require("CopilotChat.select").gitdiff(source)
+          end,
+        },
+        CommitStaged = {
+          prompt = "/COPILOT_GENERATE Write commit message for the change with commitizen convention. Make sure the title has maximum 50 characters and message is wrapped at 72 characters. Wrap the whole message in code block with language gitcommit.",
+          selection = function(source)
+            return require("CopilotChat.select").gitdiff(source, true)
+          end,
+        },
+      },
+    },   model = 'gpt-4o',  -- Use a supported OpenAI model
+      question_header = '  User ',
+      answer_header = '  Copilot ',
+      error_header = '  Error ',
+      -- Add debug settings
+      debug = false,
+      log_level = 'info',
+      -- Ensure proper timeout settings
+      timeout = 30000,
+    },net',
+      question_header = '  User ',
+      answer_header = '  Copilot ',
+      error_header = '  Error ',
+      mappings = {
+        close = {
+          normal = 'q',
+          insert = '<C-c>'
+        },
+        reset = {
+          normal = '<C-r>',
+          insert = '<C-r>'
+        },
+        submit_prompt = {
+          normal = '<CR>',
+          insert = '<C-m>'
+        },
+        accept_diff = {
+          normal = '<C-y>',
+          insert = '<C-y>'
+        },
+        yank_diff = {
+          normal = 'gy',
+          register = '"',
+        },
+        show_diff = {
+          normal = 'gd'
+        },
+        show_system_prompt = {
+          normal = 'gp'
+        },
+        show_user_selection = {
+          normal = 'gs'
+        },
+      }
+    },ains the core plugin configurations for Neovim
 local M = {
   {
     'nvim-lua/plenary.nvim',
@@ -226,45 +365,75 @@ local M = {
       local chat = require 'CopilotChat'
       chat.setup(opts)
 
-      -- Override smart-splits navigation in CopilotChat buffer
-      vim.api.nvim_create_autocmd('FileType', {
-        pattern = 'copilot-chat',
+      -- Override CopilotChat window behavior more aggressively
+      vim.api.nvim_create_autocmd({'BufEnter', 'FileType'}, {
+        pattern = {'copilot-chat', '*copilot*'},
         callback = function(event)
           local bufnr = event.buf
-          vim.keymap.set('n', '<C-h>', function()
-            require('smart-splits').move_cursor_left()
-          end, {
-            buffer = bufnr,
-            silent = true,
-            desc = 'Go to Left Window (CopilotChat override)',
-          })
-          vim.keymap.set('n', '<C-j>', function()
-            require('smart-splits').move_cursor_down()
-          end, {
-            buffer = bufnr,
-            silent = true,
-            desc = 'Go to Lower Window (CopilotChat override)',
-          })
-          vim.keymap.set('n', '<C-k>', function()
-            require('smart-splits').move_cursor_up()
-          end, {
-            buffer = bufnr,
-            silent = true,
-            desc = 'Go to Upper Window (CopilotChat override)',
-          })
-          vim.keymap.set('n', '<C-l>', function()
-            require('smart-splits').move_cursor_right()
-          end, {
-            buffer = bufnr,
-            silent = true,
-            desc = 'Go to Right Window (CopilotChat override)',
-          })
+          local bufname = vim.api.nvim_buf_get_name(bufnr)
+          
+          -- Check if this is a CopilotChat buffer by name or filetype
+          if bufname:match('copilot') or vim.bo[bufnr].filetype == 'copilot-chat' then
+            -- Debug what buffer we're in
+            print("DEBUG: Setting up CopilotChat keymaps for buffer: " .. bufname .. ", filetype: " .. vim.bo[bufnr].filetype)
+            
+            -- Override with higher priority and nowait
+            vim.keymap.set('n', '<C-h>', function()
+              print("DEBUG: CopilotChat <C-h> pressed")
+              require('smart-splits').move_cursor_left()
+            end, {
+              buffer = bufnr,
+              silent = false,  -- Changed to false for debugging
+              nowait = true,
+              desc = 'Go to Left Window (CopilotChat override)',
+            })
+            vim.keymap.set('n', '<C-j>', function()
+              print("DEBUG: CopilotChat <C-j> pressed")
+              require('smart-splits').move_cursor_down()
+            end, {
+              buffer = bufnr,
+              silent = false,  -- Changed to false for debugging
+              nowait = true,
+              desc = 'Go to Lower Window (CopilotChat override)',
+            })
+            vim.keymap.set('n', '<C-k>', function()
+              print("DEBUG: CopilotChat <C-k> pressed")
+              require('smart-splits').move_cursor_up()
+            end, {
+              buffer = bufnr,
+              silent = false,  -- Changed to false for debugging
+              nowait = true,
+              desc = 'Go to Upper Window (CopilotChat override)',
+            })
+            vim.keymap.set('n', '<C-l>', function()
+              print("DEBUG: CopilotChat <C-l> pressed - using smart-splits")
+              require('smart-splits').move_cursor_right()
+            end, {
+              buffer = bufnr,
+              silent = false,  -- Changed to false for debugging
+              nowait = true,
+              desc = 'Go to Right Window (CopilotChat override)',
+            })
+          end
         end,
       })
     end,
     keys = {
-      { '<leader>ccc', '<cmd>CopilotChat<CR>', mode = { 'n', 'v' } },
-      { '<leader>ccs', '<cmd>CopilotChatStop<CR>' },
+      -- Main CopilotChat
+      { '<leader>ccc', '<cmd>CopilotChat<CR>', mode = { 'n', 'v' }, desc = 'CopilotChat' },
+      { '<leader>ccs', '<cmd>CopilotChatStop<CR>', desc = 'Stop CopilotChat' },
+      
+      -- Agent mode shortcuts - Updated to use correct commands
+      { '<leader>cca', '<cmd>CopilotChatPrompts<CR>', mode = { 'n' }, desc = 'CopilotChat - Select Prompts' },
+      { '<leader>cce', '<cmd>CopilotChat /COPILOT_EXPLAIN<CR>', mode = { 'v' }, desc = 'CopilotChat - Explain selection' },
+      { '<leader>ccr', '<cmd>CopilotChat /COPILOT_REVIEW<CR>', mode = { 'v' }, desc = 'CopilotChat - Review selection' },
+      { '<leader>ccf', '<cmd>CopilotChat /COPILOT_GENERATE<CR>', mode = { 'v' }, desc = 'CopilotChat - Fix selection' },
+      { '<leader>cco', '<cmd>CopilotChat Please optimize this code<CR>', mode = { 'v' }, desc = 'CopilotChat - Optimize selection' },
+      { '<leader>ccd', '<cmd>CopilotChat Please add documentation for this code<CR>', mode = { 'v' }, desc = 'CopilotChat - Add docs' },
+      { '<leader>cct', '<cmd>CopilotChat Please generate tests for this code<CR>', mode = { 'v' }, desc = 'CopilotChat - Generate tests' },
+      { '<leader>ccx', '<cmd>CopilotChat Please fix the diagnostics in this file<CR>', desc = 'CopilotChat - Fix diagnostic' },
+      { '<leader>ccm', '<cmd>CopilotChat Please write a commit message for this change<CR>', desc = 'CopilotChat - Commit message' },
+      { '<leader>ccM', '<cmd>CopilotChat Please write a commit message for the staged changes<CR>', desc = 'CopilotChat - Commit message (staged)' },
     },
   },
 }

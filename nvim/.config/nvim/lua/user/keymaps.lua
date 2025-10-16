@@ -374,15 +374,241 @@ map('n', 'cc', 'cc', { remap = false, desc = 'Change current line (native vim)' 
 map('n', '<leader>cca', '<cmd>CopilotChatPrompts<CR>', { desc = 'CopilotChat - Select Prompts' })
 map('n', '<leader>ccc', '<cmd>CopilotChat<CR>', { desc = 'CopilotChat' })
 map('n', '<leader>ccs', '<cmd>CopilotChatStop<CR>', { desc = 'Stop CopilotChat' })
-map({ 'n', 'v' }, '<leader>cce', '<cmd>CopilotChat /COPILOT_EXPLAIN<CR>', { desc = 'CopilotChat - Explain selection' })
-map({ 'n', 'v' }, '<leader>ccr', '<cmd>CopilotChat /COPILOT_REVIEW<CR>', { desc = 'CopilotChat - Review selection' })
-map({ 'n', 'v' }, '<leader>ccf', '<cmd>CopilotChat /COPILOT_GENERATE<CR>', { desc = 'CopilotChat - Fix selection' })
-map({ 'n', 'v' }, '<leader>cco', '<cmd>CopilotChat Please optimize this code<CR>', { desc = 'CopilotChat - Optimize selection' })
-map({ 'n', 'v' }, '<leader>ccd', '<cmd>CopilotChat Please add documentation for this code<CR>', { desc = 'CopilotChat - Add docs' })
-map({ 'n', 'v' }, '<leader>cct', '<cmd>CopilotChat Please generate tests for this code<CR>', { desc = 'CopilotChat - Generate tests' })
-map('n', '<leader>ccx', '<cmd>CopilotChat Please fix the diagnostics in this file<CR>', { desc = 'CopilotChat - Fix diagnostic' })
-map('n', '<leader>ccm', '<cmd>CopilotChat Please write a commit message for this change<CR>', { desc = 'CopilotChat - Commit message' })
-map('n', '<leader>ccM', '<cmd>CopilotChat Please write a commit message for the staged changes<CR>', { desc = 'CopilotChat - Commit message (staged)' })
+
+-- Context-aware agent shortcuts (these automatically include full context)
+map('n', '<leader>cce', function()
+  vim.cmd('CopilotChat /COPILOT_EXPLAIN #buffer')
+end, { desc = 'CopilotChat - Explain current buffer' })
+
+map('v', '<leader>cce', function()
+  vim.cmd('CopilotChat /COPILOT_EXPLAIN #selection')
+end, { desc = 'CopilotChat - Explain selection' })
+
+map('n', '<leader>ccr', function()
+  vim.cmd('CopilotChat /COPILOT_REVIEW #buffer')
+end, { desc = 'CopilotChat - Review current buffer' })
+
+map('v', '<leader>ccr', function()
+  vim.cmd('CopilotChat /COPILOT_REVIEW #selection')
+end, { desc = 'CopilotChat - Review selection' })
+
+map('n', '<leader>ccf', function()
+  vim.cmd('CopilotChat /COPILOT_GENERATE #buffer')
+end, { desc = 'CopilotChat - Fix current buffer' })
+
+map('v', '<leader>ccf', function()
+  vim.cmd('CopilotChat /COPILOT_GENERATE #selection')
+end, { desc = 'CopilotChat - Fix selection' })
+
+map('n', '<leader>cco', function()
+  vim.cmd('CopilotChat Please optimize this code #buffer')
+end, { desc = 'CopilotChat - Optimize current buffer' })
+
+map('v', '<leader>cco', function()
+  vim.cmd('CopilotChat Please optimize this code #selection')
+end, { desc = 'CopilotChat - Optimize selection' })
+
+map('n', '<leader>ccd', function()
+  vim.cmd('CopilotChat Please add documentation for this code #buffer')
+end, { desc = 'CopilotChat - Document current buffer' })
+
+map('v', '<leader>ccd', function()
+  vim.cmd('CopilotChat Please add documentation for this code #selection')
+end, { desc = 'CopilotChat - Document selection' })
+
+map('n', '<leader>cct', function()
+  vim.cmd('CopilotChat Please generate tests for this code #buffer')
+end, { desc = 'CopilotChat - Test current buffer' })
+
+map('v', '<leader>cct', function()
+  vim.cmd('CopilotChat Please generate tests for this code #selection')
+end, { desc = 'CopilotChat - Test selection' })
+
+-- Enhanced context shortcuts
+map('n', '<leader>ccx', function()
+  vim.cmd('CopilotChat Fix the diagnostics in this file #diagnostics:current #buffer')
+end, { desc = 'CopilotChat - Fix file diagnostics (full context)' })
+
+map('v', '<leader>ccx', function()
+  vim.cmd('CopilotChat Fix the diagnostics in this selection #diagnostics:selection #selection')
+end, { desc = 'CopilotChat - Fix selection diagnostics (with context)' })
+
+map('n', '<leader>ccX', function()
+  vim.cmd('CopilotChat Fix all diagnostics in visible buffers #diagnostics:visible #buffers:visible')
+end, { desc = 'CopilotChat - Fix all visible diagnostics' })
+
+map('n', '<leader>ccg', function()
+  vim.cmd('CopilotChat Explain this git diff #gitdiff:HEAD')
+end, { desc = 'CopilotChat - Explain git changes' })
+
+map('n', '<leader>ccb', function()
+  vim.cmd('CopilotChat Help me understand the overall architecture #buffers:visible')
+end, { desc = 'CopilotChat - Analyze visible buffers' })
+
+-- Git integration with auto-context
+map('n', '<leader>ccm', function()
+  vim.cmd('CopilotChat Write a commit message for these changes #gitdiff:HEAD')
+end, { desc = 'CopilotChat - Commit message (with diff)' })
+
+map('n', '<leader>ccM', function()
+  vim.cmd('CopilotChat Write a commit message for these staged changes #gitdiff:staged')
+end, { desc = 'CopilotChat - Commit message (staged with diff)' })
+
+-- Code application shortcuts (work from any buffer)
+-- Debug function to check CopilotChat state
+map('n', '<leader>ccD', function()
+  local chat_win = vim.fn.bufwinid(vim.fn.bufnr('copilot-chat'))
+  if chat_win ~= -1 then
+    vim.api.nvim_set_current_win(chat_win)
+    local bufname = vim.api.nvim_buf_get_name(0)
+    local filetype = vim.bo.filetype
+    
+    -- Check if CopilotChat module is available
+    local ok, copilot = pcall(require, 'CopilotChat')
+    local mappings_ok, mappings = pcall(require, 'CopilotChat.config.mappings')
+    
+    local info = {
+      'CopilotChat Debug Info:',
+      '  Buffer: ' .. bufname,
+      '  Filetype: ' .. filetype,
+      '  CopilotChat loaded: ' .. tostring(ok),
+      '  Mappings loaded: ' .. tostring(mappings_ok),
+    }
+    
+    if mappings_ok then
+      table.insert(info, '  Available functions:')
+      if mappings.accept_diff then table.insert(info, '    - accept_diff') end
+      if mappings.show_diff then table.insert(info, '    - show_diff') end
+      if mappings.yank_diff then table.insert(info, '    - yank_diff') end
+      if mappings.quickfix_diffs then table.insert(info, '    - quickfix_diffs') end
+    end
+    
+    -- Check buffer-local mappings
+    local buf_maps = vim.api.nvim_buf_get_keymap(0, 'n')
+    local copilot_maps = {}
+    for _, map in ipairs(buf_maps) do
+      if map.lhs == 'gd' or map.lhs == 'gy' or map.lhs == 'gqd' or map.lhs == '<C-y>' then
+        table.insert(copilot_maps, '    ' .. map.lhs .. ' -> ' .. (map.desc or 'no desc'))
+      end
+    end
+    
+    if #copilot_maps > 0 then
+      table.insert(info, '  Buffer mappings:')
+      vim.list_extend(info, copilot_maps)
+    else
+      table.insert(info, '  No CopilotChat buffer mappings found')
+    end
+    
+    vim.notify(table.concat(info, '\n'), vim.log.levels.INFO, { timeout = 5000 })
+  else
+    vim.notify('CopilotChat window not found', vim.log.levels.WARN, { timeout = 5000 })
+  end
+end, { desc = 'CopilotChat - Debug mappings and functions' })
+
+map('n', '<leader>ccy', function()
+  -- Jump to CopilotChat window and yank diff
+  local chat_win = vim.fn.bufwinid(vim.fn.bufnr('copilot-chat'))
+  if chat_win ~= -1 then
+    vim.api.nvim_set_current_win(chat_win)
+    vim.cmd('normal! G') -- Go to end to find latest response
+    
+    vim.defer_fn(function()
+      vim.api.nvim_feedkeys('gy', 'n', false)
+      vim.notify('Diff copied to clipboard', vim.log.levels.INFO)
+    end, 100)
+  else
+    vim.notify('CopilotChat window not found. Use <leader>ccc to open it first.', vim.log.levels.WARN)
+  end
+end, { desc = 'CopilotChat - Yank latest diff to clipboard' })
+
+map('n', '<leader>cca<Tab>', function()
+  -- Accept latest diff from CopilotChat using direct function call
+  local chat_win = vim.fn.bufwinid(vim.fn.bufnr('copilot-chat'))
+  if chat_win ~= -1 then
+    local current_win = vim.api.nvim_get_current_win()
+    local current_buf = vim.api.nvim_get_current_buf()
+    
+    vim.api.nvim_set_current_win(chat_win)
+    vim.cmd('normal! G') -- Go to end for latest response
+    
+    vim.defer_fn(function()
+      local ok, mappings = pcall(require, 'CopilotChat.config.mappings')
+      if ok and mappings.accept_diff and mappings.accept_diff.callback then
+        local source = {
+          bufnr = current_buf,
+          winnr = current_win,
+        }
+        
+        local success = pcall(mappings.accept_diff.callback, source)
+        if success then
+          vim.notify('Diff applied successfully', vim.log.levels.INFO)
+          -- Go back to original window
+          if vim.api.nvim_win_is_valid(current_win) then
+            vim.api.nvim_set_current_win(current_win)
+          end
+        else
+          vim.notify('No diff found to apply', vim.log.levels.WARN)
+        end
+      else
+        vim.notify('CopilotChat accept_diff function not available', vim.log.levels.ERROR)
+      end
+    end, 50)
+  else
+    vim.notify('CopilotChat window not found', vim.log.levels.WARN)
+  end
+end, { desc = 'CopilotChat - Accept latest diff' })
+
+map('n', '<leader>ccd<Tab>', function()
+  -- Jump to CopilotChat window and show diff using direct function call
+  local chat_win = vim.fn.bufwinid(vim.fn.bufnr('copilot-chat'))
+  if chat_win ~= -1 then
+    vim.api.nvim_set_current_win(chat_win)
+    vim.cmd('normal! G') -- Go to end for latest response
+    
+    -- Try to call the show_diff function directly
+    vim.defer_fn(function()
+      local ok, copilot = pcall(require, 'CopilotChat')
+      if ok then
+        local ok2, mappings = pcall(require, 'CopilotChat.config.mappings')
+        if ok2 and mappings.show_diff and mappings.show_diff.callback then
+          local source = {
+            bufnr = vim.fn.bufnr('#'), -- Previous buffer (the source file)
+            winnr = vim.fn.win_getid(vim.fn.winnr('#')), -- Previous window
+          }
+          
+          local success = pcall(mappings.show_diff.callback, source)
+          if success then
+            vim.notify('Diff preview opened', vim.log.levels.INFO)
+          else
+            vim.notify('No diff available to show. Make sure CopilotChat has code suggestions.', vim.log.levels.WARN)
+          end
+        else
+          vim.notify('CopilotChat show_diff function not available', vim.log.levels.ERROR)
+        end
+      else
+        vim.notify('CopilotChat not loaded', vim.log.levels.ERROR)
+      end
+    end, 100)
+  else
+    vim.notify('CopilotChat window not found. Use <leader>ccc to open it first.', vim.log.levels.WARN)
+  end
+end, { desc = 'CopilotChat - Show diff for latest suggestion' })
+
+map('n', '<leader>ccq', function()
+  -- Jump to CopilotChat window and add diffs to quickfix
+  local chat_win = vim.fn.bufwinid(vim.fn.bufnr('copilot-chat'))
+  if chat_win ~= -1 then
+    vim.api.nvim_set_current_win(chat_win)
+    vim.cmd('normal! G') -- Go to end to find latest response
+    
+    vim.defer_fn(function()
+      vim.api.nvim_feedkeys('gqd', 'n', false)
+      vim.notify('Diffs added to quickfix list', vim.log.levels.INFO)
+    end, 100)
+  else
+    vim.notify('CopilotChat window not found. Use <leader>ccc to open it first.', vim.log.levels.WARN)
+  end
+end, { desc = 'CopilotChat - Add diffs to quickfix list' })
 
 -- Abbreviations
 map('!a', 'dont', [[don't]], { remap = false })

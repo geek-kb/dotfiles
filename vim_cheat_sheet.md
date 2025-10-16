@@ -214,13 +214,16 @@ A comprehensive reference organized from basic to advanced operations.
 | Shortcut      | Description                                    |
 | ------------- | ---------------------------------------------- |
 | `<leader>cca` | **Prompt Selection** - Choose specific prompt |
-| `<leader>cce` | **Explain** - Detailed code explanation       |
-| `<leader>ccr` | **Review** - Code review & optimization tips  |
-| `<leader>ccf` | **Generate/Fix** - Generate or fix code       |
-| `<leader>cco` | **Optimize** - Performance improvements       |
-| `<leader>ccd` | **Docs** - Generate documentation             |
-| `<leader>cct` | **Tests** - Generate comprehensive tests      |
-| `<leader>ccx` | **Fix Diagnostics** - Resolve LSP errors      |
+| `<leader>cce` | **Explain** - Buffer (normal) / Selection (visual) |
+| `<leader>ccr` | **Review** - Buffer (normal) / Selection (visual) |
+| `<leader>ccf` | **Generate/Fix** - Buffer (normal) / Selection (visual) |
+| `<leader>cco` | **Optimize** - Buffer (normal) / Selection (visual) |
+| `<leader>ccd` | **Docs** - Buffer (normal) / Selection (visual) |
+| `<leader>cct` | **Tests** - Buffer (normal) / Selection (visual) |
+| `<leader>ccx` | **Fix Diagnostics** - File (normal) / Selection (visual) |
+| `<leader>ccX` | **Fix All Diagnostics** - All visible buffers |
+| `<leader>ccg` | **Git Changes** - Explain git diff            |
+| `<leader>ccb` | **Architecture** - Analyze visible buffers    |
 
 ### Git Integration via Copilot
 
@@ -239,13 +242,12 @@ A comprehensive reference organized from basic to advanced operations.
 
 **Agent Mode Usage Tips:**
 
-- Use `<leader>cca` to select specific prompts for specialized tasks
-- Each shortcut uses optimized prompts or built-in CopilotChat commands
-- `<leader>cce` uses `/COPILOT_EXPLAIN` for comprehensive explanations
-- `<leader>ccr` uses `/COPILOT_REVIEW` for architectural insights
-- `<leader>ccf` uses `/COPILOT_GENERATE` for code generation and fixes
-- Other shortcuts use natural language prompts for specific tasks
-- **Note**: Explicit keymaps added to user config to prevent conflicts with native vim `cc` command
+- Use `<leader>cca` to select specific agents for specialized tasks
+- Each agent has custom prompts optimized for their function
+- `<leader>cce` provides comprehensive explanations with examples
+- `<leader>ccr` offers architectural and performance insights
+- `<leader>ccx` focuses specifically on fixing LSP diagnostics
+- Git integration agents generate conventional commit messages
 
 ---
 
@@ -364,7 +366,7 @@ A comprehensive reference organized from basic to advanced operations.
 | `<leader>.`  | Toggle Scratch buffer                 |
 | `<leader>S`  | Select Scratch buffer                 |
 | `<leader>N`  | Neovim News popup                     |
-| `<leader>yc` | YAML Companion: Change schema         |
+| `<leader>cc` | YAML Companion: Change schema         |
 | `<leader>mp` | Markdown Preview: Open preview        |
 | `<leader>dr` | Mermaid Diagram Preview: Open preview |
 

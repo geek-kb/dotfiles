@@ -33,13 +33,6 @@ nvm install --lts
 nvm use --lts
 ```
 
-Then install your global npm packages:
-
-```bash
-chmod +x ~/.dotfiles/node/install-npm-globals.sh
-~/.dotfiles/node/install-npm-globals.sh
-```
-
 2. Clone this repo:
 
    If you have a different path for your git repositories, change the path accordingly
@@ -50,6 +43,13 @@ chmod +x ~/.dotfiles/node/install-npm-globals.sh
    cd ~ && git clone git@github.com:geek-kb/dotfiles.git .dotfiles && cd .dotfiles
    ```
 
+Then install your global npm packages:
+
+    ```bash
+    chmod +x ~/.dotfiles/node/install-npm-globals.sh
+    ~/.dotfiles/node/install-npm-globals.sh
+    ```
+
 3. Install [antidote](https://antidote.sh/)
 
    ```bash
@@ -59,6 +59,7 @@ chmod +x ~/.dotfiles/node/install-npm-globals.sh
 4. Stow the .dotfiles and reload the shell:
 
    ```bash
+   cd ~/.dotfiles
    ./start.sh
    source ~/.zshrc
    ```
@@ -85,12 +86,11 @@ chmod +x ~/.dotfiles/node/install-npm-globals.sh
 
    ```bash
    venvname=".myenv"
-   pyver=$(grep python ~/.dotfiles/asdf/.tool-versions | awk '{print $2}' | cut -d. -f1,2)
-   python${pyver} -m venv ~/$venvname
+   python3 -m venv ~/$venvname
    source ~/$venvname/bin/activate
-   python${pyver} -m pip install --upgrade pip
-   python${pyver} -m pip install --upgrade setuptools
-   python${pyver} -m pip install --upgrade wheel
+   python3 -m pip install --upgrade pip
+   python3 -m pip install --upgrade setuptools
+   python3 -m pip install --upgrade wheel
    pip install -r ~/.dotfiles/requirements.txt
    deactivate
    ```
