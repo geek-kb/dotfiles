@@ -4,9 +4,10 @@ vim.g.loaded_ruby_provider = 0
 
 ---@class PluginSpec[]
 --- Plugin specifications for Lazy.nvim plugin manager
---- This fil    opts = {
-      model = 'claude-3    opts =    opts = {
-      -- Use default model (don't sp    opts = {
+--- This file contains the core plugin configurations for Neovim
+--[[
+-- ORPHANED COPILOT CONFIGURATION - NEEDS TO BE MOVED TO PROPER PLUGIN DEFINITION
+-- This configuration was corrupted and needs to be integrated properly
       model = 'claude-3.5-sonnet',
       question_header = '  User ',
       answer_header = '  Copilot ',
@@ -143,7 +144,11 @@ vim.g.loaded_ruby_provider = 0
           normal = 'gs'
         },
       }
-    },ains the core plugin configurations for Neovim
+    },
+--]]
+
+--- Plugin specifications for Lazy.nvim plugin manager
+--- This file contains the core plugin configurations for Neovim
 local M = {
   {
     'nvim-lua/plenary.nvim',
