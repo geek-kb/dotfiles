@@ -1,0 +1,15 @@
+# Personal account configuration with sensitive data
+zsh/zsh.d/personal/*
+zsh/zsh.d/personal*
+
+# macOS
+.DS_Store
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Temporary files
+.tmp/
+temp/
