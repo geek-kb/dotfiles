@@ -1,9 +1,26 @@
 format = "$directory$all"
 command_timeout = 1000
 
+[[kubernetes.contexts]]
+context_pattern = "^aws.*prod.*"
+style = "#ff000c"
+context_alias = "aws-prod-eu-west-1"
+
+
+[[kubernetes.contexts]]
+context_pattern = "^aws.*qa.*"
+style = "#ffff00"
+context_alias = "aws-qa-eu-west-1"
+
+[[kubernetes.contexts]]
+context_pattern = "^aws.*dev.*"
+style = "#64ff00"
+context_alias = "aws-dev-eu-west-1"
+
 [kubernetes]
 disabled = false
-format = '\([⎈](bold fg:33)[$cluster](fg:166):[$namespace](dimmed green)\) '
+format = '\([⎈](bold fg:33)[$context]($style):[$namespace](bright-white)\) '
+#format = '\([⎈](bold fg:33)[$cluster](fg:166):[$namespace](dimmed green)\) '
 
 [aws]
 disabled = false

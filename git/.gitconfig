@@ -102,3 +102,5 @@
   ui          = true
 [credential]
 	helper = manager-core
+[push]
+	default = current
