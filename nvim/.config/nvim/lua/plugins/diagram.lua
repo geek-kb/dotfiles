@@ -37,57 +37,69 @@ return {
       vim.api.nvim_create_user_command('DiagramRender', function()
         local bufnr = vim.api.nvim_get_current_buf()
         local ft = vim.bo[bufnr].filetype
-        local content = table.concat(vim.api.nvim_buf_get_lines(bufnr, 0, -1, false), '\n')
-        local renderers = require 'diagram.renderers'
+        local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+        local content = table.concat(lines, '\n')
 
-        -- Debug info
-        vim.notify('Current filetype: ' .. ft)
-        vim.notify('Content to render: ' .. content)
+        -- For markdown files, extract mermaid code blocks
+        local mermaid_content = nil
+        if ft == 'markdown' then
+          local in_mermaid_block = false
+          local mermaid_lines = {}
+          
+          for _, line in ipairs(lines) do
+            if line:match('^```mermaid') then
+              in_mermaid_block = true
+            elseif line:match('^```') and in_mermaid_block then
+              in_mermaid_block = false
+            elseif in_mermaid_block then
+              table.insert(mermaid_lines, line)
+            end
+          end
+          
+          if #mermaid_lines > 0 then
+            mermaid_content = table.concat(mermaid_lines, '\n')
+            ft = 'mermaid'  -- Change filetype to mermaid for rendering
+          end
+        end
 
-        -- Check mermaid-cli installation
-        local mmdc_path = vim.fn.trim(vim.fn.system 'which mmdc')
-        vim.notify('mermaid-cli path: ' .. mmdc_path)
+        -- Use the extracted mermaid content if available
+        local render_content = mermaid_content or content
+        
+        if ft == 'mermaid' and render_content then
+          -- Check mermaid-cli installation
+          local mmdc_path = vim.fn.trim(vim.fn.system('which mmdc'))
+          
+          if mmdc_path == '' or vim.v.shell_error ~= 0 then
+            vim.notify('mermaid-cli (mmdc) not found. Install with: npm install -g @mermaid-js/mermaid-cli', vim.log.levels.ERROR)
+            return
+          end
 
-        if renderers[ft] and renderers[ft].render then
           -- Get current file path and create output path
           local input_file = vim.fn.tempname() .. '.mmd'
-          local output_file = vim.fn.expand '%:p:r' .. '.png'
+          local output_file = vim.fn.expand('%:p:r') .. '.png'
 
           -- Write content to temporary file
-          vim.fn.writefile(vim.split(content, '\n'), input_file)
+          vim.fn.writefile(vim.split(render_content, '\n'), input_file)
 
-          -- Debug paths
-          vim.notify('Input file: ' .. input_file)
-          vim.notify('Output file: ' .. output_file)
-
-          -- Run mmdc directly
-          local cmd = string.format('%s -i %s -o %s', mmdc_path, input_file, output_file)
-          vim.notify('Running command: ' .. cmd)
-
+          -- Run mmdc with error output
+          local cmd = string.format('%s -i %s -o %s -b transparent 2>&1', mmdc_path, vim.fn.shellescape(input_file), vim.fn.shellescape(output_file))
+          
           local output = vim.fn.system(cmd)
           local exit_code = vim.v.shell_error
 
-          -- Debug command output
-          vim.notify('Command exit code: ' .. exit_code)
-          vim.notify('Command output: ' .. output)
-
           -- Check if file was created
-          if vim.fn.filereadable(output_file) == 1 then
-            vim.notify 'PNG file created successfully'
-            vim.fn.jobstart({ 'open', output_file }, {
-              detach = true,
-              on_exit = function(_, code)
-                vim.notify('Open command exit code: ' .. code)
-              end,
-            })
+          if exit_code == 0 and vim.fn.filereadable(output_file) == 1 then
+            vim.notify('Diagram rendered successfully: ' .. output_file, vim.log.levels.INFO)
+            vim.fn.jobstart({ 'open', output_file }, { detach = true })
           else
-            vim.notify('Failed to create PNG file', vim.log.levels.ERROR)
+            -- Show the actual mermaid error
+            vim.notify('Failed to render diagram. Error: ' .. output, vim.log.levels.ERROR)
           end
 
           -- Cleanup temp file
           vim.fn.delete(input_file)
         else
-          vim.notify('No renderer found for filetype: ' .. ft, vim.log.levels.ERROR)
+          vim.notify('No mermaid diagram found in ' .. ft .. ' file', vim.log.levels.WARN)
         end
       end, {})
     end,

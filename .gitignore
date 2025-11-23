@@ -13,10 +13,3 @@ zsh/zsh.d/personal*
 # Temporary files
 .tmp/
 temp/
-
-
-nvim/.config/configstore/
-nvim/.config/nvim/temp_backup/
-nvim/.config/tfenv/
-zsh/.zcompdump
-zsh/.zsh_sessions/

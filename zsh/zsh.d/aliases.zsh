@@ -54,6 +54,7 @@ alias watch='watch --color '
 alias myip='curl ipv4.icanhazip.com'
 alias server='python -m http.server 3030'
 alias kgevents='kubectl get event --sort-by=.metadata.creationTimestamp | grep -E -v "(Successfully (pulled|assigned)|(Started|Created) container|(Deleted|Created) pod)"'
+alias cwd='pwd | rev | cut -d/ -f1 | rev'
 
 #------------------------------------------------------------------------------
 # File Type Associations

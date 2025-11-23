@@ -40,8 +40,72 @@ M.setup = function()
   }
 
   ---@diagnostic disable-next-line: missing-fields
-  require('mason-lspconfig').setup { automatic_installation = true }
-  require('user.lsp.servers').setup()
+  require('mason-lspconfig').setup({
+    automatic_installation = true,
+    handlers = {
+      -- Default handler for all servers
+      function(server_name)
+        require('lspconfig')[server_name].setup({
+          capabilities = M.capabilities,
+        })
+      end,
+      -- Custom handlers for servers that need special configuration
+      ['jsonls'] = function()
+        require('lspconfig').jsonls.setup({
+          capabilities = M.capabilities,
+          settings = {
+            json = {
+              trace = { server = 'on' },
+              schemas = require('schemastore').json.schemas(),
+              validate = { enable = true },
+            },
+          },
+        })
+      end,
+      ['pyright'] = function()
+        require('lspconfig').pyright.setup({
+          capabilities = M.capabilities,
+          settings = {
+            organizeimports = { provider = 'isort' },
+          },
+        })
+      end,
+      ['lua_ls'] = function()
+        require('lspconfig').lua_ls.setup({
+          capabilities = M.capabilities,
+          settings = {
+            Lua = {
+              runtime = { version = 'LuaJIT' },
+              completion = { callSnippet = 'Replace' },
+              hint = { enable = true },
+              diagnostics = {
+                disable = { 'undefined-global' },
+                globals = { 'vim' },
+              },
+            },
+          },
+        })
+      end,
+      ['terraformls'] = function()
+        require('lspconfig').terraformls.setup({
+          capabilities = M.capabilities,
+          on_attach = function(client)
+            require('treesitter-terraform-doc').setup({})
+            client.server_capabilities.semanticTokensProvider = {}
+            vim.o.commentstring = '# %s'
+          end,
+        })
+      end,
+      ['helm_ls'] = function()
+        require('lspconfig').helm_ls.setup({
+          capabilities = M.capabilities,
+          filetypes = { 'helm', 'gotmpl' },
+          settings = {},
+        })
+      end,
+    },
+  })
+  -- Remove the separate servers.setup call since everything is handled by mason-lspconfig now
 
   -- on attach
   local on_attach_aug = vim.api.nvim_create_augroup('UserLspAttach', { clear = true })

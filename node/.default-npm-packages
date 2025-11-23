@@ -5,6 +5,6 @@ neovim
 npm
 typescript
 yarn
-mermaid-cli
+@mermaid-js/mermaid-cli
 corepack
 prettier

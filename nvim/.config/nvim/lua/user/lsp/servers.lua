@@ -1,14 +1,9 @@
 local M = {}
-M.setup = function()
-  local capabilities = require('user.lsp.config').capabilities
-  local lspconfig = require 'lspconfig'
+M.setup = function(capabilities)
+  local lspconfig = require('lspconfig')
 
-  lspconfig['bashls'].setup { capabilities = capabilities }
-  lspconfig['cssls'].setup { capabilities = capabilities }
-  lspconfig['cssmodules_ls'].setup { capabilities = capabilities }
-  lspconfig['dockerls'].setup { capabilities = capabilities }
-  lspconfig['vtsls'].setup { capabilities = capabilities }
-  lspconfig['docker_compose_language_service'].setup { capabilities = capabilities }
+  -- Note: Basic servers are handled by mason-lspconfig default handler
+  -- Only configure servers that need special settings here
   --lspconfig['groovyls'].setup { capabilities = capabilities }
   lspconfig['html'].setup { capabilities = capabilities }
   lspconfig['vimls'].setup { capabilities = capabilities }

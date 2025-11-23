@@ -20,7 +20,6 @@ context_alias = "aws-dev-eu-west-1"
 [kubernetes]
 disabled = false
 format = '\([⎈](bold fg:33)[$context]($style):[$namespace](bright-white)\) '
-#format = '\([⎈](bold fg:33)[$cluster](fg:166):[$namespace](dimmed green)\) '
 
 [aws]
 disabled = false
