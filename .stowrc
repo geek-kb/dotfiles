@@ -6,3 +6,5 @@
 --ignore=requirements.txt
 --ignore=snippets.xml
 --ignore=start.sh
+--ignore=vim_cheat_sheet.md
+--ignore=dotfiles.code-workspace
