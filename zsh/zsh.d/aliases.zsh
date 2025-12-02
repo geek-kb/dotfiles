@@ -46,6 +46,7 @@ alias update-nvim-nightly='asdf uninstall neovim nightly && asdf install neovim 
 alias gs='git status'
 alias git_current_branch='git branch --show-current'
 alias gb='git for-each-ref --sort=-committerdate --format="%(refname:short)" | grep -n . | sed "s?origin/??g" | sort -t: -k2 -u | sort -n | cut -d: -f2 | fzf | xargs git checkout'
+alias gaM='gs | grep modified | cut -d: -f2 | xargs git add'
 
 #------------------------------------------------------------------------------
 # Network & System Utils
