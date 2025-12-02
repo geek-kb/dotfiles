@@ -48,6 +48,7 @@ alias git_current_branch='git branch --show-current'          # Show current git
 alias gb='git for-each-ref --sort=-committerdate --format="%(refname:short)" | grep -n . | sed "s?origin/??g" | sort -t: -k2 -u | sort -n | cut -d: -f2 | fzf | xargs git checkout'  # Interactive branch selector with fzf
 alias gaM='git diff --name-only | xargs git add'  # Add all modified files
 alias gCM='git commit -m "Updates files: $(git diff --name-only --cached | xargs)"'
+alias gCMP='git commit -m "Updates files: $(git diff --name-only --cached | xargs)" ; git push'
 
 #------------------------------------------------------------------------------
 # Network & System Utils
