@@ -1,8 +1,11 @@
 #compdef confluent
-compdef _confluent confluent
+compdef _confluent confluent  # Register _confluent as the completion function for confluent command
 
 # zsh completion for confluent                            -*- shell-script -*-
+# Auto-generated completion script for Confluent CLI
+# This provides tab completion for confluent commands, flags, and arguments
 
+# Debug helper function - writes debug messages to file if BASH_COMP_DEBUG_FILE is set
 __confluent_debug()
 {
     local file="$BASH_COMP_DEBUG_FILE"
@@ -11,8 +14,11 @@ __confluent_debug()
     fi
 }
 
+# Main completion function for confluent command
+# Handles command-line completion by communicating with the confluent binary
 _confluent()
 {
+    # Directive flags that control completion behavior
     local shellCompDirectiveError=1
     local shellCompDirectiveNoSpace=2
     local shellCompDirectiveNoFileComp=4
@@ -207,7 +213,8 @@ _confluent()
 }
 
 # don't run the completion function when being source-ed or eval-ed
+# Only execute if called directly (not when sourced)
 if [ "$funcstack[1]" = "_confluent" ]; then
-    _confluent
+    _confluent  # Invoke the completion function
 fi
 

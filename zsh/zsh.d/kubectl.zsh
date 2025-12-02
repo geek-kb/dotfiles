@@ -1,5 +1,8 @@
+# Kubectl Aliases and Functions
+# Comprehensive set of shortcuts for Kubernetes management
+
 # This command is used a LOT both below and in daily life
-alias k=kubectl
+alias k=kubectl  # Main kubectl shortcut
 
 # Execute a kubectl command against all namespaces
 alias kca='_kca(){ kubectl "$@" --all-namespaces;  unset -f _kca; }; _kca'
@@ -13,10 +16,10 @@ alias krf='kubectl replace -f'
 alias keti='kubectl exec -t -i'
 
 # Manage configuration quickly to switch contexts between local, dev ad staging.
-alias kcuc='kubectl config use-context'
-alias kcsc='kubectl config set-context'
-alias kcdc='kubectl config delete-context'
-alias kccc='kubectl config current-context'
+alias kcuc='kubectl config use-context'         # Switch context
+alias kcsc='kubectl config set-context'         # Set context properties
+alias kcdc='kubectl config delete-context'      # Delete context
+alias kccc='kubectl config current-context'     # Show current context
 
 # List all contexts
 alias kcgc='kubectl config get-contexts'
@@ -56,11 +59,11 @@ alias kdi='kubectl describe ingress'
 alias kdeli='kubectl delete ingress'
 
 # Namespace management
-alias kgns='kubectl get namespaces'
-alias kens='kubectl edit namespace'
-alias kdns='kubectl describe namespace'
-alias kdelns='kubectl delete namespace'
-alias kcn='kubectl config set-context --current --namespace'
+alias kgns='kubectl get namespaces'                        # List namespaces
+alias kens='kubectl edit namespace'                        # Edit namespace
+alias kdns='kubectl describe namespace'                    # Describe namespace
+alias kdelns='kubectl delete namespace'                    # Delete namespace
+alias kcn='kubectl config set-context --current --namespace'  # Set default namespace for current context
 
 # ConfigMap management
 alias kgcm='kubectl get configmaps'
@@ -86,6 +89,7 @@ alias kdeld='kubectl delete deployment'
 alias ksd='kubectl scale deployment'
 alias krsd='kubectl rollout status deployment'
 
+# Restart deployment/statefulset by updating environment variable
 function kres() {
   kubectl set env $@ REFRESHED_AT=$(date +%Y%m%d%H%M%S)
 }
@@ -116,14 +120,14 @@ alias kga='kubectl get all'
 alias kgaa='kubectl get all --all-namespaces'
 
 # Logs
-alias kl='kubectl logs'
-alias kl1h='kubectl logs --since 1h'
-alias kl1m='kubectl logs --since 1m'
-alias kl1s='kubectl logs --since 1s'
-alias klf='kubectl logs -f'
-alias klf1h='kubectl logs --since 1h -f'
-alias klf1m='kubectl logs --since 1m -f'
-alias klf1s='kubectl logs --since 1s -f'
+alias kl='kubectl logs'              # Get logs
+alias kl1h='kubectl logs --since 1h' # Logs from last hour
+alias kl1m='kubectl logs --since 1m' # Logs from last minute
+alias kl1s='kubectl logs --since 1s' # Logs from last second
+alias klf='kubectl logs -f'          # Follow logs
+alias klf1h='kubectl logs --since 1h -f'  # Follow logs from last hour
+alias klf1m='kubectl logs --since 1m -f'  # Follow logs from last minute
+alias klf1s='kubectl logs --since 1s -f'  # Follow logs from last second
 
 # File copy
 alias kcp='kubectl cp'
@@ -173,24 +177,25 @@ alias kej='kubectl edit job'
 alias kdj='kubectl describe job'
 alias kdelj='kubectl delete job'
 
-alias cinfo='kubectl cluster-info'
-alias kafd='kubectl apply --validate=true --dry-run=true -f -'
-alias kgdns="kubectl get services --all-namespaces -o jsonpath='{.items[*].metadata.annotations.external-dns\.alpha\.kubernetes\.io/hostname}' | tr ' ' '\n'"
-alias kns='kubens'
-alias ctx='kubectx'
-alias kmem='kubectl top node | (gsed -u 1q;sort -r -hk5)'
-alias kcpu='kubectl top node | (gsed -u 1q;sort -r -hk3)'
-alias ktn='kubectl top node'
-alias ktp='kubectl top pod'
-alias krs='kubectl rollout restart'
-alias kesec='kubectl edit secret'
-alias kgnol='kgno -l'
-alias kg='kubectl get '
-alias kd='kubectl describe '
-alias ke='kubectl edit '
-alias kdelrs='kubectl delete rs '
-alias k8s='nvim +"lua require(\"kubectl\").open()"'
+alias cinfo='kubectl cluster-info'                           # Display cluster info
+alias kafd='kubectl apply --validate=true --dry-run=true -f -'  # Dry-run apply from stdin
+alias kgdns="kubectl get services --all-namespaces -o jsonpath='{.items[*].metadata.annotations.external-dns\.alpha\.kubernetes\.io/hostname}' | tr ' ' '\n'"  # List all external DNS hostnames
+alias kns='kubens'                                           # Switch namespace (kubens tool)
+alias ctx='kubectx'                                          # Switch context (kubectx tool)
+alias kmem='kubectl top node | (gsed -u 1q;sort -r -hk5)'   # Show nodes sorted by memory usage
+alias kcpu='kubectl top node | (gsed -u 1q;sort -r -hk3)'   # Show nodes sorted by CPU usage
+alias ktn='kubectl top node'                                 # Show node resource usage
+alias ktp='kubectl top pod'                                  # Show pod resource usage
+alias krs='kubectl rollout restart'                          # Restart deployment/statefulset
+alias kesec='kubectl edit secret'                            # Edit secret
+alias kgnol='kgno -l'                                        # Get nodes by label
+alias kg='kubectl get '                                      # Quick get
+alias kd='kubectl describe '                                 # Quick describe
+alias ke='kubectl edit '                                     # Quick edit
+alias kdelrs='kubectl delete rs '                            # Delete replicaset
+alias k8s='nvim +"lua require(\"kubectl\").open()"'          # Open kubectl.nvim plugin
 
 # Kubectx and kubens integration
-alias kctx='kubectx'
-alias kns='kubens'
+# Fast context and namespace switching tools
+alias kctx='kubectx'  # Switch Kubernetes context
+alias kns='kubens'    # Switch Kubernetes namespace

@@ -1,3 +1,4 @@
+# Zsh History Configuration
 setopt APPEND_HISTORY         # append to history file
 setopt BANG_HIST              # Treat the '!' character specially during expansion.
 setopt EXTENDED_HISTORY       # Write the history file in the ':start:elapsed;command' format.
@@ -13,7 +14,9 @@ setopt HIST_VERIFY            # Do not execute immediately upon history expansio
 setopt INC_APPEND_HISTORY     # Write to the history file immediately, not when the shell exits.
 setopt SHARE_HISTORY          # Share history between all sessions.
 
+# History size limits
 HISTSIZE=10000 # The maximum number of events to save in the internal history.
 SAVEHIST=10000 # The maximum number of events to save in the history file.
 
+# Show top 50 most used commands from history
 alias history-stat="history 0 | awk '{print \$2}' | sort | uniq -c | sort -n -r | head -50"

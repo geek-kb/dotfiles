@@ -1,8 +1,13 @@
+# Initialize fzf shell integration for zsh
 source <(fzf --zsh)
+# Configure fzf to search all files (including hidden) except .git
 export FZF_CTRL_T_COMMAND='rg --color=never --files --hidden --follow -g "!.git"'
+# Show file preview with syntax highlighting using bat
 export FZF_CTRL_T_OPTS='--preview "bat --color=always --style=numbers,changes {}"'
+# Configure history search with command preview
 export FZF_CTRL_R_OPTS="--ansi --color=hl:underline,hl+:underline --height 80% --preview 'echo {2..} | bat --color=always -pl bash' --preview-window 'down:4:wrap' --bind 'ctrl-/:toggle-preview'"
 
+# Interactive file deletion using fzf for selection
 function fzf-rm() {
   if [[ "$#" -eq 0 ]]; then
     local files
@@ -14,6 +19,7 @@ function fzf-rm() {
 }
 
 # Man without options will use fzf to select a page
+# Interactive man page viewer with fzf search and preview
 function fzf-man() {
   MAN="/usr/bin/man"
   if [ -n "$1" ]; then
@@ -25,10 +31,12 @@ function fzf-man() {
   fi
 }
 
+# Live command evaluation with preview - type command and see output in real-time
 function fzf-eval() {
   echo | fzf -q "$*" --preview-window=up:99% --preview="eval {q}"
 }
 
+# Fuzzy search and execute aliases or functions interactively
 function fzf-aliases-functions() {
   CMD=$(
     (
@@ -40,6 +48,7 @@ function fzf-aliases-functions() {
   eval $CMD
 }
 
+# Interactive git status - select and edit changed files with fzf
 function fzf-git-status() {
   git rev-parse --git-dir >/dev/null 2>&1 || {
     echo "You are not in a git repository" && return

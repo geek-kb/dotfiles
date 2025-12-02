@@ -1,13 +1,16 @@
 #!/bin/zsh
+# Create directory and cd into it in one command
 function take() {
   [[ $# == 1 ]] && mkdir -p -- "$1" && cd -- "$1"
 }
 
+# Delete all zsh completion dump files to force regeneration
 function delete-zcompdump() {
   rm -f ~/.cache/zsh/zcomp*
   rm -f ~/.zcompdump*
 }
 
+# Text-to-speech in Hebrew using macOS say command
 function say-hebrew() {
   # check if there's params
   if [[ -z $* ]]; then
@@ -17,12 +20,14 @@ function say-hebrew() {
   fi
 }
 
+# Set terminal tab title using dialog prompt
 function set-tab-title() {
   title=$(dialog -t "Set tab title" -m "Enter the title for the tab" --bannertext Set --textfield title,required 2>/dev/null | awk -F: '{print $2}')
   echo -e "\033]0;${title}\a"
 }
 
 ### Helper functions ###
+# Parse an alias to get its actual command
 function _alias_parser() {
   parsed_alias=$(alias -- "$1")
   if [[ $? == 0 ]]; then
@@ -30,6 +35,7 @@ function _alias_parser() {
   fi
 }
 
+# Recursively resolve nested aliases to get the final command
 function _alias_finder() {
   final_result=()
   for s in $(echo $1); do
@@ -49,6 +55,7 @@ function _alias_finder() {
 }
 
 ### Random functions ###
+# Watch command that resolves aliases before execution
 function mwatch() {
   # log_file=/tmp/moshe_mwatch.log
   # [[ -f $log_file ]] && cat /dev/null > $log_file || touch $log_file
@@ -57,6 +64,7 @@ function mwatch() {
   watch "$final_alias"
 }
 
+# Clone a git repo, cd into it, and open in nvim
 function clone() {
   cd ~/src
   git clone $1
@@ -65,29 +73,35 @@ function clone() {
   cd -
 }
 
+# Navigate to the root of the current git repository
 function gitcd() {
   cd $(git rev-parse --show-toplevel)
 }
 
+# SSH to AWS EC2 instance by converting ip-x-x-x-x format to IP address
 function ssh2() {
   in_url=$(sed -E 's?ip-([0-9]*)-([0-9]*)-([0-9]*)-([0-9]*)?\1.\2.\3.\4?g' <<<"$1")
   echo $in_url
   ssh $in_url
 }
 
+# Grep recursively and list only filenames
 function grl() {
   grep -rl $* .
 }
 
+# Open command-not-found.com to search for a command
 function cnf() {
   open "https://command-not-found.com/$*"
 }
 
+# Build Docker image for linux/amd64 platform
 function docker_build() {
   docker build . \
     --platform linux/amd64 $*
 }
 
+# Build and push Docker image to registry
 function docker_build_push() {
   docker_build --push $*
 }
@@ -144,11 +158,13 @@ function docker_copy_between_regions() {
 }
 
 # Open the github page of the repo you're in, in the browser
+# Opens the GitHub/GitLab page for the current repository
 function opengit() {
   git remote -v | awk 'NR==1{print $2}' | sed -e "s?:?/?g" -e 's?\.git$??' -e "s?git@?https://?" -e "s?https///?https://?g" | xargs open
 }
 
 # Create pull request = cpr
+# Open browser to create a PR for the current branch on GitHub or GitLab
 function cpr() {
   git_remote=$(git remote -v | grep '(fetch)')
   git_remote_name=origin
@@ -167,6 +183,7 @@ function cpr() {
 }
 
 ### Kubernetes functions ###
+# Watch and describe a Kubernetes pod with live updates
 function kdpw() {
   n_lines=$(tput lines)
   # desired_lines is n_lines minus 2
@@ -174,6 +191,7 @@ function kdpw() {
   watch "kubectl describe po $* | tail -${desired_lines}"
 }
 
+# Open Grafana web UI and copy admin password to clipboard
 function grafana_web() {
   grafana_ingress=$(kubectl get ingress -n monitoring --no-headers -o custom-columns=":metadata.name" | grep -m1 grafana)
   ingress_host=$(kubectl get ingress -n monitoring "${grafana_ingress}" -ojson | jq -r '.spec.rules[].host')
@@ -183,11 +201,13 @@ function grafana_web() {
   open "https://${ingress_host}"
 }
 
+# Open Cerebro (Elasticsearch web UI) in browser
 function cerebro_web() {
   cerebro_ingress=$(kubectl get ingress -l app=cerebro -A -ojson | jq -r '.items[].spec.rules[0].host')
   open https://${cerebro_ingress}
 }
 
+# Open Kibana web UI and copy elastic user password to clipboard
 function kibana_web() {
   kibana_ingress=$(kubectl get ingress -n elastic --no-headers -o custom-columns=":metadata.name" | grep kb-ingress)
   ingress_host=$(kubectl get ingress -n elastic "${kibana_ingress}" -ojson | jq -r '.spec.rules[].host')
@@ -197,6 +217,7 @@ function kibana_web() {
   open "https://${ingress_host}"
 }
 
+# Open ArgoCD web UI and copy admin password to clipboard. Use -f flag for port-forward
 function argocd_web() {
   argocd_ingress=$(kubectl get ingress -n argocd --no-headers -o custom-columns=":metadata.name" | grep argocd-server)
   ingress_host=https://$(kubectl get ingress -n argocd "${argocd_ingress}" -ojson | jq -r '.spec.rules[].host')
@@ -222,6 +243,7 @@ function argocd_web() {
   open "${ingress_host}"
 }
 
+# Login to ArgoCD CLI with credentials from cluster
 function argocd_login() {
   argocd_ingress=$(kubectl get ingress -n argocd --no-headers -o custom-columns=":metadata.name" | grep argocd-server)
   ingress_host=$(kubectl get ingress -n argocd "${argocd_ingress}" -ojson | jq -r '.spec.rules[].host')
@@ -229,6 +251,7 @@ function argocd_login() {
   argocd login "${ingress_host}" --username admin --password "${pass}"
 }
 
+# Get Kubernetes pod resource requests and limits in a formatted table
 function kgres() {
   kubectl get pod $* \
     -ojsonpath='{range .items[*]}{.spec.containers[*].name}{" memory: "}{.spec.containers..resources.requests.memory}{"/"}{.spec.containers..resources.limits.memory}{" | cpu: "}{.spec.containers..resources.requests.cpu}{"/"}{.spec.containers..resources.limits.cpu}{"\n"}{end}' | sort \
@@ -236,6 +259,7 @@ function kgres() {
     -k1,1 | column -t
 }
 
+# Launch a debug pod in Kubernetes cluster for troubleshooting
 function kubedebug() {
   # image=gcr.io/kubernetes-e2e-test-images/dnsutils:1.3
   local image=mosheavni/net-debug:latest
@@ -302,6 +326,7 @@ function kubedebug() {
   set +x
 }
 
+# Get all pods that belong to a Kubernetes service by label selector
 function get_pods_of_svc() {
   svc_name=$1
   shift
@@ -309,6 +334,7 @@ function get_pods_of_svc() {
   kubectl get pod $* -l $label_selectors
 }
 
+# Install all asdf plugins and versions from .tool-versions file
 function asdf_install() {
   cd ~/.dotfiles
   while read -r plugin_line; do
@@ -317,6 +343,7 @@ function asdf_install() {
      asdf install
 }
 
+# Get Kubernetes pod labels in key=value format
 function kgel() {
   if [[ -z $1 ]]; then
     echo "Usage: $0 <pod_name>"
@@ -325,6 +352,7 @@ function kgel() {
   kubectl get pod $* -ojson | jq -r '.metadata.labels | to_entries | .[] | "\(.key)=\(.value)"'
 }
 
+# Automatically install and switch to kubectl version matching the cluster
 function asdf-kubectl-version() {
   K8S_VERSION=$(kubectl version -ojson | jq -r '.serverVersion | "\(.major).\(.minor)"' | sed 's/\+$//')
   TO_INSTALL=$(asdf list-all kubectl | grep "${K8S_VERSION}" | tail -1)
@@ -335,6 +363,7 @@ function asdf-kubectl-version() {
 }
 
 # fzf
+# Fuzzy find directory, cd into it, and open nvim
 function fdf() {
   # remove trailing / from $1
   dir_clean=${1%/}
@@ -343,10 +372,12 @@ function fdf() {
   cd "$dir_clean/$dir_to_enter" && nvim
 }
 
+# Fuzzy find and describe a Kubernetes pod
 function mkdp() {
   kubectl get pod --no-headers | fzf | awk '{print $1}' | xargs -n 1 kubectl describe pod
 }
 
+# Fuzzy find Kubernetes deployment/statefulset and follow logs interactively
 function mklf() {
   substring=$1
   if [[ -z $substring ]]; then
@@ -376,16 +407,19 @@ function mklf() {
 }
 
 # debug nvim startup time
+# Measure and log neovim startup time to a file
 function nvim-startuptime() {
   cat /dev/null >startuptime.txt && nvim --startuptime startuptime.txt "$@"
 }
 
+# Get Israeli zip code for Tel Aviv Florentin 2 and copy to clipboard
 function zip-code() {
   ZIP_CODE=$(curl -s 'https://www.zipy.co.il/api/findzip/getZip' -H 'content-type: text/plain;charset=UTF-8' -H 'referer: https://www.zipy.co.il/%D7%9E%D7%99%D7%A7%D7%95%D7%93/' --data-raw '{"city":"תל אביב","street":"פלורנטין","house":"2","remote":true}' | jq -r '.result.zip')
   echo "$ZIP_CODE"
   echo "$ZIP_CODE" | pbcopy
 }
 
+# Display Matrix-style falling characters animation in terminal
 function matrix() {
   lines=$(tput lines)
   cols=$(tput cols)
@@ -425,6 +459,7 @@ function matrix() {
   done | awk "$awkscript"
 }
 
+# Colorized man pages with custom formatting
 function man() {
   env \
     LESS_TERMCAP_mb=$(printf "\e[1;31m") \
@@ -438,6 +473,7 @@ function man() {
 }
 
 # Temp functions
+# Run pre-commit hooks repeatedly until all checks pass
 function run_pre_commit() {
   while ! pre-commit run --files $(find aws/modules azure/modules demo_formatting_issues -type f) --hook-stage manual; do echo "Re-running pre-commit..."; done
 }

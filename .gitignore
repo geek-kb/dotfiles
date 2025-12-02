@@ -13,3 +13,6 @@ zsh/zsh.d/personal*
 # Temporary files
 .tmp/
 temp/
+
+# VSCode workspace settings
+dotfiles.code-workspace
