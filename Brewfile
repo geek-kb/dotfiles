@@ -308,6 +308,8 @@ cask "keycastr"
 cask "kitty"
 # Password manager
 cask "lastpass"
+# DockDoor
+cask "dockdoor"
 # Collaboration platform for API development
 cask "postman"
 # Screenshot measurement and annotation tool
