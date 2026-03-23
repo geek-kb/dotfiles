@@ -19,3 +19,6 @@ tab_width = 4
 
 [README.md]
 insert_final_newline = true
+
+[*.{yaml,yml}]
+trim_trailing_whitespace = false

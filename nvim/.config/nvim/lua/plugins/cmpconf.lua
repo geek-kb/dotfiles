@@ -58,13 +58,12 @@ M.config = function()
       fields = { 'kind', 'abbr', 'menu' },
       format = function(entry, vim_item)
         local lspkind = require 'lspkind'
-        local mode = 'symbol'
         local preset = 'default'
         lspkind.symbol_map = vim.tbl_extend('force', lspkind.presets[preset], custom_kinds)
         if custom_kinds_hl[vim_item.kind] then
           vim_item.kind_hl_group = custom_kinds_hl[vim_item.kind]
         end
-        vim_item.kind = lspkind.symbolic(vim_item.kind, { mode = mode })
+        vim_item.kind = lspkind.symbol_map[vim_item.kind] or vim_item.kind
         vim_item.menu = source_mapping[entry.source.name]
         if entry.source.name == 'cmp_tabnine' then
           local detail = (entry.completion_item.labelDetails or {}).detail

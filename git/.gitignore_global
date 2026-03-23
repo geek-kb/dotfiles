@@ -24,3 +24,8 @@ nvim/.config/snyk
 nvim/.config/starship.toml
 nvim/.config/tanzu
 nvim/.config/tanzu-cli-telemetry
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/tasks.json
+**/*.mdc
