@@ -17,11 +17,18 @@ alias pbc='pbcopy'    # Quick clipboard copy
 #------------------------------------------------------------------------------
 # File Navigation & Management
 #------------------------------------------------------------------------------
-alias ll='ls -lah'              # Long listing with hidden files
-alias ls='eza '                 # Use eza (modern ls replacement)
-alias dc='cd '                  # Typo-friendly cd alias
-alias dot='cd ~/.dotfiles'      # Quick navigation to dotfiles directory
-alias src="~/src"               # Quick navigation to source directory
+#alias ll='ls -lah'              # Long listing with hidden files
+#alias ls='eza '                 # Use eza (modern ls replacement)
+#alias dc='cd '                  # Typo-friendly cd alias
+#alias dot='cd ~/.dotfiles'      # Quick navigation to dotfiles directory
+#alias src="~/src"               # Quick navigation to source directory
+
+#------------------------------------------------------------------------------
+# File Navigation & Management
+#------------------------------------------------------------------------------
+alias ls="eza --icons"
+alias ll="eza -la --icons"
+alias lt="eza --tree --icons"
 
 #------------------------------------------------------------------------------
 # Editor Related
