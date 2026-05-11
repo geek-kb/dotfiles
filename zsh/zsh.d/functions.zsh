@@ -412,12 +412,6 @@ function nvim-startuptime() {
   cat /dev/null >startuptime.txt && nvim --startuptime startuptime.txt "$@"
 }
 
-# Get Israeli zip code for Tel Aviv Florentin 2 and copy to clipboard
-function zip-code() {
-  ZIP_CODE=$(curl -s 'https://www.zipy.co.il/api/findzip/getZip' -H 'content-type: text/plain;charset=UTF-8' -H 'referer: https://www.zipy.co.il/%D7%9E%D7%99%D7%A7%D7%95%D7%93/' --data-raw '{"city":"תל אביב","street":"פלורנטין","house":"2","remote":true}' | jq -r '.result.zip')
-  echo "$ZIP_CODE"
-  echo "$ZIP_CODE" | pbcopy
-}
 
 # Display Matrix-style falling characters animation in terminal
 function matrix() {
