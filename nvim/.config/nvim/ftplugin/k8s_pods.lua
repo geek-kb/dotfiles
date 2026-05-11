@@ -1,6 +1,6 @@
-local ResourceBuilder = require 'kubectl.resourcebuilder'
+local action_view = require 'kubectl.views.action'
 local commands = require 'kubectl.actions.commands'
-local pod_view = require 'kubectl.views.pods'
+local pod_view = require 'kubectl.resources.pods'
 
 vim.schedule(function()
   vim.api.nvim_buf_set_keymap(0, 'n', 'gk', '', {
@@ -9,9 +9,8 @@ vim.schedule(function()
     desc = 'Kill prompt',
     callback = function()
       local name, ns = pod_view.getCurrentSelection()
-      local builder = ResourceBuilder:new 'kubectl_drain'
       local pod_def = {
-        ft = 'k8s_kill_pod',
+        ft = 'k8s_action',
         display = string.format('Kill pod: %s/%s?', ns, name),
         resource = ns .. '/' .. name,
         cmd = { 'delete', 'pod', name, '-n', ns },
@@ -24,7 +23,7 @@ vim.schedule(function()
         { text = 'force:', value = 'false', options = { 'false', 'true' }, cmd = '--force', type = 'flag' },
       }
 
-      builder:action_view(pod_def, data, function(args)
+      action_view.View(pod_def, data, function(args)
         commands.shell_command_async('kubectl', args)
       end)
     end,

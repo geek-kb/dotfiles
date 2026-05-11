@@ -64,6 +64,9 @@ unset ZSH_AUTOSUGGEST_USE_ASYNC
 # Homebrew variables.
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
+# zoxide
+eval "$(zoxide init zsh)"
+
 # Ruby
 eval "$(rbenv init - zsh)"
 

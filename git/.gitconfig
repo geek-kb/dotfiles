@@ -96,11 +96,15 @@
   diff        = true
   grep        = true
   interactive = true
-  pager       = true
+  pager       = false 
   showbranch  = true
   status      = true
   ui          = true
 [credential]
 	helper = manager-core
+	helper = 
+	helper = /usr/local/share/gcm-core/git-credential-manager
 [push]
 	default = current
+[credential "https://dev.azure.com"]
+	useHttpPath = true

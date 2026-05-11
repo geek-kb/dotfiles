@@ -1,13 +1,15 @@
 return {
   'Ramilito/kubectl.nvim',
+  version = '2.*',
+  dependencies = { 'saghen/blink.download' },
   opts = {
     log_level = vim.log.levels.DEBUG,
-    diff = { bin = 'kdiff' },
-    headers = true,
-    hints = true,
-    context = true,
-    heartbeat = true,
-    kubernetes_versions = true,
+    headers = {
+      enabled = true,
+      hints = true,
+      context = true,
+      heartbeat = true,
+    },
     auto_refresh = {
       enabled = true,
     },

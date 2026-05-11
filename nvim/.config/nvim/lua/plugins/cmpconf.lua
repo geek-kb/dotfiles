@@ -33,7 +33,6 @@ M.config = function()
     buffer = '[Buffer]',
     cmdline = '[Cmd]',
     cmp_tabnine = '[TN]',
-    copilot = '[CP]',
     luasnip = '[Snpt]',
     nvim_lsp = '[LSP]',
     path = '[Path]',

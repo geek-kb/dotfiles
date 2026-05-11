@@ -1,7 +1,17 @@
 {
   "permissions": {
     "allow": [
-      "Bash(ls -la /Users/itaigan/.dotfiles/zsh/.zsh*)"
+      "Bash(ls -la /Users/itaigan/.dotfiles/zsh/.zsh*)",
+      "Bash(md5)",
+      "Bash(cargo --version)",
+      "Bash(go version *)",
+      "Bash(nvim --headless \"+Lazy! sync\" +qa)",
+      "Bash(nvim --headless \"+Lazy! load kubectl.nvim\" \"+sleep 30\" +qa)",
+      "Read(//Users/itaigan/.local/share/nvim/**)",
+      "Read(//Users/itaigan/.local/state/nvim/**)",
+      "Bash(nvim --headless \"+Lazy! build leetcode.nvim\" \"+sleep 15\" +qa)",
+      "Bash(nvim --headless \"+Lazy! load kubectl.nvim\" \"+lua require\\('kubectl'\\).setup\\(\\)\" \"+sleep 2\" +qa)",
+      "Bash(nvim --headless \"+Lazy! load kubectl.nvim\" \"+lua require\\('kubectl'\\).setup\\(\\); require\\('kubectl.views.action'\\); require\\('kubectl.resources.pods'\\); require\\('kubectl.resources.ingresses'\\); print\\('ftplugin modules OK'\\)\" +qa)"
     ]
   }
 }
