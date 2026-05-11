@@ -447,22 +447,6 @@ Use these mid-pipeline — they expand anywhere on the line.
 
 ---
 
-## 🗂️ Personal Navigation Aliases
-
-| Alias     | Goes To                                                                     |
-| --------- | --------------------------------------------------------------------------- |
-| `cl`      | `~/src/devops-candidate-core/terraform`                                     |
-| `go-dev`  | `~/src/devops-argo-apps-gitops-dev/aws/eu-west-1/pynr-eu-west-1`            |
-| `go-qa`   | `~/src/devops-argo-apps-gitops-qa/aws/eu-west-1/pynr-eu-west-1`             |
-| `go-sre`  | `~/src/devops-argo-apps-gitops-sre-playground/aws/eu-west-1/pynr-eu-west-1` |
-| `go-sb`   | `~/src/devops-argo-apps-gitops-sandbox/aws/eu-west-1/pynr-eu-west-1`        |
-| `go-prod` | `~/src/devops-argo-apps-gitops-prod/aws/eu-west-1/pynr-eu-west-1`           |
-| `ws`      | `~/src/vscode_workspaces/`                                                  |
-| `k8ssec`  | `~/src/k8s_security`                                                        |
-| `oncall`  | `~/src/professional_work/payoneer/oncall`                                   |
-
----
-
 ## 📜 History
 
 | Setting / Alias          | Description                                     |
