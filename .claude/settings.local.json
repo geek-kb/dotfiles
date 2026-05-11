@@ -11,7 +11,9 @@
       "Read(//Users/itaigan/.local/state/nvim/**)",
       "Bash(nvim --headless \"+Lazy! build leetcode.nvim\" \"+sleep 15\" +qa)",
       "Bash(nvim --headless \"+Lazy! load kubectl.nvim\" \"+lua require\\('kubectl'\\).setup\\(\\)\" \"+sleep 2\" +qa)",
-      "Bash(nvim --headless \"+Lazy! load kubectl.nvim\" \"+lua require\\('kubectl'\\).setup\\(\\); require\\('kubectl.views.action'\\); require\\('kubectl.resources.pods'\\); require\\('kubectl.resources.ingresses'\\); print\\('ftplugin modules OK'\\)\" +qa)"
+      "Bash(nvim --headless \"+Lazy! load kubectl.nvim\" \"+lua require\\('kubectl'\\).setup\\(\\); require\\('kubectl.views.action'\\); require\\('kubectl.resources.pods'\\); require\\('kubectl.resources.ingresses'\\); print\\('ftplugin modules OK'\\)\" +qa)",
+      "Bash(awk -F/ '{print $3}')",
+      "Bash(awk '{print $2}')"
     ]
   }
 }
