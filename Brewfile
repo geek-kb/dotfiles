@@ -8,9 +8,11 @@ tap "hashicorp/tap"
 tap "homebrew/command-not-found"
 tap "johanhaleby/kubetail"
 tap "jstkdng/programs"
+tap "kyverno/chainsaw", "https://github.com/kyverno/chainsaw"
 tap "microsoft/git"
 tap "minamijoyo/hcledit"
 tap "neovim/neovim"
+tap "norwoodj/tap"
 tap "superbrothers/zsh-kubectl-prompt"
 tap "vmware-tanzu/tanzu"
 tap "weaveworks/tap"
@@ -40,6 +42,8 @@ brew "bashdb"
 brew "bat"
 # Linux/OSX/FreeBSD resource monitor
 brew "bpytop"
+# Resource monitor. C++ version and continuation of bashtop and bpytop
+brew "btop"
 # Format codeblocks inside markdown and org documents
 brew "cbfmt"
 # CloudFlare's PKI toolkit
@@ -76,6 +80,10 @@ brew "crossplane"
 brew "d2"
 # Pack, ship and run any application as a lightweight container
 brew "docker"
+# Isolated development environments using Docker
+brew "docker-compose"
+# More intuitive version of du in rust
+brew "dust"
 # Simple command-line tool for creating clusters on Amazon EKS
 brew "eksctl"
 # Modern, maintained replacement for ls
@@ -104,15 +112,19 @@ brew "gh"
 brew "ghostscript"
 # Syntax-highlighting pager for git and diff output
 brew "git-delta"
+# Quickly rewrite git repository history
+brew "git-filter-repo"
+# Render markdown on the CLI
+brew "glow"
 # GNU implementation of the famous stream editor
 brew "gnu-sed"
 # GNU version of the tar archiving utility
 brew "gnu-tar"
 # GNU implementation of time utility
 brew "gnu-time"
-# GNU Pretty Good Privacy (PGP) package
+# GNU Privacy Guard (OpenPGP)
 brew "gnupg"
-# GNU Pretty Good Privacy (PGP) package
+# GNU Privacy Guard (OpenPGP)
 brew "gnupg@1.4"
 # Command-driven, interactive function plotting
 brew "gnuplot"
@@ -134,32 +146,44 @@ brew "grpcurl"
 brew "grype"
 # Kubernetes package manager
 brew "helm"
-# Tools and libraries to manipulate images in many formats
+# Tools and libraries to manipulate images in select formats
 brew "imagemagick"
-# Cost estimates for Terraform
+# Cost estimates for Terraform, Terragrunt, and CloudFormation
 brew "infracost"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
+# Run local Kubernetes cluster in Docker
+brew "kind"
 # Kubernetes prompt info for bash and zsh
 brew "kube-ps1"
 # KubeConfig Manager
 brew "kubecm"
 # Tool that can switch between kubectl contexts easily and create aliases
 brew "kubectx"
+# OpenID Connect authentication plugin for kubectl
+brew "kubelogin"
+# Kubernetes Native Policy Management
+brew "kyverno"
 # LastPass command-line interface tool
 brew "lastpass-cli"
 # Simple terminal UI for git commands
 brew "lazygit"
 # Provides library functionality for FIDO U2F & FIDO 2.0, including USB
 brew "libfido2"
+# Powerful, lightweight programming language
+brew "lua@5.4"
 # Tool for linting and static analysis of Lua code
 brew "luacheck"
+# Mac App Store command-line interface
+brew "mas"
 # Simple tool to make locally trusted development certificates
 brew "mkcert"
-# Platform built on V8 to build network applications
+# Open-source, cross-platform JavaScript runtime environment
 brew "node"
 # MongoDB Shell to connect, configure, query, and work with your MongoDB database
 brew "mongosh"
+# Cross platform, open source .NET development framework
+brew "mono"
 # Collection of tools that nobody wrote when UNIX was young
 brew "moreutils", link: false
 # Library for a binary-based efficient data interchange format
@@ -214,6 +238,8 @@ brew "snyk-cli"
 brew "sops"
 # Cross-shell prompt for astronauts
 brew "starship"
+# Tail multiple Kubernetes pods & their containers
+brew "stern"
 # Organize software neatly under a single directory tree (e.g. /usr/local)
 brew "stow"
 # CLI for generating a Software Bill of Materials from container images
@@ -270,8 +296,6 @@ brew "zoxide"
 brew "zsh"
 # EC2 Instance Selector is a tool to filter EC2 instance types based on resource criteria
 brew "aws/tap/ec2-instance-selector"
-# A Kubernetes credential (exec) plugin implementing azure authentication
-brew "azure/kubelogin/kubelogin"
 # A shell for the EC2 Parameter Store
 brew "bwhaley/ssmsh/ssmsh"
 # Kubernetes CLI To Manage Your Clusters In Style!
@@ -282,22 +306,40 @@ brew "hacker1024/hacker1024/coretemp"
 brew "johanhaleby/kubetail/kubetail"
 # Drop in replacement for ueberzug written in C++
 brew "jstkdng/programs/ueberzugpp"
+# Declarative Kubernetes end-to-end testing.
+brew "kyverno/chainsaw/chainsaw"
 # A command line editor for HCL
 brew "minamijoyo/hcledit/hcledit"
+# Automatically generate markdown documentation for helm charts
+brew "norwoodj/tap/helm-docs"
 # Display information about the kubectl current context and namespace in zsh prompt.
 brew "superbrothers/zsh-kubectl-prompt/zsh-kubectl-prompt"
 # The core Tanzu command-line tool
 brew "vmware-tanzu/tanzu/tanzu-cli"
 # Command-line interface for 1Password
 cask "1password-cli"
+# Enable Windows-like alt-tab
+cask "alt-tab"
 # Control USB Cameras from an app
 cask "cameracontroller"
+# Enables developers to manage Confluent Cloud or Confluent Platform
+cask "confluent-cli"
+# Write, edit, and chat about your code with AI
+cask "cursor"
 # Disk usage utility
 cask "disk-inventory-x"
+# Window peeking utility app
+cask "dockdoor"
+# Developer platform
+cask "dotnet-sdk"
 cask "font-fira-code"
 cask "font-fira-code-nerd-font"
 cask "font-hack-nerd-font"
 cask "font-jetbrains-mono-nerd-font"
+# Kubernetes IDE
+cask "freelens"
+# Set of tools to manage resources and applications hosted on Google Cloud
+cask "gcloud-cli"
 # Cross-platform Git credential storage for multiple hosting providers
 cask "git-credential-manager"
 # Keyboard customiser
@@ -308,12 +350,16 @@ cask "keycastr"
 cask "kitty"
 # Password manager
 cask "lastpass"
-# DockDoor
-cask "dockdoor"
+# Open source build of Lens Kubernetes IDE
+cask "openlens", args: { appdir: "~/Applications" }
 # Collaboration platform for API development
 cask "postman"
+# Control your tools with a few keystrokes
+cask "raycast"
 # Screenshot measurement and annotation tool
 cask "shottr"
+# System monitor for the menu bar
+cask "stats"
 # Open-source code editor
 cask "visual-studio-code"
 # Multimedia player
@@ -326,69 +372,18 @@ cask "wezterm"
 cask "wireshark-app"
 # CLI for interacting with the Wiz platform
 cask "wizcli"
-vscode "4ops.terraform"
-vscode "aaron-bond.better-comments"
-vscode "amazonwebservices.aws-toolkit-vscode"
-vscode "bbenoist.shell"
-vscode "bierner.markdown-mermaid"
-vscode "bpruitt-goddard.mermaid-markdown-syntax-highlighting"
-vscode "chrmarti.regex"
-vscode "davidanson.vscode-markdownlint"
-vscode "docker.docker"
-vscode "docsmsft.docs-yaml"
-vscode "donjayamanne.githistory"
-vscode "eamodio.gitlens"
-vscode "esbenp.prettier-vscode"
-vscode "formulahendry.auto-rename-tag"
-vscode "formulahendry.code-runner"
-vscode "foxundermoon.shell-format"
-vscode "fredwangwang.vscode-hcl-format"
-vscode "genieai.chatgpt-vscode"
-vscode "github.copilot"
-vscode "github.copilot-chat"
-vscode "github.vscode-github-actions"
-vscode "github.vscode-pull-request-github"
-vscode "hashicorp.hcl"
-vscode "hashicorp.terraform"
-vscode "in4margaret.compareit"
-vscode "johnpapa.vscode-peacock"
-vscode "kamikillerto.vscode-colorize"
-vscode "marklarah.pre-commit-vscode"
-vscode "me-dutour-mathieu.vscode-github-actions"
-vscode "mhutchie.git-graph"
-vscode "mikestead.dotenv"
-vscode "mindaro-dev.file-downloader"
-vscode "ms-azuretools.vscode-containers"
-vscode "ms-azuretools.vscode-docker"
-vscode "ms-kubernetes-tools.vscode-kubernetes-tools"
-vscode "ms-python.debugpy"
-vscode "ms-python.python"
-vscode "ms-python.vscode-pylance"
-vscode "ms-python.vscode-python-envs"
-vscode "ms-toolsai.jupyter"
-vscode "ms-toolsai.jupyter-keymap"
-vscode "ms-toolsai.jupyter-renderers"
-vscode "ms-toolsai.vscode-jupyter-cell-tags"
-vscode "ms-toolsai.vscode-jupyter-slideshow"
-vscode "ms-vscode-remote.remote-containers"
-vscode "ms-vscode-remote.remote-ssh"
-vscode "ms-vscode-remote.remote-ssh-edit"
-vscode "ms-vscode.remote-explorer"
-vscode "oderwat.indent-rainbow"
-vscode "omartawfik.github-actions-vscode"
-vscode "pkief.material-icon-theme"
-vscode "pnp.polacode"
-vscode "redhat.vscode-yaml"
-vscode "ritwickdey.liveserver"
-vscode "rolandgreim.sample-ext"
-vscode "samuelcolvin.jinjahtml"
-vscode "shd101wyy.markdown-preview-enhanced"
-vscode "snyk-security.snyk-vulnerability-scanner"
-vscode "streetsidesoftware.code-spell-checker"
-vscode "tim-koehler.helm-intellisense"
-vscode "tomoki1207.pdf"
-vscode "tyriar.sort-lines"
-vscode "usernamehw.errorlens"
-vscode "vscode-icons-team.vscode-icons"
-vscode "vstirbu.vscode-mermaid-preview"
-vscode "yzhang.markdown-all-in-one"
+mas "Amphetamine", id: 937984704
+mas "GarageBand", id: 682658836
+mas "iMovie", id: 408981434
+mas "Kerberos Ticket Autorenewal", id: 1246781916
+mas "Keynote", id: 409183694
+mas "Kindle", id: 302584613
+mas "Magnet", id: 441258766
+mas "Numbers", id: 409203825
+mas "Pages", id: 409201541
+mas "Paste", id: 967805235
+mas "Universal Print", id: 6450432292
+mas "WhatsApp", id: 310633997
+go "sigs.k8s.io/controller-tools/cmd/controller-gen"
+go "golang.org/x/tools/cmd/goimports"
+go "github.com/golang/mock/mockgen"
