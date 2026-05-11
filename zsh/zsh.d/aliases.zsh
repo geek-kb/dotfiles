@@ -117,4 +117,7 @@ alias -g SRT='+short | sort'                                                    
 alias -g dollar1='$(awk "{print \$1}"<<<"${line}")'  # Extract first field from $line variable
 alias -g dollar2='$(awk "{print \$2}"<<<"${line}")'  # Extract second field from $line variable
 
+# Brew dump
+alias brew_dump="brew bundle dump --describe --force --no-vscode --file=~/.dotfiles/Brewfile"
+
 export LOADED_ALIASES=true  # Flag to indicate aliases have been loaded

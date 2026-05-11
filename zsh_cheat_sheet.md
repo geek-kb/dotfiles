@@ -20,6 +20,7 @@ A comprehensive reference for aliases, functions, and keybindings configured in 
 | `pbc`   | `pbcopy`                           | Quick clipboard copy                  |
 | `diff`  | `/usr/bin/diff --color`            | Colored diff output                   |
 | `watch` | `watch --color`                    | Color-enabled watch                   |
+| `top`   | `btop`                             | Modern resource monitor in place of top |
 
 ---
 
