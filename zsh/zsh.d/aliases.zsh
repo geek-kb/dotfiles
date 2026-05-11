@@ -13,6 +13,7 @@ alias awk=gawk        # Use GNU awk instead of BSD awk
 alias s=source        # Quick source command shortcut
 alias cat="bat --style=plain --paging=never"  # Use bat for syntax highlighting
 alias pbc='pbcopy'    # Quick clipboard copy
+alias top="btop"
 
 #------------------------------------------------------------------------------
 # File Navigation & Management
