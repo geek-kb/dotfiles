@@ -79,6 +79,7 @@ alias cwd='pwd | rev | cut -d/ -f1 | rev'                     # Get current dire
 # File Type Associations
 #------------------------------------------------------------------------------
 alias -s {lua,yml,yaml,json,txt}=nvim  # Open these file types directly with nvim
+alias -s md=glow
 
 #------------------------------------------------------------------------------
 # Global Aliases (Pipe Operations)
@@ -91,7 +92,7 @@ alias -g D=';done'                                               # Close loop
 # Text Processing
 alias -g H='| head'                            # Pipe to head (first lines)
 alias -g T='| tail'                            # Pipe to tail (last lines)
-alias -g G='| grep'                            # Pipe to grep (filter)
+alias -g G='| grep -i'                            # Pipe to grep (filter)
 alias -g L="| less"                            # Pipe to less (paginated view)
 alias -g P="| pbcopy"                          # Pipe to clipboard
 alias -g V='| nvim'                            # Pipe to nvim (edit in editor)
