@@ -29,3 +29,4 @@ nvim/.config/tanzu-cli-telemetry
 !.vscode/launch.json
 !.vscode/tasks.json
 **/*.mdc
+./.gitconfig.local
