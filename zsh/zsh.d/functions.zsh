@@ -478,4 +478,13 @@ function run_pre_commit() {
   while ! pre-commit run --files $(find aws/modules azure/modules demo_formatting_issues -type f) --hook-stage manual; do echo "Re-running pre-commit..."; done
 }
 
+#------------------------------------------------------------------------------
+# Fuzzy File search
+#------------------------------------------------------------------------------
+vf() {
+  local file
+  file=$(rg --files | fzf --preview 'bat --color=always {}')
+  [ -n "$file" ] && nvim "$file"
+}
+
 export LOADED_FUNCTIONS=true

@@ -23,14 +23,6 @@ alias pbc='pbcopy'    # Quick clipboard copy
 #alias dot='cd ~/.dotfiles'      # Quick navigation to dotfiles directory
 #alias src="~/src"               # Quick navigation to source directory
 
-#------------------------------------------------------------------------------
-# Fuzzy File search
-#------------------------------------------------------------------------------
-vf() {
-  local file
-  file=$(rg --files | fzf --preview 'bat --color=always {}')
-  [ -n "$file" ] && nvim "$file"
-}
 
 #------------------------------------------------------------------------------
 # File Navigation & Management
