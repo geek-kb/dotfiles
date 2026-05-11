@@ -199,7 +199,6 @@ map('n', '<CR>', '<Esc>:nohlsearch<CR>zz', { remap = false, silent = true })
 -- Exit mappings
 map('i', 'jk', '<esc>', { remap = false })
 map('i', 'kj', '<esc>', { remap = false })
-map('n', '<leader>qq', ':qall<cr>', { remap = false, silent = true })
 
 -- Search visually selected text with // or * or #
 vim.cmd [[

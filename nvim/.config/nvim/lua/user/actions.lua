@@ -199,8 +199,8 @@ end)
   ['Close all notifications (<leader>x)'] = function()
     require('notify').dismiss { pending = true, silent = true }
   end,
-  ['Quit all (<leader>qq)'] = function()
-    vim.cmd.qall()
+  ['Quit all (<leader>q)'] = function()
+    vim.cmd 'qa!'
   end,
   ['Paste from clipboard (cv)'] = function()
     vim.fn.feedkeys 'cv'

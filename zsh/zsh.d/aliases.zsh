@@ -24,12 +24,21 @@ alias pbc='pbcopy'    # Quick clipboard copy
 #alias src="~/src"               # Quick navigation to source directory
 
 #------------------------------------------------------------------------------
+# Fuzzy File search
+#------------------------------------------------------------------------------
+vf() {
+  local file
+  file=$(rg --files | fzf --preview 'bat --color=always {}')
+  [ -n "$file" ] && nvim "$file"
+}
+
+#------------------------------------------------------------------------------
 # File Navigation & Management
 #------------------------------------------------------------------------------
 alias ls="eza --icons"
-alias ll="eza -la --icons"
+alias ll="eza -la --git --icons --group-directories-first"
 alias lt="eza --tree --icons"
-
+alias zl="zoxide query --list"
 #------------------------------------------------------------------------------
 # Editor Related
 #------------------------------------------------------------------------------
